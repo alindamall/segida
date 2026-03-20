@@ -1,0 +1,307 @@
+/* -----------------------------------------------------------
+   [전역 설정 및 디자인 변수] - 개요 요건 충실 반영
+----------------------------------------------------------- */
+:root {
+    /* 포인트 컬러: 부드러운 보라색 느낌의 블루 */
+    --primary: #8a99ff;
+    --primary-dark: #7080f5;
+    
+    /* 테마: 미색 아주 옅은 베이지 */
+    --bg-main: #fbfaf8; 
+    
+    /* 텍스트 및 기본색 */
+    --text-main: #2a2a2a;
+    --text-sub: #666666;
+    --white: #ffffff;
+    
+    /* 글래스모피즘 (아이폰 스타일) 변수 */
+    --glass-bg: rgba(255, 255, 255, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-blur: blur(20px) saturate(180%); /* 아이폰 특유의 블러/채도 */
+    --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.08);
+    
+    /* 레이아웃 */
+    --container-width: 1200px;
+    --section-padding: 120px;
+    --header-height: 80px;
+    
+    /* 애니메이션 속도 */
+    --transition-base: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* 부드러운 이징 */
+}
+
+/* 초기화 (Reset) */
+* { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+html { scroll-behavior: smooth; font-size: 16px; scroll-padding-top: var(--header-height); }
+
+/* 기본 폰트 설정 (개요 요건: Pretendard) */
+body {
+    font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased; /* 폰트 매끄럽게 */
+}
+
+/* 유틸리티 클래스 */
+.container { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; width: 100%; }
+.full-vh { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; }
+.section-padding { padding-top: var(--section-padding); padding-bottom: var(--section-padding); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.point { color: var(--primary); font-weight: 700; }
+.scroll-mt { scroll-margin-top: 100px; } /* 스크롤 시 헤더에 가려짐 방지 */
+
+/* 섹션 타이틀 공통 스타일 */
+.section-header { text-align: center; margin-bottom: 70px; }
+.sub-title { display: block; font-size: 0.9rem; color: var(--primary); font-weight: 700; letter-spacing: 0.1rem; margin-bottom: 10px; }
+.main-title { font-size: 2.8rem; font-weight: 800; letter-spacing: -0.05rem; }
+
+/* -----------------------------------------------------------
+   [디자인 핵심: 글래스모피즘 스타일]
+----------------------------------------------------------- */
+.glass-card {
+    background-color: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+}
+
+/* 하단 플로팅용 더 투명하고 강한 블러 */
+.glass-card-strong {
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(25px) saturate(200%);
+    -webkit-backdrop-filter: blur(25px) saturate(200%);
+    border-top: 1px solid var(--glass-border);
+}
+
+/* -----------------------------------------------------------
+   [1. 헤더] 알약 모양 플로팅 Bar
+----------------------------------------------------------- */
+#main-header {
+    position: fixed; top: 20px; left: 0; width: 100%; z-index: 1000;
+    transition: var(--transition-base);
+}
+
+#main-header.scrolled { top: 0; }
+
+.pill-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px; /* 고정 */
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px; /* 완벽한 알약 모양 */
+    padding: 0 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    transition: var(--transition-base);
+}
+
+#main-header.scrolled .pill-nav { border-radius: 0; max-width: 100%; width: 100%; border-left: none; border-right: none; height: 70px;}
+
+.logo { text-decoration: none; font-size: 1.4rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.05rem; }
+.nav-menu { list-style: none; display: flex; gap: 5px; }
+.nav-menu a { text-decoration: none; color: var(--text-main); font-size: 0.95rem; font-weight: 600; padding: 10px 18px; border-radius: 20px; transition: var(--transition-base); }
+.nav-menu a:hover { background-color: rgba(138, 153, 255, 0.1); color: var(--primary); }
+
+.menu-toggle { display: none; background: none; border: none; cursor: pointer; }
+
+/* -----------------------------------------------------------
+   [2. 히어로 섹션] Full Screen Slider
+----------------------------------------------------------- */
+#hero { background-color: #000; color: var(--white); overflow: hidden; }
+
+.hero-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.hero-item { 
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+    opacity: 0; transition: opacity 1s ease-in-out; /* 페이드 애니메이션 */
+    background-size: cover; background-position: center;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; z-index: 1;
+}
+.hero-item.active { opacity: 1; z-index: 2; }
+.hero-item::after { content:''; position: absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); z-index: -1; } /* 오버레이 */
+
+.hero-content h1 { font-size: 4rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.1rem; }
+.hero-content p { font-size: 1.5rem; font-weight: 400; opacity: 0.8; }
+
+.slider-dots { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; gap: 10px; }
+.dot { width: 10px; height: 10px; background: rgba(255,255,255,0.4); border-radius: 50%; cursor: pointer; transition: var(--transition-base); }
+.dot.active { background: var(--white); width: 25px; border-radius: 5px; }
+
+.scroll-down { position: absolute; bottom: 30px; left: 20px; z-index: 10; writing-mode: vertical-lr; text-orientation: mixed; font-size: 0.8rem; letter-spacing: 0.2rem; color: rgba(255,255,255,0.5); animation: sdown 2s infinite; }
+
+/* -----------------------------------------------------------
+   [콘텐츠 영역 스타일]
+----------------------------------------------------------- */
+/* 핵심 서비스 Grid */
+.service-item { padding: 40px; text-align: center; }
+.service-icon { font-size: 3rem; margin-bottom: 20px; display: block; }
+.service-item h3 { font-size: 1.5rem; margin-bottom: 15px; font-weight: 700; }
+.service-item p { color: var(--text-sub); font-size: 0.95rem; }
+
+/* 포트폴리오 Grid (아이폰 앨범 스타일) */
+.portfolio-item { 
+    position: relative; border-radius: 16px; overflow: hidden; 
+    aspect-ratio: 1/1; /* 정사각형 */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: var(--transition-base); 
+}
+.portfolio-item:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+.portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+.portfolio-item:hover img { transform: scale(1.05); }
+.pf-overlay { 
+    position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px; 
+    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent); color: var(--white); 
+}
+.pf-overlay h4 { font-weight: 700; }
+.pf-overlay span { font-size: 0.8rem; opacity: 0.8; }
+
+/* 주문 프로세스 Timeline */
+.timeline { position: relative; max-width: 800px; margin: 0 auto; padding: 20px 0; }
+.timeline::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 100%; background-color: rgba(138,153,255,0.2); }
+.tl-item { position: relative; width: 50%; padding: 20px 40px; margin-bottom: 30px; }
+.tl-item:nth-child(odd) { left: 0; text-align: right; }
+.tl-item:nth-child(even) { left: 50%; text-align: left; }
+.tl-dot { position: absolute; top: 25px; width: 16px; height: 16px; background-color: var(--primary); border: 4px solid var(--bg-main); border-radius: 50%; z-index: 5; }
+.tl-item:nth-child(odd) .tl-dot { right: -8px; }
+.tl-item:nth-child(even) .tl-dot { left: -8px; }
+.tl-content { padding: 20px; background: #fff; border-radius: 16px; border: 1px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+.tl-step { font-size: 0.8rem; font-weight: 700; color: var(--primary); margin-bottom: 5px; }
+
+/* -----------------------------------------------------------
+   [4. CTA 섹션]
+----------------------------------------------------------- */
+.cta-section { background-color: #f0f0f5; position: relative; } /* 임시 배경색 */
+.cta-section::before { 
+    content:''; position: absolute; top:0; left:0; width:100%; height:100%; 
+    background-image: url('https://via.placeholder.com/1920x1080/8a99ff/ffffff?text=Background+Pattern'); /* 추후 교체 */
+    background-size: cover; background-attachment: fixed; opacity: 0.1; 
+}
+
+.cta-content { text-align: center; padding: var(--section-padding) 40px; z-index: 5; max-width: 900px;}
+.cta-content h2 { font-size: 3.2rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px; }
+.cta-content p { font-size: 1.2rem; color: var(--text-sub); margin-bottom: 40px; }
+.cta-buttons { display: flex; gap: 20px; justify-content: center; }
+
+/* -----------------------------------------------------------
+   [버튼 스타일] - 글래스모피즘 반영
+----------------------------------------------------------- */
+.btn { 
+    display: inline-block; text-decoration: none; font-weight: 600; border-radius: 30px; 
+    transition: var(--transition-base); border: none; cursor: pointer; text-align: center;
+}
+.btn-lg { padding: 18px 40px; font-size: 1.1rem; }
+.btn-sm { padding: 10px 20px; font-size: 0.85rem; }
+
+.btn-primary { 
+    background: linear-gradient(135deg, #8a99ff, #7080f5); color: var(--white); 
+    box-shadow: 0 4px 15px rgba(138,153,255,0.4); 
+}
+.btn-primary:hover { box-shadow: 0 6px 20px rgba(138,153,255,0.6); transform: translateY(-2px); }
+
+.btn-secondary { 
+    background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+    color: var(--text-main); border: 1px solid rgba(255,255,255,0.3);
+}
+.btn-secondary:hover { background-color: rgba(255,255,255,0.6); }
+
+/* -----------------------------------------------------------
+   [5. 푸터]
+----------------------------------------------------------- */
+#main-footer { background-color: #222; color: rgba(255,255,255,0.7); padding-top: 80px; }
+.footer-content { display: grid; grid-template-columns: 2fr 3fr; gap: 60px; padding-bottom: 60px; }
+.footer-logo { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 15px; }
+.footer-funnel h4 { color: #fff; margin-bottom: 20px; font-size: 1.1rem; }
+.funnel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+.funnel-grid a { text-decoration: none; color: rgba(255,255,255,0.6); font-size: 0.9rem; transition: var(--transition-base); display: flex; align-items: center; gap: 8px;}
+.funnel-grid a:hover { color: var(--primary); }
+
+.footer-bottom { padding: 25px 0; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; text-align: center; }
+
+/* -----------------------------------------------------------
+   [⚠ 플로팅 배너 및 오버레이]
+----------------------------------------------------------- */
+/* 우측 카카오톡 */
+.floating-btn { 
+    position: fixed; bottom: 100px; right: 30px; width: 60px; height: 60px; 
+    border-radius: 50%; box-shadow: var(--shadow-lg); z-index: 99; transition: var(--transition-base); 
+    display: flex; align-items: center; justify-content: center;
+}
+.floating-btn:hover { transform: scale(1.1) rotate(5deg); }
+#floating-kakao { background-color: #fee500; }
+#floating-kakao img { width: 30px; }
+
+/* 하단 CTA 오버레이 */
+#bottom-cta-overlay { 
+    position: fixed; bottom: 0; left: 0; width: 100%; height: 80px; z-index: 98;
+    display: flex; align-items: center; justify-content: space-between; padding: 0 30px;
+    border-top-left-radius: 20px; border-top-right-radius: 20px;
+}
+#bottom-cta-overlay p { font-size: 1.1rem; font-weight: 700; color: #333; }
+
+/* -----------------------------------------------------------
+   [미디어 쿼리] PC/모바일 최적화 반응형 대응 (개요 요건)
+----------------------------------------------------------- */
+/* 태블릿 이하 (1024px) */
+@media (max-width: 1024px) {
+    :root { --section-padding: 80px; }
+    .main-title { font-size: 2.2rem; }
+    .hero-content h1 { font-size: 2.8rem; }
+    .cta-content h2 { font-size: 2.5rem; }
+    .grid-3 { gap: 20px; }
+    .pill-nav { width: calc(100% - 40px); } /* 좌우 여백 */
+}
+
+/* 모바일 (768px) */
+@media (max-width: 768px) {
+    :root { font-size: 15px; }
+    
+    /* 모바일 헤더 */
+    .pill-nav { height: 50px; border-radius: 25px;}
+    .nav-menu { 
+        position: absolute; top: 60px; left: 0; width: 100%; 
+        background-color: var(--white); flex-direction: column; gap: 0; padding: 20px;
+        border-radius: 15px; box-shadow: var(--shadow-lg); border: 1px solid #eee;
+        display: none; /* 기본 숨김 */
+    }
+    .nav-menu.open { display: flex; animation: slideIn 0.3s ease; }
+    .nav-menu a { width: 100%; display: block; border-radius: 10px; padding: 15px;}
+
+    .menu-toggle { display: block; width: 30px; height: 18px; position: relative; }
+    .menu-toggle span { display: block; position: absolute; height: 3px; width: 100%; background: #333; border-radius: 9px; transition: 0.3s; }
+    .menu-toggle span:nth-child(1) { top: 0; }
+    .menu-toggle span:nth-child(2) { top: 7px; }
+    .menu-toggle span:nth-child(3) { top: 14px; }
+    .menu-toggle.open span:nth-child(1) { transform: rotate(45deg); top: 7px; }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg); top: 7px; }
+
+    /* 모바일 그리드 1열 */
+    .grid-3 { grid-template-columns: 1fr; }
+    
+    /* 히어로 모바일 */
+    .hero-content h1 { font-size: 2.2rem; padding: 0 20px; }
+    .hero-content p { font-size: 1.1rem; }
+    
+    /* 타임라인 모바일 */
+    .timeline::before { left: 30px; }
+    .tl-item { width: 100%; text-align: left !important; padding-left: 70px; padding-right: 20px; }
+    .tl-dot { left: 22px !important; }
+
+    /* CTA 모바일 */
+    .cta-content h2 { font-size: 2rem; }
+    .cta-buttons { flex-direction: column; gap: 10px; width: 100%;}
+    
+    /* 하단 오버레이 모바일 */
+    #bottom-cta-overlay p { font-size: 0.95rem; }
+    
+    /* 푸터 모바일 */
+    .footer-content { grid-template-columns: 1fr; gap: 40px; }
+    .funnel-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* 애니메이션 정의 */
+@keyframes sdown { 0%, 100% { transform: translateY(0); opacity: 0.5; } 50% { transform: translateY(10px); opacity: 0.1; } }
+@keyframes slideIn { from { transform: translateY(-10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
