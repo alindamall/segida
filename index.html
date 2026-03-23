@@ -1,117 +1,355 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>새기다 (SEGIDA) - 알린자 브랜드 | DTF 스티커, 레이저 각인, 프리미엄 답례품</title>
-    <meta name="description" content="브랜드의 가치를 새기다. DTF 스티커, 레이저 각인, 커스텀 답례품 전문 서비스 SEGIDA입니다.">
-    <meta property="og:title" content="커스텀 텀블러 제작 SEGIDA" />
-    <meta property="og:description" content="DTF 스티커, 레이저 각인, 커스텀 답례품 전문 서비스 SEGIDA" />
-    <meta property="og:image" content="https://segida.netlify.app/img/ogimage.png" />
-    <meta property="og:url" content="https://segida.netlify.app/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="SEGIDA" />
-    
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>알린다몰 — 기업 판촉물 · 각인 텀블러 · DTF 스티커 · 답례품 전문</title>
+  <meta name="description" content="알린다몰은 각인 텀블러, DTF 스티커, 레이저 각인, 기업 판촉물, 프리미엄 답례품을 전문 제작합니다. 소량 50개부터 대량까지 원스톱 서비스.">
+
+  <!-- OG Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="알린다 : 판촉물 제작 및 커스텀 굿즈">
+  <meta property="og:description" content="DTF 스티커, 레이저 각인, 커스텀 답례품 전문 서비스 SEGIDA">
+  <meta property="og:image" content="https://segida.netlify.app/img/ogimage.png">
+  <meta property="og:url" content="https://alinda.ai">
+  <meta property="og:site_name" content="alinda">
+  <link rel="canonical" href="https://alinda.ai">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="img/logo/favicon.png">
+  <link rel="apple-touch-icon" href="img/logo/logo_square.webp">
+
+  <!-- Preload Font -->
+  <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css">
+
+  <!-- Critical CSS Inline (above the fold) -->
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+    body{font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;color:#0D2B5E;background:#F4F7FB;line-height:1.7;overflow-x:hidden}
+    .header{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0);transition:all .3s}
+    .hero{position:relative;height:100vh;min-height:600px;max-height:900px;overflow:hidden}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,31,68,.55),rgba(13,43,94,.7))}
+    .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease}
+    .hero-slide.active{opacity:1}
+    .hero-slide-bg{position:absolute;inset:0;background-size:cover;background-position:center}
+    .hero-content{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 24px;max-width:800px;margin:0 auto}
+    .hero-title{font-size:clamp(2rem,6vw,3.75rem);font-weight:800;color:#fff;line-height:1.15;margin-bottom:20px;white-space:pre-line}
+  </style>
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "알린다몰",
+    "description": "기업 판촉물, 각인 텀블러, DTF 스티커, 레이저 각인, 프리미엄 답례품 전문 제작",
+    "url": "https://alinda.ai",
+    "telephone": "02-465-0817",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "미사강변서로 25 6층 635호",
+      "addressLocality": "하남시",
+      "addressRegion": "경기도",
+      "addressCountry": "KR"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"최소 주문 수량은 얼마인가요?","acceptedAnswer":{"@type":"Answer","text":"대부분 50개부터 주문 가능합니다."}},
+      {"@type":"Question","name":"제작 기간은 얼마나 걸리나요?","acceptedAnswer":{"@type":"Answer","text":"시안 확정 후 보통 3~7일(영업일 기준)입니다."}},
+      {"@type":"Question","name":"시안은 어떻게 확인하나요?","acceptedAnswer":{"@type":"Answer","text":"주문 접수 후 24시간 이내에 카카오톡 또는 이메일로 디자인 시안을 보내드립니다."}},
+      {"@type":"Question","name":"세금계산서 발행이 되나요?","acceptedAnswer":{"@type":"Answer","text":"네, 사업자 등록증 확인 후 전자세금계산서를 발행해 드립니다."}}
+    ]
+  }
+  </script>
 </head>
 <body>
 
-    <header id="main-header">
-        <nav class="pill-nav container">
-            <a href="#" class="logo">
-                <span>SEGIDA</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="#services">서비스</a></li>
-                <li><a href="#portfolio">포트폴리오</a></li>
-                <li><a href="#process">주문안내</a></li>
-                <li><a href="#contact">견적문의</a></li>
-            </ul>
-            <button class="menu-toggle" aria-label="메뉴 열기">
-                <span></span><span></span><span></span>
-            </button>
-        </nav>
-    </header>
-
-    <main>
-        <section id="hero" class="full-vh">
-            <div class="hero-slider">
-                </div>
-            <div class="slider-dots"></div>
-            <div class="scroll-down"><span>SCROLL</span></div>
-        </section>
-
-        <div class="content-wrapper container">
-            
-            <section id="services" class="section-padding scroll-mt">
-                <div class="section-header">
-                    <span class="sub-title">CORE SERVICES</span>
-                    <h2 class="main-title">무엇을 <span class="point">새기다</span></h2>
-                </div>
-                <div id="service-grid" class="grid-3">
-                    </div>
-            </section>
-
-            <section id="portfolio" class="section-padding scroll-mt">
-                <div class="section-header">
-                    <span class="sub-title">PORTFOLIO</span>
-                    <h2 class="main-title">결과를 확인하세요</h2>
-                </div>
-                <div id="portfolio-grid" class="grid-3">
-                    </div>
-            </section>
-
-            <section id="process" class="section-padding scroll-mt">
-                <div class="section-header">
-                    <span class="sub-title">ORDER PROCESS</span>
-                    <h2 class="main-title">쉽고 간편한 주문</h2>
-                </div>
-                <div id="process-timeline" class="timeline">
-                    </div>
-            </section>
-            
-            </div> <section id="contact" class="cta-section full-vh">
-            <div class="cta-content glass-card container">
-                <h2>당신의 브랜드를<br>새길 준비가 되셨나요?</h2>
-                <p>지금 바로 문의하고 맞춤형 견적과 회사소개서를 받아보세요.</p>
-                <div class="cta-buttons">
-                    <a href="#" class="btn btn-primary btn-lg">가장 빠른 견적 문의</a>
-                    <a href="#" class="btn btn-secondary btn-lg">회사소개서 다운로드</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer id="main-footer">
-        <div class="container footer-content">
-            <div class="footer-info">
-                <div class="footer-logo">SEGIDA</div>
-                <p>알린자의 새로운 각인 전문 브랜드</p>
-            </div>
-            <div class="footer-funnel">
-                <h4>CONNECT</h4>
-                <div id="funnel-links" class="funnel-grid">
-                    </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="container">
-                <p>&copy; 2024 SEGIDA & ALINJA. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <a href="#" id="floating-kakao" class="floating-btn" target="_blank" aria-label="카카오톡 문의하기">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/KakaoTalk_logo.svg" alt="Kakao">
-    </a>
-
-    <div id="bottom-cta-overlay" class="glass-card-strong">
-        <p>빠른 상담이 필요하신가요?</p>
-        <a href="tel:010-0000-0000" class="btn btn-primary btn-sm">전화 바로 연결</a>
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="#" class="logo">알린다<span>몰</span></a>
+      <nav class="nav" aria-label="메인 메뉴">
+        <a href="#services" class="nav-link">서비스</a>
+        <a href="#brand" class="nav-link">커스텀</a>
+        <a href="#portfolio" class="nav-link">포트폴리오</a>
+        <a href="#reviews" class="nav-link">제작리뷰</a>
+        <a href="#process" class="nav-link">제작과정</a>
+        <a href="#guide" class="nav-link">제작가이드</a>
+        <a href="#contact" class="nav-link">문의</a>
+      </nav>
+      <a href="tel:02-465-0817" class="header-phone">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        02-465-0817
+      </a>
+      <button class="hamburger" aria-label="메뉴 열기" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </header>
 
-    <script src="js/data.js"></script>
-    <script src="js/ui.js"></script>
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#services" class="nav-link">서비스</a>
+    <a href="#brand" class="nav-link">커스텀</a>
+    <a href="#portfolio" class="nav-link">포트폴리오</a>
+    <a href="#reviews" class="nav-link">제작리뷰</a>
+    <a href="#process" class="nav-link">제작과정</a>
+    <a href="#guide" class="nav-link">제작가이드</a>
+    <a href="#contact" class="nav-link">문의</a>
+    <a href="tel:02-465-0817" class="btn btn--primary btn--sm">전화 상담</a>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero" aria-label="메인 배너">
+    <div id="heroSlides"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content" id="heroContent">
+      <h1 class="hero-title" id="heroTitle"></h1>
+      <p class="hero-subtitle" id="heroSubtitle"></p>
+      <div class="hero-cta" id="heroCta"></div>
+    </div>
+    <div class="hero-dots" id="heroDots"></div>
+    <div class="hero-scroll-hint">
+      스크롤
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <div class="services-bg">
+    <section class="section" id="services">
+      <div class="text-center fade-up">
+        <span class="section-label">Products & Services</span>
+        <h2 class="heading-lg section-title">핵심 제품 서비스</h2>
+        <p class="text-small section-desc">텀블러 · 볼펜 · 선풍기 · USB · 에코백 — 각인부터 배송까지 원스톱으로 제공합니다.</p>
+      </div>
+      <div class="card-grid" id="servicesGrid"></div>
+    </section>
+  </div>
+
+  <!-- ===== BRAND '새기다' ===== -->
+  <section class="brand-section section-full" id="brand">
+    <div class="section">
+      <div class="text-center fade-up">
+        <span class="section-label" style="color:var(--accent-lt)">Brand Story</span>
+        <h2 class="heading-lg section-title text-white">'새기다' — 브랜드를 새기는 기술</h2>
+        <p class="text-small section-desc" style="color:rgba(255,255,255,.65)">DTF 스티커, 레이저 각인, 프리미엄 답례품 — 알린다만의 커스텀 제작 기술력.</p>
+      </div>
+      <div class="brand-grid" id="brandGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===== PORTFOLIO ===== -->
+  <div class="portfolio-bg">
+    <section class="section" id="portfolio">
+      <div class="text-center fade-up">
+        <span class="section-label">Portfolio</span>
+        <h2 class="heading-lg section-title">포트폴리오</h2>
+        <p class="text-small section-desc">다양한 기업과 함께한 알린다몰의 제작 사례를 확인하세요.</p>
+      </div>
+      <div class="filter-bar" id="filterBar"></div>
+      <div class="portfolio-grid" id="portfolioGrid"></div>
+    </section>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <button class="lightbox-close" id="lightboxClose" aria-label="닫기">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-info">
+      <p id="lightboxTitle" class="heading-sm"></p>
+      <p id="lightboxDesc" class="text-small" style="color:rgba(255,255,255,.7)"></p>
+    </div>
+  </div>
+
+  <!-- ===== REVIEWS (대화형 말풍선) ===== -->
+  <div class="reviews-bg">
+    <section class="section" id="reviews">
+      <div class="text-center fade-up">
+        <span class="section-label">Reviews</span>
+        <h2 class="heading-lg section-title">제작 리뷰</h2>
+        <p class="text-small section-desc">알린다몰과 실제 대화한 고객님들의 생생한 후기입니다.</p>
+      </div>
+      <div class="chat-list" id="chatList"></div>
+    </section>
+  </div>
+
+  <!-- ===== PROCESS ===== -->
+  <div class="process-bg">
+    <section class="section" id="process">
+      <div class="text-center fade-up">
+        <span class="section-label">How It Works</span>
+        <h2 class="heading-lg section-title">주문부터 배송까지</h2>
+        <p class="text-small section-desc">간편한 5단계 프로세스로 완벽한 결과물을 받아보세요.</p>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </section>
+  </div>
+
+  <!-- ===== GUIDE & FAQ ===== -->
+  <div class="guide-bg">
+    <section class="section" id="guide">
+      <div class="text-center fade-up">
+        <span class="section-label">Guide & FAQ</span>
+        <h2 class="heading-lg section-title">주문 가이드 & 자주 묻는 질문</h2>
+      </div>
+      <div class="guide-grid" id="guideGrid"></div>
+      <div class="accordion" id="faqAccordion"></div>
+    </section>
+  </div>
+
+  <!-- ===== CONTACT / CTA ===== -->
+  <section class="contact-section section-full" id="contact">
+    <div class="section">
+      <div class="contact-grid">
+        <div class="fade-up">
+          <span class="section-label" style="color:rgba(255,255,255,.7)">Contact Us</span>
+          <h2 class="heading-lg" style="color:#fff;margin-bottom:16px;">무료 견적 문의</h2>
+          <p style="color:rgba(255,255,255,.75);margin-bottom:32px;max-width:440px;">
+            제품, 수량, 원하시는 각인 내용을 알려주시면 24시간 이내에 견적을 보내드립니다.
+          </p>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <span style="color:#fff">02-465-0817</span>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </div>
+            <span style="color:#fff">alindamall@naver.com</span>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 1.892.402 3.13 1.5 4.5L12 22l6.5-7.5c1.098-1.37 1.5-2.608 1.5-4.5a8 8 0 0 0-8-8z"/></svg>
+            </div>
+            <span style="color:#fff">경기 하남시 미사강변서로 25 6층 635호</span>
+          </div>
+          <div style="margin-top:24px;display:flex;gap:12px;">
+            <a href="https://raw.githubusercontent.com/alindamall/shop-images/39938e5f7e9ade7d399e93c0c3c5e32f9f99141d/Proposal_alindamall.pdf" download="알린다몰_회사소개서.pdf" target="_blank" rel="noopener" class="btn btn--white btn--sm" id="pdfDownload">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              브로슈어 PDF 다운로드
+            </a>
+          </div>
+        </div>
+        <div class="fade-up fade-up-delay-1">
+          <form class="contact-form" id="contactForm">
+            <input type="text" class="form-input" name="name" placeholder="이름 / 회사명" required>
+            <input type="tel" class="form-input" name="phone" placeholder="연락처 (010-0000-0000)" required>
+            <input type="email" class="form-input" name="email" placeholder="이메일 (선택)">
+            <textarea class="form-input" name="message" placeholder="문의 내용 (제품, 수량, 원하시는 각인 내용 등)" rows="5" required></textarea>
+            <button type="submit" class="btn btn--white" style="width:100%;">견적 문의 보내기</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">알린다<span>몰</span></div>
+        <p class="footer-desc">기업 판촉물 · 각인 텀블러 · DTF 스티커 · 프리미엄 답례품 전문 제작</p>
+        <div class="footer-social">
+          <a href="https://blog.naver.com/alindamall" target="_blank" rel="noopener" aria-label="네이버 블로그">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h8v8.5l2-2.5V3h8v18h-8v-8.5l-2 2.5V21H3z"/></svg>
+          </a>
+          <a href="https://instagram.com/alindamall" target="_blank" rel="noopener" aria-label="인스타그램">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://youtube.com/@alindamall" target="_blank" rel="noopener" aria-label="유튜브">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.56A3.02 3.02 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3.02 3.02 0 0 0 2.12 2.14c1.88.56 9.38.56 9.38.56s7.5 0 9.38-.56a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+          </a>
+          <a href="https://pf.kakao.com/_YBFEX" target="_blank" rel="noopener" aria-label="카카오채널">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.48 3 2 6.58 2 10.94c0 2.8 1.86 5.27 4.66 6.67l-1.19 4.39 5.07-3.34c.48.04.96.07 1.46.07 5.52 0 10-3.58 10-7.79S17.52 3 12 3z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h3 class="footer-heading">바로가기</h3>
+        <a href="#services" class="footer-link">서비스</a>
+        <a href="#brand" class="footer-link">커스텀</a>
+        <a href="#portfolio" class="footer-link">포트폴리오</a>
+        <a href="#reviews" class="footer-link">제작리뷰</a>
+        <a href="#process" class="footer-link">제작과정</a>
+        <a href="#guide" class="footer-link">제작가이드</a>
+        <a href="#contact" class="footer-link">견적 문의</a>
+      </div>
+      <div>
+        <h3 class="footer-heading">외부 링크</h3>
+        <a href="https://smartstore.naver.com/alindamall" target="_blank" rel="noopener" class="footer-link">네이버 스마트스토어</a>
+        <a href="https://naver.me/x5m0ABfi" target="_blank" rel="noopener" class="footer-link">네이버 플레이스</a>
+        <a href="https://pf.kakao.com/_YBFEX" target="_blank" rel="noopener" class="footer-link">카카오톡 채널</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-biz">
+        상호: 주식회사 알린다 | 대표: 이준호 | 사업자등록번호: 484-87-00820<br>
+        주소: 경기 하남시 미사강변서로 25 6층 635호 | 전화: 02-465-0817
+      </p>
+      <p>&copy; 2026 알린다몰. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===== PROMO POPUP MODAL ===== -->
+  <div class="promo-overlay" id="promoOverlay">
+    <div class="promo-modal">
+      <button class="promo-close" id="promoClose" aria-label="닫기">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <img class="promo-img" src="https://segida.netlify.app/img/ogimage.png" alt="알린다몰 프로모션" loading="eager">
+      <div class="promo-body">
+        <p class="promo-title">첫 주문 고객 10% 할인</p>
+        <p class="promo-desc">지금 견적 문의하시면 첫 주문 시<br>전 제품 10% 할인 혜택을 드립니다.</p>
+        <a href="#contact" class="btn btn--primary" id="promoCta" style="width:100%;">무료 견적 문의하기</a>
+      </div>
+      <div class="promo-footer">
+        <button id="promoTodayClose">오늘 하루 보지 않기</button>
+        <button id="promoJustClose">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FLOATING ELEMENTS ===== -->
+  <!-- Floating Bottom Bar (상품 카테고리 롤아웃 탭 포함) -->
+  <div class="floating-bar" id="floatingBar">
+    <div class="float-categories" id="floatCategories"></div>
+    <div class="float-form-row">
+      <div class="float-selected" id="floatSelected" style="display:none"></div>
+      <input type="text" placeholder="이름" id="floatName">
+      <input type="tel" placeholder="연락처" id="floatPhone">
+      <button class="btn btn--primary btn--sm" id="floatSubmit">빠른 문의</button>
+    </div>
+  </div>
+
+  <!-- Naver Smartstore Floating Button (desktop only) -->
+  <a href="https://smartstore.naver.com/alindamall" target="_blank" rel="noopener" class="naver-float" id="naverFloat" aria-label="스마트스토어">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M3 3h8v8.5l2-2.5V3h8v18h-8v-8.5l-2 2.5V21H3z"/></svg>
+    <span class="naver-tooltip">스마트스토어</span>
+  </a>
+
+  <!-- Kakao Floating Button -->
+  <a href="https://pf.kakao.com/_YBFEX" target="_blank" rel="noopener" class="kakao-float" id="kakaoFloat" aria-label="카카오톡 상담">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#3C1E1E"><path d="M12 3C6.48 3 2 6.58 2 10.94c0 2.8 1.86 5.27 4.66 6.67l-1.19 4.39 5.07-3.34c.48.04.96.07 1.46.07 5.52 0 10-3.58 10-7.79S17.52 3 12 3z"/></svg>
+    <span class="kakao-tooltip">카카오톡 상담</span>
+  </a>
+
+  <!-- Scripts (defer) -->
+  <script src="js/data.js" defer></script>
+  <script src="js/ui.js" defer></script>
 </body>
 </html>

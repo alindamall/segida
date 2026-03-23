@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "알린다몰 로컬 서버",
+      "runtimeExecutable": "C:/Program Files/nodejs/node.exe",
+      "runtimeArgs": ["node_modules/serve/build/main.js", "-l", "8080"],
+      "port": 8080
+    }
+  ]
+}

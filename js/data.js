@@ -1,78 +1,306 @@
-/* -----------------------------------------------------------
-   [새기다 WEBSITE CONTENT DATA]
-   운영자는 이 파일의 내용만 수정하여 웹사이트 콘텐츠를 관리합니다.
------------------------------------------------------------ */
+/* ============================================================
+   data.js — 알린다몰 콘텐츠 데이터
+   모든 텍스트/제품/리뷰 콘텐츠를 JS 객체로 관리
+   ============================================================ */
 
-const SEGIDA_DATA = {
-    
-    // 1. 헤더 (Nav 메뉴는 index.html 하드코딩 권장 - 워드프레스 메뉴 시스템 활용 예정)
-
-    // 2. 히어로 섹션 슬라이더 (1920*1080 권장)
-    hero_slides: [
-        {
-            bg_img: 'https://via.placeholder.com/1920x1080/2a2a2a/ffffff?text=SEGIDA+Main+Visual+01', // 실제 이미지 경로로 변경
-            title: '브랜드의 가치를<br>확실하게 <span class="point">새기다</span>',
-            desc: 'DTF 스티커 | 레이저 각인 | 프리미엄 답례품'
-        },
-        {
-            bg_img: 'https://via.placeholder.com/1920x1080/8a99ff/ffffff?text=SEGIDA+Visual+02+DTF',
-            title: '무한한 컬러 표현,<br>정밀한 <span class="point">DTF 스티커</span>',
-            desc: '어떤 소재에도 제약 없이 당신의 디자인을 새기세요.'
-        },
-        {
-            bg_img: 'https://via.placeholder.com/1920x1080/b0b8f0/2a2a2a?text=SEGIDA+Visual+03+Laser',
-            title: '품격을 높이는<br><span class="point">프리미엄 레이저 각인</span>',
-            desc: '0.1mm의 오차도 허용하지 않는 섬세함으로 가치를 더합니다.'
-        }
-    ],
-
-    // 3. 핵심 서비스 안내
-    services: [
-        {
-            icon: '', // 임시 이모지 (추후 img 또는 svg로 변경 가능)
-            title: 'DTF 스티커',
-            desc: '강력한 접착력과 선명한 컬러 표현으로 다양한 굿즈 및 의류 제작에 최적화된 솔루션을 제공합니다.'
-        },
-        {
-            icon: '',
-            title: '레이저 각인',
-            desc: '금속, 목재, 아크릴 등 다양한 자재에 정밀한 마킹을 통해 영구적이고 고급스러운 결과물을 새깁니다.'
-        },
-        {
-            icon: '',
-            title: '프리미엄 답례품',
-            desc: '기획부터 제작, 패키징까지. 받는 이의 기억에 남을 브랜드 커스텀 답례품을 제안합니다.'
-        }
-    ],
-
-    // 주문 프로세스
-    process: [
-        { step: 'STEP 01', title: '상담 및 견적', desc: '제작 사양 확인 후 맞춤형 견적을 제안합니다.' },
-        { step: 'STEP 02', title: '디자인 확정', desc: '고객님께서 제공한 데이터를 검토하고 시안을 확정합니다.' },
-        { step: 'STEP 03', title: '제작 진행', desc: '최신 설비로 정밀 제작에 들어갑니다.' },
-        { step: 'STEP 04', title: '검수 및 배송', desc: '꼼꼼한 최종 검수 후 안전하게 발송합니다.' }
-    ],
-
-    // 실제 제작 사례 (포트폴리오 - 정사각형 600*600 권장)
-    portfolio: [
-        { img: 'https://via.placeholder.com/600x600/f0f0f0/333333?text=DTF+Case+01', title: 'A기업 이벤트 티셔츠', cate: 'DTF 스티커' },
-        { img: 'https://via.placeholder.com/600x600/f0f0f0/333333?text=Laser+Case+01', title: 'B호텔 웰컴 텀블러 각인', cate: '레이저 각인' },
-        { img: 'https://via.placeholder.com/600x600/f0f0f0/333333?text=Gift+Case+01', title: 'C사 창립기념품 세트', cate: '프리미엄 답례품' },
-        { img: 'https://via.placeholder.com/600x600/f0f0f0/333333?text=DTF+Case+02', title: '스타트업 굿즈 패키지', cate: 'DTF 스티커' },
-        { img: 'https://via.placeholder.com/600x600/f0f0f0/333333?text=Laser+Case+02', title: 'F&B 브랜드 우드 트레이', cate: '레이저 각인' },
-        { img: 'https://via.placeholder.com/600x600/f0f0f0/333333?text=Gift+Case+02', title: 'VIP 고객 프라이빗 기프트', cate: '프리미엄 답례품' }
-    ],
-
-    // 5. 푸터 스프레딩 퍼널 (개요 요건)
-    funnel: [
-        { name: '스마트스토어', link: '#', icon: '' }, // 추후 icon은 SVG 등으로 구현
-        { name: '네이버 블로그', link: '#', icon: '' },
-        { name: '네이버 플레이스', link: '#', icon: '' },
-        { name: '인스타그램', link: '#', icon: '' },
-        { name: '유튜브', link: '#', icon: '' },
-        { name: '카카오톡 문의', link: '#', icon: '' }
-    ],
-
-    // 회사소개서 PDF 링크
-    intro_pdf: 'img/segida.pdf' // 실제 파일 위치
+const SITE = {
+  name: '알린다몰',
+  tagline: '기업 판촉물 · 답례품 · 각인 전문',
+  phone: '02-465-0817',
+  email: 'alindamall@naver.com',
+  kakao: 'https://pf.kakao.com/_YBFEX',
+  smartstore: 'https://smartstore.naver.com/alindamall',
+  instagram: 'https://instagram.com/alindamall',
+  youtube: 'https://youtube.com/@alindamall',
+  blog: 'https://blog.naver.com/alindamall',
+  naverPlace: 'https://naver.me/x5m0ABfi',
+  address: '경기 하남시 미사강변서로 25 6층 635호',
+  bizNum: '484-87-00820',
+  ceo: '이준호',
+  company: '주식회사 알린다',
 };
+
+const HERO_SLIDES = [
+  {
+    id: 1,
+    img: 'img/hero/hero_01.webp',
+    placeholder: 'linear-gradient(135deg, #0D2B5E 0%, #1565C0 100%)',
+    title: '기업 판촉물,\n알린다에서 시작하세요',
+    subtitle: '텀블러 · 볼펜 · USB · 에코백 — 각인부터 배송까지 원스톱',
+    cta1: { text: '무료 견적 받기', link: '#contact' },
+    cta2: { text: '스마트스토어 바로가기', link: SITE.smartstore },
+  },
+  {
+    id: 2,
+    img: 'img/hero/hero_02.webp',
+    placeholder: 'linear-gradient(135deg, #1565C0 0%, #2196F3 100%)',
+    title: 'DTF 스티커 · 레이저 각인\n브랜드를 새기다',
+    subtitle: '소량 50개부터 대량 10,000개까지 — 정밀 커스텀 제작',
+    cta1: { text: '포트폴리오 보기', link: '#portfolio' },
+    cta2: { text: '카카오 상담', link: SITE.kakao },
+  },
+  {
+    id: 3,
+    img: 'img/hero/hero_03.webp',
+    placeholder: 'linear-gradient(135deg, #0A1F44 0%, #0D2B5E 100%)',
+    title: '프리미엄 답례품\n특별한 순간을 완성합니다',
+    subtitle: '돌잔치 · 결혼 · 기업행사 — 감동을 전하는 맞춤 답례품',
+    cta1: { text: '답례품 상담', link: '#contact' },
+    cta2: { text: '인스타그램', link: SITE.instagram },
+  },
+];
+
+/* SVG icons for services */
+const SERVICE_SVG = {
+  tumbler: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M6 8h11v9a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="17" y2="1"/><line x1="6" y1="4" x2="17" y2="4"/></svg>',
+  pen: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>',
+  fan: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c-2-2.67-6-7-6-10a6 6 0 0 1 12 0c0 3-4 7.33-6 10z"/><circle cx="12" cy="12" r="2"/><path d="M12 12c2 2.67 6 7 6 10a6 6 0 0 1-12 0c0-3 4-7.33 6-10z"/><path d="M12 12c2.67-2 7-6 10-6a6 6 0 0 1 0 12c-3 0-7.33-4-10-6z"/><path d="M12 12c-2.67 2-7 6-10 6a6 6 0 0 1 0-12c3 0 7.33 4 10 6z"/></svg>',
+  usb: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="4" cy="20" r="2"/><circle cx="16" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M12 2v10l4-2"/><path d="M12 12l-8 6"/><path d="M12 12l8 2"/></svg>',
+  ecobag: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>',
+  gift: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>',
+};
+
+const SERVICES = [
+  {
+    id: 'tumbler',
+    svgIcon: SERVICE_SVG.tumbler,
+    title: '각인 텀블러',
+    desc: '스텐·도자기·트라이탄 —\n레이저 & UV 각인으로\n브랜드를 새깁니다.',
+    img: 'img/product/product_tumbler.webp',
+    link: SITE.smartstore,
+  },
+  {
+    id: 'pen',
+    svgIcon: SERVICE_SVG.pen,
+    title: '판촉 볼펜',
+    desc: '제트스트림·모나미 프리미엄 —\n기업 로고 인쇄 50개부터.',
+    img: 'img/product/product_pen.webp',
+    link: SITE.smartstore,
+  },
+  {
+    id: 'fan',
+    svgIcon: SERVICE_SVG.fan,
+    title: '핸디 선풍기',
+    desc: '여름 시즌 판촉 필수템 —\n풀컬러 인쇄, 개별포장 가능.',
+    img: 'img/product/product_fan.webp',
+    link: SITE.smartstore,
+  },
+  {
+    id: 'usb',
+    svgIcon: SERVICE_SVG.usb,
+    title: 'USB · 보조배터리',
+    desc: '실용성 최강 IT 판촉물 —\n레이저 각인 & 풀컬러 UV 인쇄.',
+    img: 'img/product/product_usb.webp',
+    link: SITE.smartstore,
+  },
+  {
+    id: 'ecobag',
+    svgIcon: SERVICE_SVG.ecobag,
+    title: '에코백 · 파우치',
+    desc: '친환경 캔버스 원단 —\n실크스크린, 디지털 전사 인쇄.',
+    img: 'img/product/product_ecobag.webp',
+    link: SITE.smartstore,
+  },
+  {
+    id: 'gift',
+    svgIcon: SERVICE_SVG.gift,
+    title: '세트 · 선물 패키지',
+    desc: '텀블러+볼펜+에코백 세트 —\n답례품·행사 선물 맞춤 구성.',
+    img: 'img/product/product_gift.webp',
+    link: SITE.smartstore,
+  },
+];
+
+/* SVG icons for brand items */
+const BRAND_SVG = {
+  dtf: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-lt)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-2-3.92-2-6.5 0 2.58.93 4.36 2 6.5.5 1 1 1.62 1 3a2.5 2.5 0 0 1-2.5 2.5z"/><path d="M12.5 14.5A2.5 2.5 0 0 0 15 12c0-1.38-.5-2-1-3-1.07-2.14-2-3.92-2-6.5 0 2.58.93 4.36 2 6.5.5 1 1 1.62 1 3a2.5 2.5 0 0 1-2.5 2.5z"/><path d="M6 22v-4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4"/><path d="M6 18H4a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2"/></svg>',
+  laser: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-lt)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+  premium: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-lt)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3l1 6"/><path d="M2 9h20"/><path d="M7 9l5 13 5-13"/></svg>',
+};
+
+const BRAND_ITEMS = [
+  {
+    svgIcon: BRAND_SVG.dtf,
+    title: 'DTF 스티커',
+    desc: '의류·모자·가방에 열전사 —\n풀컬러 소량 가능,\n내구성 우수.',
+  },
+  {
+    svgIcon: BRAND_SVG.laser,
+    title: '레이저 각인',
+    desc: '금속·나무·가죽 정밀 각인 —\n반영구적 마감으로\n고급스러움.',
+  },
+  {
+    svgIcon: BRAND_SVG.premium,
+    title: '프리미엄 답례품',
+    desc: '돌잔치·결혼·회갑 —\n개별 포장 & 감성 디자인\n맞춤 제작.',
+  },
+];
+
+/* SVG icons for process steps */
+const PROCESS_SVG = {
+  order: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>',
+  design: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>',
+  factory: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M5 20V8l5 4V8l5 4V4h3a2 2 0 0 1 2 2v14"/><path d="M8 16h.01"/><path d="M12 16h.01"/><path d="M16 16h.01"/></svg>',
+  check: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
+  delivery: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
+};
+
+const PROCESS_STEPS = [
+  { step: 1, svgIcon: PROCESS_SVG.order, title: '주문 접수', desc: '카카오톡·전화·폼으로\n원하시는 제품과 수량을\n알려주세요.' },
+  { step: 2, svgIcon: PROCESS_SVG.design, title: '시안 확인', desc: '24시간 내 디자인 시안을\n보내드립니다.\n수정 무제한.' },
+  { step: 3, svgIcon: PROCESS_SVG.factory, title: '제작 진행', desc: '시안 확정 후 3~7일 내\n자체 공장에서\n제작합니다.' },
+  { step: 4, svgIcon: PROCESS_SVG.check, title: '품질 검수', desc: '1:1 수작업 검수로\n완벽한 품질을\n보장합니다.' },
+  { step: 5, svgIcon: PROCESS_SVG.delivery, title: '안전 배송', desc: '개별 포장 후\n안전하게 배송해\n드립니다.' },
+];
+
+const PORTFOLIO_ITEMS = [
+  { id: 1, category: 'engrave', img: 'img/portfolio/portfolio_01.webp', title: '대기업 A사 텀블러 각인', desc: '스텐 텀블러 500ml 레이저 각인 2,000개' },
+  { id: 2, category: 'sticker', img: 'img/portfolio/portfolio_02.webp', title: '통신사 B사 DTF 스티커', desc: '유니폼 열전사 스티커 500장' },
+  { id: 3, category: 'gift', img: 'img/portfolio/portfolio_03.webp', title: '건설사 C사 답례품 세트', desc: '텀블러+볼펜+에코백 세트 1,000개' },
+  { id: 4, category: 'engrave', img: 'img/portfolio/portfolio_04.webp', title: 'IT기업 D사 볼펜 로고 인쇄', desc: '제트스트림 볼펜 UV 인쇄 3,000개' },
+  { id: 5, category: 'sticker', img: 'img/portfolio/portfolio_05.webp', title: '스포츠브랜드 E사 DTF 전사', desc: '모자 열전사 스티커 2,000장' },
+  { id: 6, category: 'gift', img: 'img/portfolio/portfolio_06.webp', title: '돌잔치 답례품 패키지', desc: '미니 디퓨저+타올 세트 300개' },
+  { id: 7, category: 'engrave', img: 'img/portfolio/portfolio_07.webp', title: '에너지기업 F사 USB 각인', desc: '메탈 USB 32GB 레이저 각인 1,500개' },
+  { id: 8, category: 'sticker', img: 'img/portfolio/portfolio_08.webp', title: '프랜차이즈 G사 라벨', desc: 'PVC 스티커 풀컬러 인쇄 10,000장' },
+];
+
+const PORTFOLIO_FILTERS = [
+  { key: 'all', label: '전체' },
+  { key: 'engrave', label: '각인' },
+  { key: 'sticker', label: '스티커' },
+  { key: 'gift', label: '답례품' },
+];
+
+/* 대화형 리뷰 — 고객 질문 → 알린다 답변 → 결과 후기 */
+const REVIEWS = [
+  {
+    id: 1,
+    name: '김*영 님',
+    company: 'IT기업 홍보팀',
+    rating: 5,
+    chat: [
+      { who: 'customer', msg: '사내 행사용 텀블러 500개, 3일 안에 가능할까요?' },
+      { who: 'alinda', msg: '네! 스텐 텀블러 레이저 각인 500개, 3일 납품 가능합니다. 시안 바로 보내드릴게요.' },
+      { who: 'customer', msg: '시안부터 배송까지 3일 만에 완료! 퀄리티도 기대 이상이었어요.' },
+    ],
+  },
+  {
+    id: 2,
+    name: '박*수 님',
+    company: '웨딩플래너',
+    rating: 5,
+    chat: [
+      { who: 'customer', msg: '결혼식 답례품 텀블러 각인인데, 예쁘게 나올까요?' },
+      { who: 'alinda', msg: '물론이죠! UV 풀컬러로 감성적인 디자인 시안 준비해 드릴게요.' },
+      { who: 'customer', msg: '하객분들 반응이 최고였어요. 포장도 너무 예뻤습니다!' },
+    ],
+  },
+  {
+    id: 3,
+    name: '이*진 님',
+    company: '스타트업 대표',
+    rating: 5,
+    chat: [
+      { who: 'customer', msg: '50개 소량인데도 주문 가능한가요...?' },
+      { who: 'alinda', msg: '소량도 환영합니다! 50개부터 정성껏 제작해 드려요.' },
+      { who: 'customer', msg: '소량인데도 친절하게 상담해주셨어요. 각인 퀄리티 정말 좋습니다.' },
+    ],
+  },
+  {
+    id: 4,
+    name: '최*미 님',
+    company: '대학 총학생회',
+    rating: 5,
+    chat: [
+      { who: 'customer', msg: 'MT 기념품 에코백 300개 예산이 빠듯한데...' },
+      { who: 'alinda', msg: '예산에 맞춰 최적의 원단과 인쇄 방식 추천드릴게요!' },
+      { who: 'customer', msg: '디자인 수정도 빠르고 가격도 합리적이었습니다!' },
+    ],
+  },
+  {
+    id: 5,
+    name: '정*호 님',
+    company: '제약회사 마케팅',
+    rating: 4,
+    chat: [
+      { who: 'customer', msg: '학술대회 볼펜 3,000개 대량 주문인데 납기 맞출 수 있나요?' },
+      { who: 'alinda', msg: '네, 대량 주문 전용 라인으로 납기 정확히 맞춰드립니다!' },
+      { who: 'customer', msg: '납기 정확하고, 인쇄 품질도 깔끔했습니다.' },
+    ],
+  },
+  {
+    id: 6,
+    name: '한*은 님',
+    company: '돌잔치 준비맘',
+    rating: 5,
+    chat: [
+      { who: 'customer', msg: '아기 돌잔치 답례품으로 뭐가 좋을까요?' },
+      { who: 'alinda', msg: '미니 디퓨저+타올 세트가 인기 많아요! 감성 패키징도 함께 해드릴게요.' },
+      { who: 'customer', msg: '너무 예쁘게 만들어주셔서 감동이었어요!' },
+    ],
+  },
+];
+
+const FAQ_ITEMS = [
+  {
+    q: '최소 주문 수량은 얼마인가요?',
+    a: '제품에 따라 다르지만, 대부분 50개부터 주문 가능합니다. 소량 주문도 상담해 주세요!',
+  },
+  {
+    q: '제작 기간은 얼마나 걸리나요?',
+    a: '시안 확정 후 보통 3~7일(영업일 기준)입니다. 긴급 제작도 가능하니 별도 문의해 주세요.',
+  },
+  {
+    q: '시안은 어떻게 확인하나요?',
+    a: '주문 접수 후 24시간 이내에 카카오톡 또는 이메일로 디자인 시안을 보내드립니다. 수정은 횟수 제한 없이 가능합니다.',
+  },
+  {
+    q: '로고 파일은 어떤 형식으로 보내야 하나요?',
+    a: 'AI, PDF, PNG(고해상도) 파일을 권장합니다. 파일이 없으시면 이미지 기반으로 시안 작업도 가능합니다.',
+  },
+  {
+    q: '샘플 제작이 가능한가요?',
+    a: '네, 유료 샘플 제작이 가능합니다. 대량 주문 확정 시 샘플 비용을 환불해 드립니다.',
+  },
+  {
+    q: '세금계산서 발행이 되나요?',
+    a: '네, 사업자 등록증 확인 후 전자세금계산서를 발행해 드립니다.',
+  },
+];
+
+/* SVG icons for guide cards */
+const GUIDE_SVG = {
+  file: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>',
+  box: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>',
+  clock: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+};
+
+const GUIDE_CARDS = [
+  {
+    svgIcon: GUIDE_SVG.file,
+    title: '파일 가이드',
+    desc: 'AI, PDF, PNG 고해상도 파일 권장.\n로고가 없어도 시안 작업 가능합니다.',
+  },
+  {
+    svgIcon: GUIDE_SVG.box,
+    title: '최소 수량',
+    desc: '대부분 50개부터 주문 가능.\n소량·대량 모두 친절히 상담해 드립니다.',
+  },
+  {
+    svgIcon: GUIDE_SVG.clock,
+    title: '제작 기간',
+    desc: '시안 확정 후 3~7일.\n긴급 제작 가능 (별도 문의).',
+  },
+];
+
+/* 플로팅바 상품 카테고리 */
+const FLOAT_CATEGORIES = [
+  { key: 'tumbler', label: '텀블러', svg: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M6 8h11v9a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="17" y2="1"/><line x1="6" y1="4" x2="17" y2="4"/></svg>' },
+  { key: 'pen', label: '볼펜', svg: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>' },
+  { key: 'fan', label: '선풍기', svg: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 12c-2-2.67-6-7-6-10a6 6 0 0 1 12 0c0 3-4 7.33-6 10z"/><circle cx="12" cy="12" r="2"/><path d="M12 12c2 2.67 6 7 6 10a6 6 0 0 1-12 0c0-3 4-7.33 6-10z"/></svg>' },
+  { key: 'usb', label: 'USB', svg: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="4" cy="20" r="2"/><circle cx="16" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M12 2v10l4-2"/><path d="M12 12l-8 6"/><path d="M12 12l8 2"/></svg>' },
+  { key: 'ecobag', label: '에코백', svg: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>' },
+  { key: 'gift', label: '답례품', svg: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>' },
+  { key: 'sticker', label: '스티커', svg: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>' },
+  { key: 'etc', label: '기타', svg: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>' },
+];
