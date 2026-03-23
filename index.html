@@ -30,7 +30,7 @@
     body{font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;color:#0D2B5E;background:#F4F7FB;line-height:1.7;overflow-x:hidden}
     .header{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0);transition:all .3s}
     .hero{position:relative;height:100vh;min-height:600px;max-height:900px;overflow:hidden}
-    .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,31,68,.55),rgba(13,43,94,.7))}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.65))}
     .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease}
     .hero-slide.active{opacity:1}
     .hero-slide-bg{position:absolute;inset:0;background-size:cover;background-position:center}
@@ -135,6 +135,18 @@
       </div>
       <div class="card-grid" id="servicesGrid"></div>
     </section>
+  </div>
+
+  <!-- ===== WHAT WE DO ===== -->
+  <div class="iceberg-below" id="iceberg">
+    <div class="section" style="max-width:1200px;margin:0 auto;">
+      <div class="text-center fade-up" style="margin-bottom:48px;">
+        <span class="section-label" style="color:var(--accent-lt)">What We Do</span>
+        <h2 class="heading-lg" style="color:#fff;">그 하나를 위해,<br>알린다는 이렇게 합니다.</h2>
+        <p style="color:rgba(255,255,255,.55);margin-top:12px;">보이지 않는 곳에서 완성도를 만드는 알린다의 제작 프로세스</p>
+      </div>
+      <div class="iceberg-grid" id="icebergGrid"></div>
+    </div>
   </div>
 
   <!-- ===== BRAND '새기다' ===== -->
@@ -328,12 +340,13 @@
   <!-- Floating Bottom Bar (상품 카테고리 롤아웃 탭 포함) -->
   <div class="floating-bar" id="floatingBar">
     <div class="float-categories" id="floatCategories"></div>
-    <div class="float-form-row">
+    <form class="float-form-row" id="floatForm">
       <div class="float-selected" id="floatSelected" style="display:none"></div>
-      <input type="text" placeholder="이름" id="floatName">
-      <input type="tel" placeholder="연락처" id="floatPhone">
-      <button class="btn btn--primary btn--sm" id="floatSubmit">빠른 문의</button>
-    </div>
+      <input type="text" placeholder="이름" id="floatName" required>
+      <input type="tel" placeholder="연락처" id="floatPhone" required>
+      <input type="text" placeholder="전달사항" id="floatMessage">
+      <button type="submit" class="btn btn--primary btn--sm" id="floatSubmit">빠른 문의</button>
+    </form>
   </div>
 
   <!-- Naver Smartstore Floating Button (desktop only) -->

@@ -119,6 +119,24 @@
   }
 
   /* ----------------------------------------------------------
+     2-1. ICEBERG GRID
+  ---------------------------------------------------------- */
+  function initIceberg() {
+    const grid = document.getElementById('icebergGrid');
+    ICEBERG_ITEMS.forEach((item, i) => {
+      const card = el('div', { className: `iceberg-card fade-up fade-up-delay-${(i % 3) + 1}` }, [
+        el('span', { className: 'iceberg-card-num', text: item.num }),
+        el('div', { className: 'iceberg-card-head' }, [
+          el('div', { className: 'iceberg-card-icon', html: item.svg }),
+          el('span', { className: 'iceberg-card-title', text: item.title }),
+        ]),
+        el('p', { className: 'iceberg-card-desc', text: item.desc }),
+      ]);
+      grid.appendChild(card);
+    });
+  }
+
+  /* ----------------------------------------------------------
      3. BRAND GRID
   ---------------------------------------------------------- */
   function initBrand() {
@@ -395,32 +413,62 @@
       bar.classList.toggle('visible', window.scrollY > heroBottom);
     }, { passive: true });
 
-    // 빠른 문의
-    document.getElementById('floatSubmit').addEventListener('click', () => {
+    // 빠른 문의 (Google Sheets + Gmail 연동 대비)
+    document.getElementById('floatForm').addEventListener('submit', e => {
+      e.preventDefault();
       const name = document.getElementById('floatName').value.trim();
       const phone = document.getElementById('floatPhone').value.trim();
-      if (!name || !phone) {
-        alert('이름과 연락처를 입력해주세요.');
-        return;
-      }
+      const message = document.getElementById('floatMessage').value.trim();
       const catLabel = selectedCategory
         ? FLOAT_CATEGORIES.find(c => c.key === selectedCategory)?.label || ''
         : '미선택';
-      alert(`${name}님, [${catLabel}] 문의가 접수되었습니다!\n빠른 시간 내에 연락드리겠습니다.`);
-      document.getElementById('floatName').value = '';
-      document.getElementById('floatPhone').value = '';
+
+      const payload = { name, phone, message, category: catLabel, source: 'float' };
+      submitInquiry(payload);
+      e.target.reset();
     });
   }
 
   /* ----------------------------------------------------------
      10. CONTACT FORM
   ---------------------------------------------------------- */
+  /* ----------------------------------------------------------
+     Google Sheets / Gmail 연동 공통 제출 함수
+     → GOOGLE_APPS_SCRIPT_URL 에 Apps Script 웹앱 URL 넣으면 자동 연동
+  ---------------------------------------------------------- */
+  const GOOGLE_APPS_SCRIPT_URL = ''; // TODO: Apps Script 배포 URL
+
+  function submitInquiry(payload) {
+    if (GOOGLE_APPS_SCRIPT_URL) {
+      fetch(GOOGLE_APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      .then(res => res.json())
+      .then(() => {
+        alert(`${payload.name}님, 문의가 접수되었습니다!\n빠른 시간 내에 연락드리겠습니다.`);
+      })
+      .catch(() => {
+        alert('전송 중 오류가 발생했습니다. 전화(02-465-0817)로 문의해주세요.');
+      });
+    } else {
+      alert(`${payload.name}님, 문의가 접수되었습니다!\n빠른 시간 내에 연락드리겠습니다.`);
+    }
+  }
+
   function initContactForm() {
     document.getElementById('contactForm').addEventListener('submit', e => {
       e.preventDefault();
       const fd = new FormData(e.target);
-      const name = fd.get('name');
-      alert(`${name}님, 견적 문의가 접수되었습니다!\n24시간 이내에 연락드리겠습니다.`);
+      const payload = {
+        name: fd.get('name'),
+        phone: fd.get('phone'),
+        email: fd.get('email'),
+        message: fd.get('message'),
+        source: 'contact',
+      };
+      submitInquiry(payload);
       e.target.reset();
     });
   }
@@ -484,6 +532,7 @@
     initHero();
     initHeroSwipe();
     initServices();
+    initIceberg();
     initBrand();
     initProcess();
     initPortfolio();

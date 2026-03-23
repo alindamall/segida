@@ -111,6 +111,43 @@ const SERVICES = [
   },
 ];
 
+/* ===== ICEBERG SECTION ===== */
+const ICEBERG = {
+  aboveLabel: 'VISIBLE 10%',
+  aboveTitle: '고객이 받는 판촉물 하나',
+  aboveDesc: '완성된 결과물, 그것이 전부로 보입니다.',
+  dividerLeft: '겉으로 보이는 건',
+  dividerBold: '완성품 하나',
+  dividerRight: '입니다.',
+  belowLabel: 'INVISIBLE 90%',
+  belowTitle: '그 하나를 위해,\n알린다는 이렇게 합니다.',
+  belowDesc: '보이지 않는 곳에서 완성도를 만드는 알린다의 제작 프로세스',
+};
+
+const ICEBERG_SVG = {
+  consult:  '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+  design:   '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>',
+  material: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>',
+  engrave:  '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+  color:    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="10.5" r="2.5"/><circle cx="8.5" cy="7.5" r="2.5"/><circle cx="6.5" cy="12" r="2.5"/><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12a10 10 0 0 0 8 9.8"/></svg>',
+  check:    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>',
+  pack:     '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>',
+  delivery: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
+  after:    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+};
+
+const ICEBERG_ITEMS = [
+  { svg: ICEBERG_SVG.consult,  num: '01', title: '1:1 맞춤 상담',       desc: '용도·수량·예산에 맞는 최적 제안' },
+  { svg: ICEBERG_SVG.design,   num: '02', title: '디자인 시안 제작',    desc: '24시간 내 시안, 수정 무제한' },
+  { svg: ICEBERG_SVG.material, num: '03', title: '원자재 품질 선별',    desc: '검증된 공급처, 불량률 1% 미만' },
+  { svg: ICEBERG_SVG.engrave,  num: '04', title: '정밀 각인 · 인쇄',    desc: '레이저·UV·DTF — 기법별 최적화' },
+  { svg: ICEBERG_SVG.color,    num: '05', title: '색상 보정 · 테스트',  desc: '시안과 실물 차이 최소화' },
+  { svg: ICEBERG_SVG.check,    num: '06', title: '전수 품질 검수',      desc: '1:1 수작업 검수, 불량 0% 목표' },
+  { svg: ICEBERG_SVG.pack,     num: '07', title: '개별 포장 · 패키징',  desc: '감성 포장, 답례품 맞춤 구성' },
+  { svg: ICEBERG_SVG.delivery, num: '08', title: '안전 배송',           desc: '에어캡+박스 이중포장, 추적 가능' },
+  { svg: ICEBERG_SVG.after,    num: '09', title: 'A/S · 재주문 관리',   desc: '납품 후에도 책임지는 사후관리' },
+];
+
 /* SVG icons for brand items */
 const BRAND_SVG = {
   dtf: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent-lt)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-2-3.92-2-6.5 0 2.58.93 4.36 2 6.5.5 1 1 1.62 1 3a2.5 2.5 0 0 1-2.5 2.5z"/><path d="M12.5 14.5A2.5 2.5 0 0 0 15 12c0-1.38-.5-2-1-3-1.07-2.14-2-3.92-2-6.5 0 2.58.93 4.36 2 6.5.5 1 1 1.62 1 3a2.5 2.5 0 0 1-2.5 2.5z"/><path d="M6 22v-4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4"/><path d="M6 18H4a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2"/></svg>',
