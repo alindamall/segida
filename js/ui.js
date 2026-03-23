@@ -189,7 +189,11 @@
   function filterPortfolio(key) {
     activeFilter = key;
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === key));
-    renderPortfolio(key);
+    if (document.startViewTransition) {
+      document.startViewTransition(() => renderPortfolio(key));
+    } else {
+      renderPortfolio(key);
+    }
   }
 
   function renderPortfolio(key) {

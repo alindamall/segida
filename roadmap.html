@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>알린다몰 — 2주 런칭 로드맵</title>
+<link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{width:1920px;background:#111;color:#ccc;font-family:'Pretendard Variable',sans-serif;font-size:14px}
+body{width:1920px;min-height:1080px;overflow-y:auto;overflow-x:hidden}
+
+.page{width:1920px;min-height:1080px;padding:40px 48px;display:flex;flex-direction:column;gap:24px}
+
+/* Header */
+.header{display:flex;justify-content:space-between;align-items:flex-end}
+.title{font-size:28px;font-weight:800;color:#fff;letter-spacing:-.02em}
+.subtitle{font-size:13px;color:#666;margin-top:4px}
+.legend{display:flex;gap:20px;align-items:center;font-size:12px;color:#888}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px}
+.dot--done{background:#fff}
+.dot--doing{background:#999}
+.dot--blocked{background:#555;border:1.5px dashed #888}
+.dot--todo{background:#222;border:1.5px solid #444}
+
+/* Timeline header */
+.timeline-header{display:grid;grid-template-columns:220px 1fr}
+.phase-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#555;padding:8px 0}
+.days-row{display:grid;grid-template-columns:repeat(14,1fr)}
+.day-cell{text-align:center;padding:8px 0;font-size:11px;font-weight:600;color:#555;border-bottom:1px solid #222}
+.day-cell.weekend{color:#333}
+.day-cell.today{color:#fff}
+.day-cell.today::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:20px;height:2px;background:#fff}
+
+/* Board */
+.board{display:flex;flex-direction:column;gap:1px}
+
+/* Row */
+.row{display:grid;grid-template-columns:220px 1fr;align-items:center;min-height:42px}
+.row:hover{background:rgba(255,255,255,.03);border-radius:4px}
+.task-info{display:flex;align-items:center;gap:10px;padding:4px 0}
+.task-status{width:16px;height:16px;border-radius:3px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px}
+.task-status.todo{background:#1a1a1a;border:1.5px solid #333}
+.task-status.doing{background:#666}
+.task-status.done{background:#fff}
+.task-status.blocked{background:#333;border:1.5px dashed #666}
+.task-status.done::after{content:'✓';color:#111;font-weight:700}
+.task-status.doing::after{content:'';width:5px;height:5px;border-radius:50%;background:#fff;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.task-name{font-size:13px;font-weight:500;color:#bbb;white-space:nowrap}
+.task-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:50px;white-space:nowrap;background:rgba(255,255,255,.06);color:#777}
+
+/* Gantt */
+.gantt{display:grid;grid-template-columns:repeat(14,1fr);position:relative;height:100%}
+.gantt-bg{border-left:1px solid #1a1a1a;height:100%}
+.gantt-bg.weekend{background:rgba(255,255,255,.01)}
+.bar{position:absolute;height:22px;top:50%;transform:translateY(-50%);border-radius:4px;display:flex;align-items:center;padding:0 8px;font-size:10px;font-weight:600;white-space:nowrap;z-index:1}
+.bar-default{background:#333;color:#aaa}
+.bar-done{background:#555;color:#ccc;opacity:.5}
+.bar-highlight{background:#fff;color:#111}
+
+/* Category divider */
+.cat-divider{display:grid;grid-template-columns:220px 1fr;min-height:32px;align-items:center;margin-top:8px}
+.cat-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#666;padding-left:26px}
+.cat-line{height:1px;background:linear-gradient(90deg,#333,transparent)}
+
+/* Footer */
+.footer{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid #222;margin-top:8px}
+.stat{display:flex;gap:24px}
+.stat-item{font-size:12px;color:#555}
+.stat-item strong{color:#999;font-weight:700}
+.footer-note{font-size:11px;color:#333}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div>
+      <div class="title">알린다몰 — 2주 런칭 로드맵</div>
+      <div class="subtitle">alindamall.com &nbsp;|&nbsp; 2026.03.24 (월) → 2026.04.06 (일)</div>
+    </div>
+    <div class="legend">
+      <span><span class="dot dot--done"></span>완료</span>
+      <span><span class="dot dot--doing"></span>진행중</span>
+      <span><span class="dot dot--blocked"></span>대기</span>
+      <span><span class="dot dot--todo"></span>예정</span>
+    </div>
+  </div>
+
+  <div class="timeline-header">
+    <div class="phase-label"></div>
+    <div class="days-row">
+      <div class="day-cell today" style="position:relative">24 월</div>
+      <div class="day-cell">25 화</div>
+      <div class="day-cell">26 수</div>
+      <div class="day-cell">27 목</div>
+      <div class="day-cell">28 금</div>
+      <div class="day-cell weekend">29 토</div>
+      <div class="day-cell weekend">30 일</div>
+      <div class="day-cell">31 월</div>
+      <div class="day-cell">01 화</div>
+      <div class="day-cell">02 수</div>
+      <div class="day-cell">03 목</div>
+      <div class="day-cell">04 금</div>
+      <div class="day-cell weekend">05 토</div>
+      <div class="day-cell weekend">06 일</div>
+    </div>
+  </div>
+
+  <div class="board">
+
+    <div class="cat-divider">
+      <div class="cat-title">INFRA / DEPLOY</div>
+      <div class="cat-line"></div>
+    </div>
+
+    <div class="row">
+      <div class="task-info">
+        <div class="task-status done"></div>
+        <span class="task-name">Netlify 배포 + SSL</span>
+        <span class="task-tag">OPS</span>
+      </div>
+      <div class="gantt" style="position:relative">
+        <div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div>
+        <div class="bar bar-done" style="left:0%;width:calc(50%/14)">Done</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="task-info">
+        <div class="task-status todo"></div>
+        <span class="task-name">도메인 변경 (alindamall.com)</span>
+        <span class="task-tag">OPS</span>
+      </div>
+      <div class="gantt" style="position:relative">
+        <div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div>
+        <div class="bar bar-default" style="left:calc(100%/14);width:calc(100%/14)">25 화</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="task-info">
+        <div class="task-status todo"></div>
+        <span class="task-name">Google Sheets + Gmail 연동</span>
+        <span class="task-tag">DEV</span>
+      </div>
+      <div class="gantt" style="position:relative">
+        <div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div>
+        <div class="bar bar-default" style="left:calc(100%/14);width:calc(200%/14)">Apps Script</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="task-info">
+        <div class="task-status todo"></div>
+        <span class="task-name">폼 스팸 방지 (reCAPTCHA)</span>
+        <span class="task-tag">DEV</span>
+      </div>
+      <div class="gantt" style="position:relative">
+        <div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div>
+        <div class="bar bar-default" style="left:calc(300%/14);width:calc(100%/14)">27 목</div>
+      </div>
+    </div>
+
+    <div class="cat-divider">
+      <div class="cat-title">DESIGN / ASSET</div>
+      <div class="cat-line"></div>
+    </div>
+
+    <div class="row">
+      <div class="task-info">
+        <div class="task-status blocked"></div>
+        <span class="task-name">디자이너 이미지 에셋 수령 (23장)</span>
+        <span class="task-tag">DESIGN</span>
+      </div>
+      <div class="gantt" style="position:relative">
+        <div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div>
+        <div class="bar bar-default" style="left:0%;width:calc(400%/14);border:1px dashed #555;background:#1a1a1a;color:#666">디자이너 작업 대기</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="task-info">
+        <div class="task-status todo"></div>
+        <span class="task-name">OG 이미지 자체 호스팅 전환</span>
+        <span class="task-tag">DESIGN</span>
+      </div>
+      <div class="gantt" style="position:relative">
+        <div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div>
+        <div class="bar bar-default" style="left:calc(200%/14);width:calc(100%/14)">26 수</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="task-info">
+        <div class="task-status todo"></div>
+        <span class="task-name">이미지 교체 + 용량 최적화</span>
+        <span class="task-tag">DESIGN</span>
+      </div>
+      <div class="gantt" style="position:relative">
+        <div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div>
+        <div class="bar bar-default" style="left:calc(400%/14);width:calc(100%/14)">28 금</div>
+      </div>
+    </div>
+
+    <div class="cat-divider">
+      <div class="cat-title">SEO / GEO</div>
+      <div class="cat-line"></div>
+    </div>
+
+    <div class="row">
+      <div class="task-info">
+        <div class="task-status done"></div>
+        <span class="task-name">sitemap.xml + robots.txt + llms.txt</span>
+        <span class="task-tag">SEO</span>
+      </div>
+      <div class="gantt" style="position:relative">
+        <div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div>
+        <div class="bar bar-done" style="left:0%;width:calc(50%/14)">Done</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="task-info">
+        <div class="task-status done"></div>
+        <span class="task-name">HowTo + Product JSON-LD</span>
+        <span class="task-tag">SEO</span>
+      </div>
+      <div class="gantt" style="position:relative">
+        <div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div>
+        <div class="bar bar-done" style="left:0%;width:calc(50%/14)">Done</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="task-info">
+        <div class="task-status todo"></div>
+        <span class="task-name">구글 서치콘솔 등록 + 인증</span>
+        <span class="task-tag">SEO</span>
+      </div>
+      <div class="gantt" style="position:relative">
+        <div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div>
+        <div class="bar bar-default" style="left:calc(100%/14);width:calc(100%/14)">배포 후</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="task-info">
+        <div class="task-status todo"></div>
+        <span class="task-name">네이버 서치어드바이저 등록</span>
+        <span class="task-tag">SEO</span>
+      </div>
+      <div class="gantt" style="position:relative">
+        <div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div>
+        <div class="bar bar-default" style="left:calc(100%/14);width:calc(100%/14)">배포 후</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="task-info">
+        <div class="task-status todo"></div>
+        <span class="task-name">sitemap 도메인 업데이트</span>
+        <span class="task-tag">SEO</span>
+      </div>
+      <div class="gantt" style="position:relative">
+        <div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div>
+        <div class="bar bar-default" style="left:calc(100%/14);width:calc(50%/14)"></div>
+      </div>
+    </div>
+
+    <div class="cat-divider">
+      <div class="cat-title">MARKETING / TRACKING</div>
+      <div class="cat-line"></div>
+    </div>
+
+    <div class="row">
+      <div class="task-info">
+        <div class="task-status todo"></div>
+        <span class="task-name">GA4 설치 + 기본 이벤트</span>
+        <span class="task-tag">MKT</span>
+      </div>
+      <div class="gantt" style="position:relative">
+        <div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div>
+        <div class="bar bar-default" style="left:calc(700%/14);width:calc(100%/14)">ID 필요</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="task-info">
+        <div class="task-status todo"></div>
+        <span class="task-name">GTM 컨테이너 + 이벤트 태깅</span>
+        <span class="task-tag">MKT</span>
+      </div>
+      <div class="gantt" style="position:relative">
+        <div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div>
+        <div class="bar bar-default" style="left:calc(800%/14);width:calc(200%/14)">CTA 이벤트</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="task-info">
+        <div class="task-status todo"></div>
+        <span class="task-name">Meta Pixel 설치</span>
+        <span class="task-tag">MKT</span>
+      </div>
+      <div class="gantt" style="position:relative">
+        <div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div>
+        <div class="bar bar-default" style="left:calc(800%/14);width:calc(100%/14)">ID 필요</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="task-info">
+        <div class="task-status todo"></div>
+        <span class="task-name">Lighthouse 최적화 (90+ 목표)</span>
+        <span class="task-tag">DEV</span>
+      </div>
+      <div class="gantt" style="position:relative">
+        <div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div>
+        <div class="bar bar-default" style="left:calc(1000%/14);width:calc(200%/14)">이미지 교체 후</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="task-info">
+        <div class="task-status todo"></div>
+        <span class="task-name">최종 QA + 런칭</span>
+        <span class="task-tag">OPS</span>
+      </div>
+      <div class="gantt" style="position:relative">
+        <div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg"></div><div class="gantt-bg weekend"></div><div class="gantt-bg weekend"></div>
+        <div class="bar bar-highlight" style="left:calc(1100%/14);width:calc(100%/14)">GO LIVE</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="stat">
+      <div class="stat-item"><strong>3</strong> 완료</div>
+      <div class="stat-item"><strong>0</strong> 진행중</div>
+      <div class="stat-item"><strong>1</strong> 대기</div>
+      <div class="stat-item"><strong>14</strong> 예정</div>
+      <div class="stat-item"><strong>18</strong> 전체</div>
+    </div>
+    <div class="footer-note">alindamall.com &nbsp;|&nbsp; 2026-03-23</div>
+  </div>
+
+</div>
+</body>
+</html>
