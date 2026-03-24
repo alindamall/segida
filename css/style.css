@@ -173,14 +173,14 @@ ul,ol { list-style:none; }
   padding:0 24px;
   display:flex; align-items:center; justify-content:space-between;
 }
-.logo {
-  font-size:1.375rem; font-weight:800;
-  color:#fff; letter-spacing:-.02em;
-  transition:color var(--transition);
+.logo { display:flex; align-items:center; }
+.logo-img {
+  height:32px; width:auto;
+  filter:brightness(0) invert(1);
+  transition:filter var(--transition);
 }
-.logo span { color:#fff; transition:color var(--transition); }
-.header.scrolled .logo { color:var(--primary); }
-.header.scrolled .logo span { color:var(--accent); }
+.header.scrolled .logo-img { filter:none; }
+.footer-logo-img { height:28px; width:auto; filter:brightness(0) invert(1); }
 .nav { display:flex; align-items:center; gap:32px; }
 .nav-link {
   font-size:.9375rem; font-weight:500;
@@ -304,7 +304,7 @@ ul,ol { list-style:none; }
 
 /* --- What We Do (Iceberg) Section --- */
 .iceberg-below {
-  background:linear-gradient(180deg, #1a2e4a 0%, #0f1c30 100%);
+  background:linear-gradient(rgba(0,0,0,.82),rgba(0,0,0,.88)), url('../img/bg/bg_whatwedo.webp') center/cover no-repeat;
   padding:0 0 clamp(60px,10vw,100px);
 }
 
@@ -387,6 +387,29 @@ ul,ol { list-style:none; }
   background:rgba(33,150,243,.15);
 }
 .brand-card .card-desc { color:rgba(255,255,255,.7); }
+
+/* --- Client Logo Marquee --- */
+.marquee-section { padding:64px 0 72px; background:var(--bg); }
+.marquee-cta { display:flex; justify-content:center; gap:16px; margin-top:32px; flex-wrap:wrap; }
+.marquee-wrap { overflow:hidden; margin-top:40px; }
+.marquee-track {
+  display:flex; align-items:center; gap:100px;
+  width:max-content;
+  animation:marquee-scroll 32s linear infinite;
+}
+.marquee-track:hover { animation-play-state:paused; }
+.marquee-reverse { animation-direction:reverse; }
+.marquee-wrap + .marquee-wrap { margin-top:28px; }
+.marquee-track img {
+  height:40px; width:auto; opacity:.35;
+  filter:grayscale(100%);
+  transition:all var(--transition);
+}
+.marquee-track img:hover { opacity:1; filter:grayscale(0); }
+@keyframes marquee-scroll {
+  0% { transform:translateX(0); }
+  100% { transform:translateX(-50%); }
+}
 
 /* --- Process Timeline --- */
 .process-bg { background:var(--surface); }
@@ -498,74 +521,52 @@ ul,ol { list-style:none; }
    ============================================================ */
 .reviews-bg { background:var(--surface); }
 
-.chat-list {
+/* X(트위터) 스타일 리뷰 카드 */
+.tweet-list {
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
-  gap:24px;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  align-items:start;
 }
+.tweet-list .tweet-card:nth-child(3n+2) { transform:translateY(32px); }
 
-.chat-card {
-  background:var(--bg);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  overflow:hidden;
-  transition:all var(--transition);
+.tweet-card {
+  background:#fff;
+  border:1px solid #e7e7e7;
+  border-radius:16px;
+  padding:20px;
+  box-shadow:0 2px 12px rgba(0,0,0,.07);
+  transition:box-shadow var(--transition), transform var(--transition);
 }
-.chat-card:hover {
-  box-shadow:var(--shadow-lg);
-  transform:translateY(-2px);
-}
+.tweet-card:hover { box-shadow:0 6px 24px rgba(0,0,0,.13); }
 
-.chat-card-header {
-  display:flex; align-items:center; justify-content:space-between;
-  padding:16px 20px; background:var(--surface);
-  border-bottom:1px solid var(--border);
+.tweet-header { display:flex; align-items:flex-start; gap:12px; margin-bottom:14px; }
+.tweet-avatar {
+  width:44px; height:44px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-weight:700; font-size:.9375rem;
 }
-.chat-card-author { font-weight:600; font-size:.875rem; }
-.chat-card-company { font-size:.75rem; color:var(--text-muted); }
-.chat-card-stars { color:var(--gold); font-size:.875rem; letter-spacing:1px; }
+.tweet-author { flex:1; min-width:0; }
+.tweet-name-row { display:flex; align-items:center; gap:4px; }
+.tweet-name { font-weight:700; font-size:.9375rem; color:#0f1419; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.tweet-verified { flex-shrink:0; color:#1d9bf0; }
+.tweet-handle { font-size:.8125rem; color:#536471; margin-top:1px; }
+.tweet-meta { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+.tweet-time { font-size:.8125rem; color:#536471; }
+.tweet-dots { font-size:1.25rem; color:#536471; line-height:1; cursor:default; }
 
-.chat-messages {
-  padding:20px; display:flex; flex-direction:column; gap:12px;
-  min-height:180px;
-}
+.tweet-body { font-size:.9375rem; line-height:1.65; color:#0f1419; margin-bottom:16px; word-break:keep-all; }
 
-/* 말풍선 공통 */
-.chat-bubble {
-  max-width:85%; padding:12px 16px;
-  font-size:.875rem; line-height:1.6;
-  border-radius:16px; position:relative;
-  /* 스크롤 애니메이션 */
-  opacity:0; transform:translateY(12px);
-  transition:opacity .4s ease, transform .4s ease;
+.tweet-actions {
+  display:flex; gap:20px; padding-top:12px;
+  border-top:1px solid #eff3f4;
 }
-.chat-bubble.visible { opacity:1; transform:translateY(0); }
-.chat-bubble-delay-0 { transition-delay:0s; }
-.chat-bubble-delay-1 { transition-delay:.2s; }
-.chat-bubble-delay-2 { transition-delay:.4s; }
-
-/* 고객 말풍선 (왼쪽) */
-.chat-bubble--customer {
-  align-self:flex-start;
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-bottom-left-radius:4px;
-  color:var(--text);
+.tweet-action {
+  display:flex; align-items:center; gap:5px;
+  font-size:.8125rem; color:#536471;
+  cursor:default;
 }
-
-/* 알린다 답변 (오른쪽) */
-.chat-bubble--alinda {
-  align-self:flex-end;
-  background:var(--accent);
-  color:#fff;
-  border-bottom-right-radius:4px;
-}
-
-.chat-bubble-label {
-  font-size:.6875rem; font-weight:600;
-  margin-bottom:4px; opacity:.65;
-  text-transform:uppercase; letter-spacing:.05em;
-}
+.tweet-action svg { flex-shrink:0; }
 
 /* --- Guide & FAQ --- */
 .guide-bg { background:var(--bg); }
@@ -616,7 +617,7 @@ ul,ol { list-style:none; }
 
 /* --- Contact / CTA --- */
 .contact-section {
-  background:linear-gradient(135deg,var(--accent) 0%,var(--primary) 100%);
+  background:linear-gradient(135deg,var(--accent) 0%,var(--bg-dark) 100%);
   color:#fff;
 }
 .contact-grid {
@@ -642,7 +643,7 @@ ul,ol { list-style:none; }
   border-color:rgba(255,255,255,.6);
   background:rgba(255,255,255,.15);
 }
-textarea.form-input { resize:vertical; min-height:120px; }
+textarea.form-input { resize:vertical; min-height:120px; font-family:inherit; }
 .contact-info-item {
   display:flex; align-items:center; gap:12px;
   font-size:.9375rem; margin-bottom:16px;
@@ -821,7 +822,7 @@ textarea.form-input { resize:vertical; min-height:120px; }
   .card-grid { grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
   .contact-grid { grid-template-columns:1fr; }
   .footer-inner { grid-template-columns:1fr 1fr; }
-  .chat-list { grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); }
+  .tweet-list { grid-template-columns:repeat(2,1fr); }
 }
 
 @media (max-width:768px) {
@@ -841,14 +842,13 @@ textarea.form-input { resize:vertical; min-height:120px; }
   .timeline { flex-direction:column; align-items:center; padding-left:0; }
   .timeline-step { text-align:center; max-width:280px; padding:0 0 36px; }
   .timeline-step:not(:last-child)::after {
-    top:64px; left:50%; right:auto;
-    width:3px; height:calc(100% - 64px);
-    transform:translateX(-50%);
+    display:none;
   }
   .timeline-icon { margin:0 auto 12px; }
 
-  /* Reviews chat */
-  .chat-list { grid-template-columns:1fr; }
+  /* Reviews tweet */
+  .tweet-list { grid-template-columns:1fr; }
+  .tweet-list .tweet-card:nth-child(3n+2) { transform:none; }
 
   /* Portfolio */
   .portfolio-grid { grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); }
@@ -858,12 +858,28 @@ textarea.form-input { resize:vertical; min-height:120px; }
   .footer-bottom { flex-direction:column; gap:8px; text-align:center; }
 
   /* Floating */
+  .floating-bar { display:none !important; }
   .naver-float { display:none; }
-  .kakao-float { display:flex; bottom:calc(var(--floating-h) + 24px); right:16px; width:52px; height:52px; }
+  .kakao-float { display:flex; bottom:24px; right:16px; width:52px; height:52px; }
   .kakao-tooltip { display:none; }
 
   /* Reviews — 모바일 3개만 */
   .chat-card:nth-child(n+4) { display:none; }
+
+  /* Services — 모바일 3개만 */
+  .card-grid .service-card:nth-child(n+4) { display:none; }
+
+  /* WHAT WE DO — 모바일 3개만 */
+  .iceberg-grid .iceberg-card:nth-child(n+4) { display:none; }
+
+  /* Portfolio — 모바일 4개만 + 필터바 숨김 */
+  .portfolio-grid .portfolio-item:nth-child(n+5) { display:none; }
+  .filter-bar { display:none; }
+
+  /* FAQ — 모바일 3개만 */
+  .accordion-item:nth-child(n+4) { display:none; }
+
+  /* Float form */
   .float-form-row { padding:8px 12px; gap:6px; }
   .floating-bar input { width:90px; padding:8px 10px; font-size:.8125rem; }
   .floating-bar input#floatMessage { display:none; }
@@ -871,7 +887,7 @@ textarea.form-input { resize:vertical; min-height:120px; }
   .float-cat-btn { padding:8px 12px; font-size:.6875rem; }
 
   /* Section padding */
-  .section, .section-full { padding:48px 16px; }
+  .section, .section-full { padding:40px 16px; }
 }
 
 @media (max-width:480px) {

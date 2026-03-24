@@ -103,10 +103,12 @@
         href: s.link, target: '_blank', rel: 'noopener'
       }, [
         el('div', { className: 'card-img-wrap' }, [
-          el('div', {
-            className: 'card-img img-placeholder',
-            style: 'aspect-ratio:4/3',
-            html: s.svgIcon
+          el('img', {
+            className: 'card-img',
+            src: s.img,
+            alt: s.title,
+            loading: 'lazy',
+            style: 'aspect-ratio:4/3;object-fit:cover;width:100%'
           })
         ]),
         el('div', { className: 'card-body' }, [
@@ -243,59 +245,41 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
   /* ----------------------------------------------------------
-     6. REVIEWS — 대화형 말풍선 채팅
+     6. REVIEWS — X(트위터) 스타일 카드
   ---------------------------------------------------------- */
+  const VERIFIED_SVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="#1d9bf0"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91C1.88 9.33 1 10.57 1 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.8 3.91s2.52 1.26 3.92.8c.66 1.31 1.9 2.19 3.33 2.19s2.68-.88 3.34-2.19c1.39.46 2.9.2 3.91-.8s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/></svg>';
+
   function initReviews() {
-    const chatList = document.getElementById('chatList');
+    const list = document.getElementById('chatList');
+    list.className = 'tweet-list';
 
-    REVIEWS.forEach(r => {
-      const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+    REVIEWS.forEach((r, i) => {
+      const initials = r.name.replace(/[^가-힣a-zA-Z]/g, '').slice(0, 1) || '?';
 
-      // 채팅 카드
-      const card = el('div', { className: 'chat-card fade-up' });
-
-      // 헤더 (작성자 + 별점)
-      const header = el('div', { className: 'chat-card-header' }, [
-        el('div', {}, [
-          el('div', { className: 'chat-card-author', text: r.name }),
-          el('div', { className: 'chat-card-company', text: r.company }),
+      const card = el('div', { className: 'tweet-card fade-up' }, [
+        el('div', { className: 'tweet-header' }, [
+          el('div', { className: 'tweet-avatar', style: `background:${r.avatarColor}`, text: initials }),
+          el('div', { className: 'tweet-author' }, [
+            el('div', { className: 'tweet-name-row' }, [
+              el('span', { className: 'tweet-name', text: r.name }),
+              ...(r.verified ? [el('span', { className: 'tweet-verified', html: VERIFIED_SVG })] : []),
+            ]),
+            el('div', { className: 'tweet-handle', text: r.handle }),
+          ]),
+          el('div', { className: 'tweet-meta' }, [
+            el('span', { className: 'tweet-time', text: r.time }),
+            el('span', { className: 'tweet-dots', text: '···' }),
+          ]),
         ]),
-        el('div', { className: 'chat-card-stars', text: stars }),
+        el('p', { className: 'tweet-body', text: r.text }),
+        el('div', { className: 'tweet-actions' }, [
+          el('span', { className: 'tweet-action', html: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f91880" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="#f91880"/></svg>${r.likes}` }),
+          el('span', { className: 'tweet-action', html: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#536471" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>${r.comments}` }),
+          el('span', { className: 'tweet-action', html: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#536471" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>${r.retweets}` }),
+        ]),
       ]);
-      card.appendChild(header);
-
-      // 채팅 메시지들
-      const messages = el('div', { className: 'chat-messages' });
-      r.chat.forEach((c, idx) => {
-        const isCustomer = c.who === 'customer';
-        const bubble = el('div', {
-          className: `chat-bubble chat-bubble--${c.who} chat-bubble-delay-${idx}`,
-        }, [
-          el('div', {
-            className: 'chat-bubble-label',
-            text: isCustomer ? '고객' : '알린다',
-          }),
-          el('span', { text: c.msg }),
-        ]);
-        messages.appendChild(bubble);
-      });
-      card.appendChild(messages);
-
-      chatList.appendChild(card);
+      list.appendChild(card);
     });
-  }
-
-  /* 말풍선 스크롤 애니메이션 전용 옵저버 */
-  const bubbleObserver = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.3 });
-
-  function observeBubbles() {
-    document.querySelectorAll('.chat-bubble').forEach(b => bubbleObserver.observe(b));
   }
 
   /* ----------------------------------------------------------
@@ -499,6 +483,12 @@
     const overlay = document.getElementById('promoOverlay');
     if (!overlay) return;
 
+    // 모바일에서 숨김
+    if (window.innerWidth <= 768) {
+      overlay.remove();
+      return;
+    }
+
     // 오늘 하루 보지 않기 체크
     const today = new Date().toISOString().slice(0, 10);
     if (localStorage.getItem('promoHide') === today) {
@@ -532,22 +522,36 @@
   /* ----------------------------------------------------------
      INIT
   ---------------------------------------------------------- */
+  function initMarquee() {
+    const src = 'img/logo/logo_hash.png';
+    const count = 16;
+    let html = '';
+    for (let i = 0; i < count; i++) {
+      html += '<img src="' + src + '" alt="알린다몰" loading="lazy">';
+    }
+    ['marqueeTrack1','marqueeTrack2','marqueeTrack3'].forEach(function(id) {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = html;
+    });
+  }
+
   function init() {
     initHero();
     initHeroSwipe();
     initServices();
     initIceberg();
-    initBrand();
+    // initBrand(); /* 브랜드 섹션 개편 예정, 임시 비활성 */
     initProcess();
     initPortfolio();
     initReviews();
     initGuide();
+    initMarquee();
     initHeader();
     initFloating();
     initContactForm();
     initObserver();
     observeBubbles();
-    initPromo();
+    // initPromo(); /* 프로모 팝업 제거 */
   }
 
   if (document.readyState === 'loading') {
