@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>제품 목록 — 알린다몰</title>
+  <meta name="description" content="알린다몰의 전체 제품을 확인하세요. 텀블러 각인, 머그, 세라믹, 물병, 쉐이킷 전문 제작.">
+  <link rel="icon" type="image/png" href="img/logo/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .products-hero {
+      padding: calc(var(--header-h) + 40px) 24px 40px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--bg-dark) 100%);
+      text-align: center; color: #fff;
+    }
+    .products-hero h1 { font-size: clamp(1.75rem,4vw,2.5rem); font-weight:800; margin-bottom:8px; }
+    .products-hero p { color:rgba(255,255,255,.7); font-size:.9375rem; }
+
+    .products-wrap { max-width:var(--max-w); margin:0 auto; padding:40px 24px 80px; }
+
+    .products-filter { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:32px; }
+    .filter-btn {
+      padding:8px 20px; border-radius:999px;
+      border:2px solid var(--border);
+      background:transparent; color:var(--text-muted);
+      font-size:.875rem; font-weight:600;
+      cursor:pointer; transition:all var(--transition);
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background:var(--accent); border-color:var(--accent); color:#fff;
+    }
+
+    .products-count { font-size:.875rem; color:var(--text-muted); margin-bottom:20px; }
+    .products-count strong { color:var(--accent); }
+
+    .products-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(220px,1fr));
+      gap:20px;
+    }
+
+    .product-card {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:var(--radius-lg); overflow:hidden;
+      transition:all var(--transition); cursor:pointer;
+      text-decoration:none; color:inherit; display:block;
+    }
+    .product-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); border-color:var(--accent); }
+
+    .product-thumb-wrap {
+      width:100%; aspect-ratio:1/1; overflow:hidden;
+      background:linear-gradient(135deg,var(--border) 0%,var(--bg) 100%);
+      display:flex; align-items:center; justify-content:center;
+      font-size:3rem;
+    }
+    .product-thumb-wrap img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    .product-info { padding:14px; }
+    .product-category { font-size:.7rem; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:.05em; margin-bottom:4px; }
+    .product-name { font-size:.9rem; font-weight:700; color:var(--text); margin-bottom:2px; line-height:1.4; }
+    .product-vol { font-size:.8125rem; color:var(--text-muted); margin-bottom:8px; }
+    .product-tags { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:10px; }
+    .product-tag { font-size:.6875rem; padding:3px 8px; background:var(--bg); border:1px solid var(--border); border-radius:4px; color:var(--text-muted); }
+    .product-moq { font-size:.75rem; color:var(--text-muted); }
+    .product-moq strong { color:var(--primary); font-weight:700; }
+
+    .products-empty { text-align:center; padding:80px 24px; color:var(--text-muted); grid-column:1/-1; }
+    .products-empty .empty-icon { font-size:3rem; margin-bottom:12px; }
+
+    @media (max-width:768px) {
+      .products-grid { grid-template-columns:repeat(2,1fr); gap:12px; }
+      .product-info { padding:10px; }
+    }
+    @media (max-width:360px) {
+      .products-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img class="logo-img" src="img/logo/logo_hash.png" alt="알린다몰">
+      </a>
+      <nav class="nav" aria-label="메인 메뉴">
+        <a href="products.html" class="nav-link active">제품</a>
+        <a href="index.html#services" class="nav-link">서비스</a>
+        <a href="index.html#brand" class="nav-link">커스텀</a>
+        <a href="index.html#portfolio" class="nav-link">포트폴리오</a>
+        <a href="index.html#reviews" class="nav-link">제작리뷰</a>
+        <a href="index.html#process" class="nav-link">제작과정</a>
+        <a href="index.html#contact" class="nav-link">문의</a>
+      </nav>
+      <a href="tel:02-465-0817" class="header-phone">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        02-465-0817
+      </a>
+      <button class="hamburger" aria-label="메뉴 열기" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="products.html" class="nav-link">제품</a>
+    <a href="index.html#services" class="nav-link">서비스</a>
+    <a href="index.html#brand" class="nav-link">커스텀</a>
+    <a href="index.html#portfolio" class="nav-link">포트폴리오</a>
+    <a href="index.html#reviews" class="nav-link">제작리뷰</a>
+    <a href="index.html#process" class="nav-link">제작과정</a>
+    <a href="index.html#contact" class="nav-link">문의</a>
+    <a href="tel:02-465-0817" class="btn btn--primary btn--sm">전화 상담</a>
+  </div>
+
+  <section class="products-hero">
+    <span class="section-label" style="color:rgba(255,255,255,.6);">PRODUCTS</span>
+    <h1>전체 제품</h1>
+    <p>소량 30개부터 대량까지, 알린다몰의 모든 제품을 확인하세요.</p>
+  </section>
+
+  <main class="products-wrap">
+    <div class="products-filter" id="filterBtns">
+      <button class="filter-btn active" data-cat="all">전체</button>
+      <button class="filter-btn" data-cat="tumbler">텀블러</button>
+      <button class="filter-btn" data-cat="mug">머그</button>
+      <button class="filter-btn" data-cat="ceramic">세라믹</button>
+      <button class="filter-btn" data-cat="kids">키즈</button>
+      <button class="filter-btn" data-cat="bottle">물병·보틀</button>
+      <button class="filter-btn" data-cat="shaker">쉐이킷</button>
+      <button class="filter-btn" data-cat="cookware">주방용품</button>
+    </div>
+    <p class="products-count" id="productsCount"></p>
+    <div class="products-grid" id="productsGrid"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">
+          <img src="img/logo/logo_hash.png" alt="알린다몰" class="footer-logo-img">
+        </div>
+        <p class="footer-desc">기업 판촉물 · 각인 텀블러 · DTF 스티커 · 프리미엄 답례품 전문 제작</p>
+      </div>
+      <div>
+        <h3 class="footer-heading">바로가기</h3>
+        <a href="products.html" class="footer-link">제품 목록</a>
+        <a href="index.html#services" class="footer-link">서비스</a>
+        <a href="index.html#portfolio" class="footer-link">포트폴리오</a>
+        <a href="index.html#contact" class="footer-link">견적 문의</a>
+      </div>
+      <div>
+        <h3 class="footer-heading">외부 링크</h3>
+        <a href="https://smartstore.naver.com/alindamall" target="_blank" rel="noopener" class="footer-link">네이버 스마트스토어</a>
+        <a href="https://naver.me/x5m0ABfi" target="_blank" rel="noopener" class="footer-link">네이버 플레이스</a>
+        <a href="https://pf.kakao.com/_YBFEX" target="_blank" rel="noopener" class="footer-link">카카오톡 채널</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-biz">상호: 주식회사 알린다 | 대표: 이준호 | 사업자등록번호: 484-87-00820<br>주소: 경기 하남시 미사강변서로 25 6층 635호 | 전화: 02-465-0817</p>
+      <p>&copy; 2026 알린다몰. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <a href="https://pf.kakao.com/_YBFEX" target="_blank" rel="noopener" class="kakao-float" aria-label="카카오톡 상담">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#3C1E1E"><path d="M12 3C6.48 3 2 6.58 2 10.94c0 2.8 1.86 5.27 4.66 6.67l-1.19 4.39 5.07-3.34c.48.04.96.07 1.46.07 5.52 0 10-3.58 10-7.79S17.52 3 12 3z"/></svg>
+    <span class="kakao-tooltip">카카오톡 상담</span>
+  </a>
+
+  <script src="js/products-data.js"></script>
+  <script>
+    function renderProducts(cat) {
+      const list = cat === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cat === cat);
+      document.getElementById('productsCount').innerHTML = `총 <strong>${list.length}</strong>개 제품`;
+      document.getElementById('productsGrid').innerHTML = list.length ? list.map(p => `
+        <a class="product-card fade-up" href="product-detail.html?id=${p.id}">
+          <div class="product-thumb-wrap" id="tw${p.id}">
+            <img src="img/product/thumb/${p.thumb}" alt="${p.name}" loading="lazy"
+              onerror="this.style.display='none';">
+          </div>
+          <div class="product-info">
+            <p class="product-category">${CAT_LABEL[p.cat]||p.cat}</p>
+            <h3 class="product-name">${p.name}</h3>
+            <p class="product-vol">${p.vol !== '-' ? p.vol : ''}</p>
+            <div class="product-tags">${p.tags.map(t=>`<span class="product-tag">${t}</span>`).join('')}</div>
+            <p class="product-moq">최소수량 <strong>${p.moq}개~</strong></p>
+          </div>
+        </a>`).join('') :
+        `<div class="products-empty"><p>해당 카테고리에 제품이 없습니다.</p></div>`;
+      setTimeout(() => document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible')), 50);
+    }
+
+    document.getElementById('filterBtns').addEventListener('click', e => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderProducts(btn.dataset.cat);
+    });
+
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 60));
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileNav.classList.toggle('open'); });
+
+    renderProducts('all');
+  </script>
+</body>
+</html>

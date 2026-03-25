@@ -804,6 +804,29 @@ textarea.form-input { resize:vertical; min-height:120px; font-family:inherit; }
 }
 .kakao-float:hover .kakao-tooltip { opacity:1; }
 
+.cart-float {
+  position:fixed; bottom:calc(var(--floating-h) + 224px); right:24px; z-index:900;
+  width:60px; height:60px; border-radius:50%;
+  background:var(--accent); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.5rem;
+  box-shadow:0 4px 20px rgba(0,0,0,.15);
+  transition:all var(--transition);
+  cursor:pointer; text-decoration:none;
+}
+.cart-float:hover { transform:scale(1.1) translateY(-2px); }
+.cart-float:hover .cart-tooltip { opacity:1; }
+.cart-tooltip {
+  position:absolute; right:72px; top:50%; transform:translateY(-50%);
+  background:var(--surface); color:var(--text);
+  padding:8px 16px; border-radius:8px;
+  font-size:.8125rem; font-weight:600;
+  white-space:nowrap;
+  box-shadow:var(--shadow);
+  opacity:0; pointer-events:none;
+  transition:opacity var(--transition);
+}
+
 /* --- Scroll Animation --- */
 .fade-up {
   opacity:0; transform:translateY(30px);
@@ -849,6 +872,7 @@ textarea.form-input { resize:vertical; min-height:120px; font-family:inherit; }
   /* Reviews tweet */
   .tweet-list { grid-template-columns:1fr; }
   .tweet-list .tweet-card:nth-child(3n+2) { transform:none; }
+  .tweet-list .tweet-card:nth-child(n+3) { display:none; }
 
   /* Portfolio */
   .portfolio-grid { grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); }
@@ -856,6 +880,7 @@ textarea.form-input { resize:vertical; min-height:120px; font-family:inherit; }
   /* Footer */
   .footer-inner { grid-template-columns:1fr; gap:24px; }
   .footer-bottom { flex-direction:column; gap:8px; text-align:center; }
+  .footer { padding:40px 20px 32px; }
 
   /* Floating */
   .floating-bar { display:none !important; }

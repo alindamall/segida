@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageTitle">제품 상세 — 알린다몰</title>
+  <link rel="icon" type="image/png" href="img/logo/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .detail-wrap {
+      max-width: 1100px; margin: 0 auto;
+      padding: calc(var(--header-h) + 32px) 24px 80px;
+    }
+
+    /* 브레드크럼 */
+    .breadcrumb {
+      display: flex; align-items: center; gap: 6px;
+      font-size: .8125rem; color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+    .breadcrumb span { color: var(--border); }
+
+    /* 메인 레이아웃 */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 60px;
+    }
+
+    /* 이미지 갤러리 */
+    .gallery-main {
+      aspect-ratio: 1/1; border-radius: var(--radius-lg);
+      overflow: hidden; background: var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem; margin-bottom: 12px;
+      border: 1px solid var(--border);
+    }
+    .gallery-main img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; cursor: zoom-in;
+    }
+    .gallery-thumbs {
+      display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .gallery-thumb {
+      width: 72px; height: 72px; border-radius: 8px;
+      overflow: hidden; cursor: pointer;
+      border: 2px solid var(--border);
+      background: var(--bg);
+      transition: border-color var(--transition);
+      flex-shrink: 0;
+    }
+    .gallery-thumb.active, .gallery-thumb:hover { border-color: var(--accent); }
+    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* 제품 정보 */
+    .detail-info { display: flex; flex-direction: column; }
+    .detail-category {
+      font-size: .75rem; font-weight: 700; color: var(--accent);
+      text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px;
+    }
+    .detail-name {
+      font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800;
+      color: var(--text); line-height: 1.3; margin-bottom: 4px;
+    }
+    .detail-vol {
+      font-size: 1rem; color: var(--text-muted); margin-bottom: 16px;
+    }
+    .detail-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+    .detail-tag {
+      padding: 4px 12px; border-radius: 999px;
+      background: var(--bg); border: 1px solid var(--border);
+      font-size: .8125rem; color: var(--text-muted);
+    }
+
+    .detail-divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+    /* 스펙 테이블 */
+    .spec-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    .spec-table tr { border-bottom: 1px solid var(--border); }
+    .spec-table td:first-child {
+      width: 40%; padding: 10px 0;
+      font-size: .8125rem; font-weight: 600; color: var(--text-muted);
+    }
+    .spec-table td:last-child {
+      padding: 10px 0;
+      font-size: .875rem; font-weight: 600; color: var(--text);
+    }
+
+    /* 최소수량 배지 */
+    .moq-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(21,101,192,.1); color: var(--accent);
+      border: 1px solid rgba(21,101,192,.2);
+      border-radius: 8px; padding: 8px 14px;
+      font-size: .875rem; font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    /* CTA 버튼 */
+    .detail-cta { display: flex; flex-direction: column; gap: 10px; margin-top: auto; padding-top: 20px; }
+    .cta-kakao {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 16px; border-radius: var(--radius);
+      background: #FEE500; color: #3C1E1E;
+      font-size: 1rem; font-weight: 800;
+      text-decoration: none; transition: filter var(--transition);
+    }
+    .cta-kakao:hover { filter: brightness(.95); }
+    .cta-phone {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px; border-radius: var(--radius);
+      background: var(--surface); border: 2px solid var(--border);
+      color: var(--text); font-size: .9375rem; font-weight: 700;
+      text-decoration: none; transition: border-color var(--transition);
+    }
+    .cta-phone:hover { border-color: var(--accent); color: var(--accent); }
+    .cta-inquiry {
+      display: flex; align-items: center; justify-content: center;
+      padding: 14px; border-radius: var(--radius);
+      background: var(--accent); color: #fff;
+      font-size: .9375rem; font-weight: 700;
+      text-decoration: none; transition: background var(--transition);
+    }
+    .cta-inquiry:hover { background: var(--primary); }
+    .cta-naver {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px; border-radius: var(--radius);
+      background: #03C75A; color: #fff;
+      font-size: .9375rem; font-weight: 700;
+      text-decoration: none; transition: filter var(--transition);
+    }
+    .cta-naver:hover { filter: brightness(.9); }
+
+    /* 각인 안내 */
+    .engrave-notice {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px;
+      font-size: .8125rem; line-height: 1.7;
+      color: var(--text-muted); margin-top: 16px;
+    }
+    .engrave-notice strong { color: var(--text); }
+
+    /* 상세 이미지 섹션 */
+    .detail-images-section { margin-top: 20px; }
+    .detail-images-section h2 {
+      font-size: 1.125rem; font-weight: 800;
+      color: var(--text); margin-bottom: 20px;
+      padding-bottom: 12px; border-bottom: 2px solid var(--accent);
+      display: inline-block;
+    }
+    .detail-images-grid {
+      display: grid; grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .detail-sample-img {
+      width: 100%; border-radius: var(--radius);
+      border: 1px solid var(--border); display: block;
+    }
+    .detail-images-empty {
+      text-align: center; padding: 60px 24px;
+      color: var(--text-muted); background: var(--surface);
+      border: 1px solid var(--border); border-radius: var(--radius-lg);
+    }
+
+    /* 연관 제품 */
+    .related-section { margin-top: 60px; }
+    .related-section h2 { font-size: 1.25rem; font-weight: 800; color: var(--text); margin-bottom: 20px; }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px,1fr));
+      gap: 16px;
+    }
+    .related-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+      text-decoration: none; color: inherit;
+      transition: all var(--transition); display: block;
+    }
+    .related-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--accent); }
+    .related-thumb {
+      width: 100%; aspect-ratio: 1/1;
+      background: var(--border); object-fit: cover; display: block;
+    }
+    .related-info { padding: 10px 12px; }
+    .related-name { font-size: .8125rem; font-weight: 700; color: var(--text); line-height: 1.4; margin-bottom: 2px; }
+    .related-vol { font-size: .75rem; color: var(--text-muted); }
+
+    /* 라이트박스 */
+    .lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.9); z-index: 9999;
+      align-items: center; justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 8px; }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 24px;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,.15); border: none;
+      color: #fff; font-size: 1.25rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+      .detail-grid { grid-template-columns: 1fr; gap: 24px; }
+      .detail-wrap { padding: calc(var(--header-h) + 16px) 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img class="logo-img" src="img/logo/logo_hash.png" alt="알린다몰">
+      </a>
+      <nav class="nav" aria-label="메인 메뉴">
+        <a href="products.html" class="nav-link active">제품</a>
+        <a href="index.html#services" class="nav-link">서비스</a>
+        <a href="index.html#brand" class="nav-link">커스텀</a>
+        <a href="index.html#portfolio" class="nav-link">포트폴리오</a>
+        <a href="index.html#reviews" class="nav-link">제작리뷰</a>
+        <a href="index.html#process" class="nav-link">제작과정</a>
+        <a href="index.html#guide" class="nav-link">제작가이드</a>
+        <a href="index.html#contact" class="nav-link">문의</a>
+      </nav>
+      <a href="tel:02-465-0817" class="header-phone">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        02-465-0817
+      </a>
+      <button class="hamburger" aria-label="메뉴 열기" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="products.html" class="nav-link">제품</a>
+    <a href="index.html#services" class="nav-link">서비스</a>
+    <a href="index.html#brand" class="nav-link">커스텀</a>
+    <a href="index.html#portfolio" class="nav-link">포트폴리오</a>
+    <a href="index.html#reviews" class="nav-link">제작리뷰</a>
+    <a href="index.html#process" class="nav-link">제작과정</a>
+    <a href="index.html#guide" class="nav-link">제작가이드</a>
+    <a href="index.html#contact" class="nav-link">문의</a>
+    <a href="tel:02-465-0817" class="btn btn--primary btn--sm">전화 상담</a>
+  </div>
+
+  <div class="detail-wrap" id="detailWrap">
+    <!-- JS로 렌더링 -->
+  </div>
+
+  <!-- 라이트박스 -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">✕</button>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">
+          <img src="img/logo/logo_hash.png" alt="알린다몰" class="footer-logo-img">
+        </div>
+        <p class="footer-desc">기업 판촉물 · 각인 텀블러 · DTF 스티커 · 프리미엄 답례품 전문 제작</p>
+      </div>
+      <div>
+        <h3 class="footer-heading">바로가기</h3>
+        <a href="products.html" class="footer-link">제품 목록</a>
+        <a href="index.html#services" class="footer-link">서비스</a>
+        <a href="index.html#contact" class="footer-link">견적 문의</a>
+      </div>
+      <div>
+        <h3 class="footer-heading">외부 링크</h3>
+        <a href="https://smartstore.naver.com/alindamall" target="_blank" rel="noopener" class="footer-link">네이버 스마트스토어</a>
+        <a href="https://pf.kakao.com/_YBFEX" target="_blank" rel="noopener" class="footer-link">카카오톡 채널</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-biz">상호: 주식회사 알린다 | 대표: 이준호 | 사업자등록번호: 484-87-00820<br>주소: 경기 하남시 미사강변서로 25 6층 635호 | 전화: 02-465-0817</p>
+      <p>&copy; 2026 알린다몰. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <a href="https://pf.kakao.com/_YBFEX" target="_blank" rel="noopener" class="kakao-float" aria-label="카카오톡 상담">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#3C1E1E"><path d="M12 3C6.48 3 2 6.58 2 10.94c0 2.8 1.86 5.27 4.66 6.67l-1.19 4.39 5.07-3.34c.48.04.96.07 1.46.07 5.52 0 10-3.58 10-7.79S17.52 3 12 3z"/></svg>
+    <span class="kakao-tooltip">카카오톡 상담</span>
+  </a>
+
+  <script src="js/products-data.js"></script>
+  <script>
+    // URL 파라미터에서 id 추출
+    const params = new URLSearchParams(location.search);
+    const id = parseInt(params.get('id'));
+    const product = PRODUCTS.find(p => p.id === id);
+
+    const wrap = document.getElementById('detailWrap');
+
+    if (!product) {
+      wrap.innerHTML = `
+        <div style="text-align:center;padding:80px 24px;color:var(--text-muted);">
+          <p style="font-size:1.125rem;font-weight:700;margin-bottom:12px;">제품을 찾을 수 없습니다.</p>
+          <a href="products.html" class="btn btn--primary">제품 목록으로</a>
+        </div>`;
+    } else {
+      document.title = `${product.name} ${product.vol} — 알린다몰`;
+
+      // 상세 이미지 목록: detailImgs 필드 있으면 우선 사용, 없으면 img/sample/ 폴더 탐색
+      const sampleFiles = product.detailImgs
+        ? product.detailImgs
+        : [1,2,3,4,5].map(n => `img/sample/product_${String(id).padStart(2,'0')}_0${n}.webp`);
+      const thumbSrc = `img/product/thumb/${product.thumb}`;
+
+      // 연관 제품 (같은 카테고리, 본인 제외, 최대 4개)
+      const related = PRODUCTS.filter(p => p.cat === product.cat && p.id !== product.id).slice(0, 4);
+
+      wrap.innerHTML = `
+        <!-- 브레드크럼 -->
+        <nav class="breadcrumb">
+          <a href="index.html">홈</a>
+          <span>/</span>
+          <a href="products.html">제품</a>
+          <span>/</span>
+          <a href="products.html?cat=${product.cat}">${CAT_LABEL[product.cat]||product.cat}</a>
+          <span>/</span>
+          <span style="color:var(--text)">${product.name}</span>
+        </nav>
+
+        <!-- 메인 정보 -->
+        <div class="detail-grid">
+          <!-- 갤러리 -->
+          <div>
+            <div class="gallery-main" id="galleryMain">
+              <img src="${thumbSrc}" alt="${product.name}" id="mainImg"
+                onerror="this.style.display='none';">
+            </div>
+            <div class="gallery-thumbs" id="galleryThumbs">
+              <div class="gallery-thumb active" data-src="${thumbSrc}">
+                <img src="${thumbSrc}" alt="썸네일"
+                  onerror="this.parentElement.style.display='none';">
+              </div>
+              ${sampleFiles.map((src,i) => `
+              <div class="gallery-thumb" data-src="${src}" id="sThumb${i}">
+                <img src="${src}" alt="샘플${i+1}"
+                  onload="document.getElementById('sThumb${i}').style.display='block';"
+                  onerror="document.getElementById('sThumb${i}').style.display='none';">
+              </div>`).join('')}
+            </div>
+          </div>
+
+          <!-- 정보 -->
+          <div class="detail-info">
+            <p class="detail-category">${CAT_LABEL[product.cat]||product.cat}</p>
+            <h1 class="detail-name">${product.name}</h1>
+            ${product.vol !== '-' ? `<p class="detail-vol">${product.vol}</p>` : ''}
+            <div class="detail-tags">
+              ${product.tags.map(t=>`<span class="detail-tag">${t}</span>`).join('')}
+            </div>
+
+            <hr class="detail-divider">
+
+            <table class="spec-table">
+              <tr><td>용량</td><td>${product.vol !== '-' ? product.vol : '-'}</td></tr>
+              <tr><td>카테고리</td><td>${CAT_LABEL[product.cat]||product.cat}</td></tr>
+              <tr><td>각인 방식</td><td>레이저 각인 / UV 인쇄 / DTF</td></tr>
+              <tr><td>납기</td><td>주문 확정 후 5~7 영업일</td></tr>
+            </table>
+
+            <div class="moq-badge">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/></svg>
+              최소 주문 수량 ${product.moq}개~
+            </div>
+
+            <div class="detail-cta">
+              <a href="https://pf.kakao.com/_YBFEX" target="_blank" rel="noopener" class="cta-kakao">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#3C1E1E"><path d="M12 3C6.48 3 2 6.58 2 10.94c0 2.8 1.86 5.27 4.66 6.67l-1.19 4.39 5.07-3.34c.48.04.96.07 1.46.07 5.52 0 10-3.58 10-7.79S17.52 3 12 3z"/></svg>
+                카카오톡으로 견적 문의
+              </a>
+              <a href="tel:02-465-0817" class="cta-phone">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                02-465-0817 전화 상담
+              </a>
+              <a href="index.html#contact" class="cta-inquiry">홈페이지 견적 문의</a>
+              <a href="https://smartstore.naver.com/alindamall" target="_blank" rel="noopener" class="cta-naver">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h8v8.5l2-2.5V3h8v18h-8v-8.5l-2 2.5V21H3z"/></svg>
+                네이버 스마트스토어 바로가기
+              </a>
+            </div>
+
+            <div class="engrave-notice">
+              <strong>각인 안내</strong><br>
+              로고 파일(AI/PDF/PNG)을 카카오톡으로 보내주시면 무료로 시안을 제작해드립니다.<br>
+              수정 횟수 제한 없음 · 시안 확인 후 제작 진행
+            </div>
+          </div>
+        </div>
+
+        <!-- 상세 이미지 -->
+        <div class="detail-images-section">
+          <h2>상세 이미지</h2>
+          <div class="detail-images-grid" id="detailImagesGrid">
+            <div class="detail-images-empty" id="detailImagesEmpty">
+              <p>img/sample/product_${String(id).padStart(2,'0')}_01.webp ~ 05.webp 파일을 넣으면 자동으로 표시됩니다.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 연관 제품 -->
+        ${related.length ? `
+        <div class="related-section">
+          <h2>같은 카테고리 제품</h2>
+          <div class="related-grid">
+            ${related.map(r => `
+            <a class="related-card" href="product-detail.html?id=${r.id}">
+              <img class="related-thumb" src="img/product/thumb/${r.thumb}" alt="${r.name}"
+                onerror="this.style.display='none';" loading="lazy">
+              <div class="related-info">
+                <p class="related-name">${r.name}</p>
+                <p class="related-vol">${r.vol !== '-' ? r.vol : ''}</p>
+              </div>
+            </a>`).join('')}
+          </div>
+        </div>` : ''}
+      `;
+
+      // 갤러리 썸네일 클릭
+      document.getElementById('galleryThumbs').addEventListener('click', e => {
+        const thumb = e.target.closest('.gallery-thumb');
+        if (!thumb || !thumb.dataset.src) return;
+        document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+        const mainImg = document.getElementById('mainImg');
+        if (mainImg) mainImg.src = thumb.dataset.src;
+      });
+
+      // 메인 이미지 클릭 → 라이트박스
+      document.getElementById('galleryMain').addEventListener('click', e => {
+        const img = document.getElementById('mainImg');
+        if (!img) return;
+        document.getElementById('lightboxImg').src = img.src;
+        document.getElementById('lightbox').classList.add('open');
+      });
+
+      // 샘플 이미지 로드 시 상세 이미지 영역에 표시
+      sampleFiles.forEach((src, i) => {
+        const img = new Image();
+        img.onload = () => {
+          const empty = document.getElementById('detailImagesEmpty');
+          if (empty) empty.remove();
+          const grid = document.getElementById('detailImagesGrid');
+          if (grid) {
+            const el = document.createElement('img');
+            el.src = src; el.alt = `상세 이미지 ${i+1}`;
+            el.className = 'detail-sample-img';
+            el.addEventListener('click', () => {
+              document.getElementById('lightboxImg').src = src;
+              document.getElementById('lightbox').classList.add('open');
+            });
+            el.style.cursor = 'zoom-in';
+            grid.appendChild(el);
+          }
+        };
+        img.src = src;
+      });
+    }
+
+    // 라이트박스 닫기
+    document.getElementById('lightboxClose').addEventListener('click', () => {
+      document.getElementById('lightbox').classList.remove('open');
+    });
+    document.getElementById('lightbox').addEventListener('click', e => {
+      if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
+    });
+
+    // 헤더 스크롤
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 60));
+
+    // 햄버거
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileNav.classList.toggle('open'); });
+  </script>
+</body>
+</html>
