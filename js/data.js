@@ -219,6 +219,7 @@ const REVIEWS = [
     time: '3일 전',
     text: '시안부터 배송까지 3일 만에 완료! 사내 행사용 텀블러 500개 주문했는데 퀄리티도 기대 이상이었어요. 다음 행사도 무조건 알린다몰입니다',
     likes: 128, comments: 14, retweets: 32,
+    img: 'review_01.jpg',
   },
   {
     id: 2,
@@ -229,6 +230,7 @@ const REVIEWS = [
     time: '1주 전',
     text: '결혼식 답례품 텀블러 각인, 하객분들 반응이 최고였어요. UV 풀컬러 감성 디자인에 포장까지 너무 예뻤습니다! 재주문 확정',
     likes: 214, comments: 27, retweets: 58,
+    img: 'review_02.jpg',
   },
   {
     id: 3,
@@ -239,6 +241,7 @@ const REVIEWS = [
     time: '2주 전',
     text: '50개 소량인데도 대량 주문처럼 친절하게 상담해주셨어요. 각인 퀄리티 정말 좋고 납기도 정확했습니다. 소량 제작 고민하시는 분들 강추!',
     likes: 87, comments: 9, retweets: 21,
+    img: 'review_03.jpg',
   },
   {
     id: 4,
@@ -249,6 +252,7 @@ const REVIEWS = [
     time: '3주 전',
     text: '예산이 빠듯했는데 딱 맞는 에코백 원단이랑 인쇄 방식 추천해주셔서 300개 잘 제작했어요. 디자인 수정도 빠르고 가격도 합리적!',
     likes: 63, comments: 5, retweets: 12,
+    img: 'review_04.jpg',
   },
   {
     id: 5,
@@ -259,6 +263,7 @@ const REVIEWS = [
     time: '1달 전',
     text: '학술대회 볼펜 3,000개 대량 주문, 납기 하나도 안 밀리고 정확하게 왔어요. 인쇄 품질도 깔끔해서 내부 평가 최고 받았습니다.',
     likes: 156, comments: 18, retweets: 44,
+    img: 'review_05.jpg',
   },
   {
     id: 6,
@@ -269,6 +274,7 @@ const REVIEWS = [
     time: '1달 전',
     text: '아기 돌잔치 답례품으로 미니 디퓨저+타올 세트 했는데 너무 예쁘게 만들어주셔서 감동이었어요. 손님들이 다들 어디서 했냐고 물어봤어요',
     likes: 302, comments: 41, retweets: 89,
+    img: 'review_06.jpg',
   },
 ];
 

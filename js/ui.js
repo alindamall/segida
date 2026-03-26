@@ -272,6 +272,9 @@
           ]),
         ]),
         el('p', { className: 'tweet-body', text: r.text }),
+        ...(r.img ? [el('div', { className: 'tweet-img-wrap' }, [
+          el('img', { className: 'tweet-img', src: `img/review/${r.img}`, alt: '텀블러판촉물' })
+        ])] : []),
         el('div', { className: 'tweet-actions' }, [
           el('span', { className: 'tweet-action', html: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f91880" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="#f91880"/></svg>${r.likes}` }),
           el('span', { className: 'tweet-action', html: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#536471" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>${r.comments}` }),
@@ -527,7 +530,7 @@
     const count = 16;
     let html = '';
     for (let i = 0; i < count; i++) {
-      html += '<img src="' + src + '" alt="알린다몰" loading="lazy">';
+      html += '<img src="' + src + '" alt="돌잔치" loading="lazy">';
     }
     ['marqueeTrack1','marqueeTrack2','marqueeTrack3'].forEach(function(id) {
       const el = document.getElementById(id);

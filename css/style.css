@@ -557,6 +557,8 @@ ul,ol { list-style:none; }
 
 .tweet-body { font-size:.9375rem; line-height:1.65; color:#0f1419; margin-bottom:16px; word-break:keep-all; }
 
+.tweet-img-wrap { margin:10px 0; border-radius:12px; overflow:hidden; }
+.tweet-img { width:100%; aspect-ratio:1/1; object-fit:cover; display:block; }
 .tweet-actions {
   display:flex; gap:20px; padding-top:12px;
   border-top:1px solid #eff3f4;
