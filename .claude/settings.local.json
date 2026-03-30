@@ -6,7 +6,20 @@
       "Bash(where deno:*)",
       "Bash(export PATH=\"$PATH:/c/Program Files/nodejs\")",
       "Bash(npm --version)",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(for dir:*)",
+      "Bash(do)",
+      "Bash(echo \"=== $dir ===\")",
+      "Read(//c/Users/PC/Dropbox/서종원/claude/alindamall/alindamall/04_모든상품/**)",
+      "Bash(done)",
+      "Bash(node -e \":*)",
+      "Read(//c/Users/PC/**)",
+      "Bash(python -c \":*)",
+      "Bash(pip install:*)",
+      "Bash(python -c \"import openpyxl; print\\(''ok''\\)\")",
+      "Bash(python -c \"import sys; sys.stdout.buffer.write\\(sys.stdin.buffer.read\\(\\)\\)\" 2)",
+      "Bash(1 echo:*)",
+      "Bash(node \"C:/Users/PC/Dropbox/서종원/claude/alindamall/alindamall/js/products-data.js\")"
     ]
   }
 }

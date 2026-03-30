@@ -122,13 +122,11 @@
   <main class="products-wrap">
     <div class="products-filter" id="filterBtns">
       <button class="filter-btn active" data-cat="all">전체</button>
+      <button class="filter-btn" data-cat="metal-pen">메탈볼펜</button>
+      <button class="filter-btn" data-cat="pen">일반볼펜</button>
       <button class="filter-btn" data-cat="tumbler">텀블러</button>
-      <button class="filter-btn" data-cat="mug">머그</button>
-      <button class="filter-btn" data-cat="ceramic">세라믹</button>
-      <button class="filter-btn" data-cat="kids">키즈</button>
-      <button class="filter-btn" data-cat="bottle">물병·보틀</button>
-      <button class="filter-btn" data-cat="shaker">쉐이킷</button>
       <button class="filter-btn" data-cat="cookware">주방용품</button>
+      <button class="filter-btn" data-cat="giftset">기프트세트</button>
     </div>
     <p class="products-count" id="productsCount"></p>
     <div class="products-grid" id="productsGrid"></div>
@@ -175,7 +173,7 @@
       document.getElementById('productsGrid').innerHTML = list.length ? list.map(p => `
         <a class="product-card fade-up" href="product-detail.html?id=${p.id}">
           <div class="product-thumb-wrap" id="tw${p.id}">
-            <img src="img/product/thumb/${p.thumb}" alt="굿즈소량제작" loading="lazy"
+            <img src="${p.thumb.startsWith('http') ? p.thumb : 'img/product/thumb/' + p.thumb}" alt="굿즈소량제작" loading="lazy"
               onerror="this.style.display='none';">
           </div>
           <div class="product-info">

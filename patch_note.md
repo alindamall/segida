@@ -2,6 +2,17 @@
 
 ---
 
+## v0.3.0 — 2026-03-30
+
+### 신규 파일
+- **`js/products-data.js` 자동 생성**
+  - Excel 파일(`0324 제안서 정보추가 완료 (3).xlsx`) 6개 시트에서 총 274개 상품 데이터 추출
+  - 시트별 카테고리: metal-pen(47), pen(51), lamy(30), tumbler(45), cookware(31), giftset(70)
+  - 각 상품: id, name, vol, cat, moq, tags, thumb, detailImgs, price 필드 포함
+  - `CAT_LABEL` 상수 및 `PRODUCTS` 배열 포함
+
+---
+
 ## v0.2.0 — 2026-03-24
 
 ### 버그 수정

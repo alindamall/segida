@@ -409,6 +409,94 @@
     </section>
   </div>
 
+  <!-- ===== SAMPLE PROCESS ===== -->
+  <section class="section sample-process-section" id="sampleProcess">
+    <div class="text-center fade-up" style="max-width:var(--max-w);margin:0 auto 40px;">
+      <span class="section-label">VISIT &amp; SAMPLE</span>
+      <h2 class="heading-lg section-title">직접 만져보고 결정하세요</h2>
+      <p class="text-small section-desc">방문하시면 각인 텍스처·컬러·재질을 현장에서 확인하고<br>샘플을 바로 제작해 드립니다.</p>
+    </div>
+    <div class="sample-scroll-wrap fade-up">
+      <div class="sample-steps">
+        <div class="sample-step">
+          <div class="sample-step-num">01</div>
+          <div class="sample-step-icon">📞</div>
+          <h3 class="sample-step-title">방문 예약</h3>
+          <p class="sample-step-desc">카카오톡 또는 전화로 방문 일정을 조율합니다. 원하시는 제품과 수량을 미리 알려주시면 더 빠른 상담이 가능합니다.</p>
+        </div>
+        <div class="sample-step-arrow">→</div>
+        <div class="sample-step">
+          <div class="sample-step-num">02</div>
+          <div class="sample-step-icon">🏭</div>
+          <h3 class="sample-step-title">쇼룸 방문</h3>
+          <p class="sample-step-desc">경기 하남 미사비즈타워 쇼룸에서 텀블러·머그·판촉물 실물을 직접 확인합니다. 재질·무게감·마감까지 눈과 손으로 검토하세요.</p>
+        </div>
+        <div class="sample-step-arrow">→</div>
+        <div class="sample-step">
+          <div class="sample-step-num">03</div>
+          <div class="sample-step-icon">✏️</div>
+          <h3 class="sample-step-title">현장 샘플 제작</h3>
+          <p class="sample-step-desc">로고·문구를 레이저 각인 또는 DTF 인쇄로 현장에서 즉시 제작합니다. 색상·위치·크기를 실물로 비교하고 바로 피드백 드립니다.</p>
+        </div>
+        <div class="sample-step-arrow">→</div>
+        <div class="sample-step">
+          <div class="sample-step-num">04</div>
+          <div class="sample-step-icon">✅</div>
+          <h3 class="sample-step-title">최종 확정 · 발주</h3>
+          <p class="sample-step-desc">샘플 확인 후 수량·납기를 협의하고 발주합니다. 당일 견적 확정이 가능하며 소량 50개부터 대량까지 유연하게 대응합니다.</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top:32px;">
+      <a href="https://pf.kakao.com/_YBFEX" target="_blank" rel="noopener" class="btn btn--primary">방문 예약하기 (카카오톡)</a>
+    </div>
+  </section>
+
+  <!-- ===== LOCATION ===== -->
+  <section class="section" id="location">
+    <div class="section text-center fade-up">
+      <span class="section-label">LOCATION</span>
+      <h2 class="heading-lg section-title">오시는 길</h2>
+      <p class="text-small section-desc">방문하시면 현장에서 바로 샘플 제작·확인이 가능합니다.<br>각인 텍스처, 컬러, 재질을 직접 눈으로 보고 결정하세요.</p>
+    </div>
+    <div class="location-grid fade-up">
+      <div class="location-map" id="locationMap"></div>
+      <div class="location-info">
+        <ul class="location-list">
+          <li>
+            <span class="location-icon">📍</span>
+            <div>
+              <strong>주소</strong>
+              <p>경기 하남시 미사강변서로 25<br>미사비즈타워 6층 635호</p>
+            </div>
+          </li>
+          <li>
+            <span class="location-icon">🕐</span>
+            <div>
+              <strong>운영시간</strong>
+              <p>평일 09:00 – 18:00<br>토·일·공휴일 휴무</p>
+            </div>
+          </li>
+          <li>
+            <span class="location-icon">🚗</span>
+            <div>
+              <strong>주차</strong>
+              <p>건물 내 무료 주차 가능</p>
+            </div>
+          </li>
+          <li>
+            <span class="location-icon">✏️</span>
+            <div>
+              <strong>샘플 제작</strong>
+              <p>방문 시 현장 샘플 제작·확인 가능<br>사전 예약 후 방문을 권장드립니다</p>
+            </div>
+          </li>
+        </ul>
+        <a href="https://pf.kakao.com/_YBFEX" target="_blank" rel="noopener" class="btn btn--primary" style="margin-top:24px;display:inline-flex;">방문 예약 (카카오톡)</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== CONTACT / CTA ===== -->
   <section class="contact-section section-full" id="contact">
     <div class="section">
@@ -542,5 +630,26 @@
   <!-- Scripts (defer) -->
   <script src="js/data.js" defer></script>
   <script src="js/ui.js" defer></script>
+  <!-- 카카오맵 SDK -->
+  <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=53ab1efe44b6ec86d8d04b6eb86d0bd7&libraries=services"></script>
+  <script>
+    (function() {
+      if (typeof kakao === 'undefined' || !kakao.maps) return;
+      var container = document.getElementById('locationMap');
+      if (!container) return;
+      var geocoder = new kakao.maps.services.Geocoder();
+      geocoder.addressSearch('경기 하남시 미사강변서로 25', function(result, status) {
+        var coords = (status === kakao.maps.services.Status.OK)
+          ? new kakao.maps.LatLng(result[0].y, result[0].x)
+          : new kakao.maps.LatLng(37.5627, 127.1986);
+        var map = new kakao.maps.Map(container, { center: coords, level: 4 });
+        var marker = new kakao.maps.Marker({ map: map, position: coords });
+        var infowindow = new kakao.maps.InfoWindow({
+          content: '<div style="padding:8px 12px;font-size:13px;font-weight:600;color:#0D2B5E;white-space:nowrap;">알린다몰 — 미사비즈타워 6층 635호</div>'
+        });
+        infowindow.open(map, marker);
+      });
+    })();
+  </script>
 </body>
 </html>
