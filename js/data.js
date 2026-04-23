@@ -66,7 +66,7 @@ const SERVICES = [
     svgIcon: SERVICE_SVG.tumbler,
     title: '각인 텀블러',
     desc: '스텐·도자기·트라이탄 —\n레이저 & UV 각인으로\n브랜드를 새깁니다.',
-    img: 'img/product/product_tumbler.webp',
+    img: 'img/product/product_tumbler.png',
     link: SITE.smartstore,
   },
   {
@@ -74,7 +74,7 @@ const SERVICES = [
     svgIcon: SERVICE_SVG.pen,
     title: '판촉 볼펜',
     desc: '제트스트림·모나미 프리미엄 —\n기업 로고 인쇄 50개부터.',
-    img: 'img/product/product_pen.webp',
+    img: 'img/product/product_pen.png',
     link: SITE.smartstore,
   },
   {
@@ -82,7 +82,7 @@ const SERVICES = [
     svgIcon: SERVICE_SVG.fan,
     title: '핸디 선풍기',
     desc: '여름 시즌 판촉 필수템 —\n풀컬러 인쇄, 개별포장 가능.',
-    img: 'img/product/product_fan.webp',
+    img: 'img/product/product_fan.png',
     link: SITE.smartstore,
   },
   {
@@ -90,7 +90,7 @@ const SERVICES = [
     svgIcon: SERVICE_SVG.usb,
     title: 'USB · 보조배터리',
     desc: '실용성 최강 IT 판촉물 —\n레이저 각인 & 풀컬러 UV 인쇄.',
-    img: 'img/product/product_usb.webp',
+    img: 'img/product/product_usb.png',
     link: SITE.smartstore,
   },
   {
@@ -98,7 +98,7 @@ const SERVICES = [
     svgIcon: SERVICE_SVG.ecobag,
     title: '에코백 · 파우치',
     desc: '친환경 캔버스 원단 —\n실크스크린, 디지털 전사 인쇄.',
-    img: 'img/product/product_ecobag.webp',
+    img: 'img/product/product_ecobag.png',
     link: SITE.smartstore,
   },
   {
@@ -106,7 +106,7 @@ const SERVICES = [
     svgIcon: SERVICE_SVG.gift,
     title: '세트 · 선물 패키지',
     desc: '텀블러+볼펜+에코백 세트 —\n답례품·행사 선물 맞춤 구성.',
-    img: 'img/product/product_gift.webp',
+    img: 'img/product/product_gift.png',
     link: SITE.smartstore,
   },
 ];
