@@ -630,22 +630,25 @@
   <!-- Scripts (defer) -->
   <script src="js/data.js" defer></script>
   <script src="js/ui.js" defer></script>
-  <!-- 카카오맵 SDK -->
-  <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=53ab1efe44b6ec86d8d04b6eb86d0bd7&libraries=services"></script>
+  <!-- 네이버맵 SDK -->
+  <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=cr3ld7wm2y&submodules=geocoder"></script>
   <script>
     (function() {
-      if (typeof kakao === 'undefined' || !kakao.maps) return;
+      if (typeof naver === 'undefined' || !naver.maps) return;
       var container = document.getElementById('locationMap');
       if (!container) return;
-      var geocoder = new kakao.maps.services.Geocoder();
-      geocoder.addressSearch('경기 하남시 미사강변서로 25', function(result, status) {
-        var coords = (status === kakao.maps.services.Status.OK)
-          ? new kakao.maps.LatLng(result[0].y, result[0].x)
-          : new kakao.maps.LatLng(37.5627, 127.1986);
-        var map = new kakao.maps.Map(container, { center: coords, level: 4 });
-        var marker = new kakao.maps.Marker({ map: map, position: coords });
-        var infowindow = new kakao.maps.InfoWindow({
-          content: '<div style="padding:8px 12px;font-size:13px;font-weight:600;color:#0D2B5E;white-space:nowrap;">알린다몰 — 미사비즈타워 6층 635호</div>'
+      naver.maps.Service.geocode({ query: '경기 하남시 미사강변서로 25' }, function(status, response) {
+        var center;
+        if (status === naver.maps.Service.Status.OK && response.v2.addresses.length) {
+          var item = response.v2.addresses[0];
+          center = new naver.maps.LatLng(item.y, item.x);
+        } else {
+          center = new naver.maps.LatLng(37.5627, 127.1986);
+        }
+        var map = new naver.maps.Map(container, { center: center, zoom: 16 });
+        var marker = new naver.maps.Marker({ map: map, position: center });
+        var infowindow = new naver.maps.InfoWindow({
+          content: '<div style="padding:8px 12px;font-size:13px;font-weight:600;color:#0D2B5E;white-space:nowrap;">알린다몰 — 미사비즈타워 6층 636호</div>'
         });
         infowindow.open(map, marker);
       });
