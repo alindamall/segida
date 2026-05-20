@@ -6,9 +6,9 @@
 const SITE = {
   name: '알린다몰',
   tagline: '기업 판촉물 · 답례품 · 각인 전문',
-  phone: '02-465-0817',
+  phone: '1644-2523',
   email: 'alindamall@naver.com',
-  kakao: 'https://pf.kakao.com/_YBFEX',
+  kakao: 'http://talk.naver.com/profile/wyh876l',
   smartstore: 'https://smartstore.naver.com/alindamall',
   instagram: 'https://instagram.com/alindamall',
   youtube: 'https://youtube.com/@alindamall',

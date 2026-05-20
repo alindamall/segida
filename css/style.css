@@ -389,6 +389,36 @@ ul,ol { list-style:none; }
 .brand-card .card-desc { color:rgba(255,255,255,.7); }
 
 /* --- Client Logo Marquee --- */
+/* ===== Promo Gallery (1920x400) ===== */
+.promo-gallery {
+  position:relative; width:100%; aspect-ratio:1920/400;
+  overflow:hidden; background:#000;
+}
+.promo-slides { position:relative; width:100%; height:100%; }
+.promo-slide {
+  position:absolute; inset:0; display:block;
+  opacity:0; transition:opacity .8s ease;
+  pointer-events:none;
+}
+.promo-slide.active { opacity:1; pointer-events:auto; }
+.promo-slide img { width:100%; height:100%; object-fit:cover; display:block; }
+.promo-dots {
+  position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
+  display:flex; gap:8px; z-index:2;
+}
+.promo-dot {
+  width:10px; height:10px; border-radius:50%; border:0;
+  background:rgba(255,255,255,.4); cursor:pointer; padding:0;
+  transition:all .3s;
+}
+.promo-dot.active { background:#fff; width:28px; border-radius:5px; }
+@media (max-width:768px) {
+  .promo-gallery { aspect-ratio:16/9; }
+  .promo-dots { bottom:12px; }
+  .promo-dot { width:8px; height:8px; }
+  .promo-dot.active { width:22px; }
+}
+
 .marquee-section { padding:64px 0 72px; background:var(--bg); }
 .marquee-cta { display:flex; justify-content:center; gap:16px; margin-top:32px; flex-wrap:wrap; }
 .marquee-wrap { overflow:hidden; margin-top:40px; }

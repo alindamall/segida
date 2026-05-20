@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
-Sitemap: https://alinda.ai/sitemap.xml
+Sitemap: https://alinda.kr/sitemap.xml
 
 # AI 크롤러 허용
 User-agent: GPTBot

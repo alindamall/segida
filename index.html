@@ -9,7 +9,7 @@
   <!-- SEO -->
   <meta name="keywords" content="텀블러제작,각인텀블러,기업판촉물,DTF스티커,답례품,굿즈소량제작,텀블러주문,레이저각인,기념품제작,판촉물소량">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://alindamall.co.kr">
+  <link rel="canonical" href="https://alinda.kr">
 
   <!-- OG Tags -->
   <meta property="og:type" content="website">
@@ -17,8 +17,8 @@
   <meta property="og:site_name" content="알린다몰">
   <meta property="og:title" content="알린다몰 — 기업 판촉물 · 각인 텀블러 · DTF 스티커 · 답례품 전문">
   <meta property="og:description" content="각인 텀블러, DTF 스티커, 레이저 각인, 기업 판촉물, 프리미엄 답례품 전문 제작. 소량 50개부터 대량까지 24시간 내 시안 제공.">
-  <meta property="og:url" content="https://alindamall.co.kr">
-  <meta property="og:image" content="https://alindamall.co.kr/img/og/og_image.webp">
+  <meta property="og:url" content="https://alinda.kr">
+  <meta property="og:image" content="https://alinda.kr/img/og/og_image.webp">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="알린다몰 기업 판촉물 각인 텀블러 DTF 스티커 답례품 전문">
@@ -27,7 +27,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="알린다몰 — 기업 판촉물 · 각인 텀블러 · 답례품 전문">
   <meta name="twitter:description" content="각인 텀블러, DTF 스티커, 기업 판촉물, 프리미엄 답례품 전문 제작. 소량 50개부터 원스톱 서비스.">
-  <meta name="twitter:image" content="https://alindamall.co.kr/img/og/og_image.webp">
+  <meta name="twitter:image" content="https://alinda.kr/img/og/og_image.webp">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="img/logo/favicon.png">
@@ -62,7 +62,7 @@
     "@type": "LocalBusiness",
     "name": "알린다몰",
     "description": "기업 판촉물, 각인 텀블러, DTF 스티커, 레이저 각인, 프리미엄 답례품 전문 제작",
-    "url": "https://alinda.ai",
+    "url": "https://alinda.kr",
     "telephone": "1644-2523",
     "address": {
       "@type": "PostalAddress",
@@ -289,6 +289,42 @@
     </div>
   </section>
 
+  <!-- ===== PROMO GALLERY ===== -->
+  <section class="promo-gallery" id="promoGallery" aria-label="진행중인 프로모션">
+    <div class="promo-slides" id="promoSlides">
+      <a href="https://smartstore.naver.com/alindamall" target="_blank" rel="noopener" class="promo-slide active"><img src="img/promo/promo1.png" alt="텀블러제작 프로모션 - 알린다몰 스마트스토어"></a>
+      <a href="https://smartstore.naver.com/alindamall" target="_blank" rel="noopener" class="promo-slide"><img src="img/promo/promo2.png" alt="커스텀텀블러 단체주문 할인"></a>
+      <a href="https://smartstore.naver.com/alindamall" target="_blank" rel="noopener" class="promo-slide"><img src="img/promo/promo3.png" alt="기업 판촉물 각인 특가"></a>
+      <a href="https://smartstore.naver.com/alindamall" target="_blank" rel="noopener" class="promo-slide"><img src="img/promo/promo4.png" alt="답례품 굿즈 소량제작 이벤트"></a>
+    </div>
+    <div class="promo-dots" id="promoDots"></div>
+  </section>
+  <script>
+    (function(){
+      var slides = document.querySelectorAll('#promoSlides .promo-slide');
+      var dotsWrap = document.getElementById('promoDots');
+      var idx = 0, timer;
+      slides.forEach(function(_, i){
+        var d = document.createElement('button');
+        d.className = 'promo-dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', '슬라이드 ' + (i+1));
+        d.addEventListener('click', function(){ go(i); reset(); });
+        dotsWrap.appendChild(d);
+      });
+      var dots = dotsWrap.querySelectorAll('.promo-dot');
+      function go(n){
+        slides[idx].classList.remove('active');
+        dots[idx].classList.remove('active');
+        idx = n;
+        slides[idx].classList.add('active');
+        dots[idx].classList.add('active');
+      }
+      function next(){ go((idx+1) % slides.length); }
+      function reset(){ clearInterval(timer); timer = setInterval(next, 5000); }
+      reset();
+    })();
+  </script>
+
   <!-- ===== SERVICES ===== -->
   <div class="services-bg">
     <section class="section" id="services">
@@ -448,7 +484,7 @@
       </div>
     </div>
     <div class="text-center" style="margin-top:32px;">
-      <a href="https://pf.kakao.com/_YBFEX" target="_blank" rel="noopener" class="btn btn--primary">방문 예약하기 (카카오톡)</a>
+      <a href="http://talk.naver.com/profile/wyh876l" target="_blank" rel="noopener" class="btn btn--primary">방문 예약하기 (카카오톡)</a>
     </div>
   </section>
 
@@ -460,7 +496,7 @@
       <p class="text-small section-desc">방문하시면 현장에서 바로 샘플 제작·확인이 가능합니다.<br>각인 텍스처, 컬러, 재질을 직접 눈으로 보고 결정하세요.</p>
     </div>
     <div class="location-grid fade-up">
-      <div class="location-map" id="locationMap"></div>
+      <div class="location-map" id="locationMap" style="background:#e5e7eb;"></div>
       <div class="location-info">
         <ul class="location-list">
           <li>
@@ -492,7 +528,7 @@
             </div>
           </li>
         </ul>
-        <a href="https://pf.kakao.com/_YBFEX" target="_blank" rel="noopener" class="btn btn--primary" style="margin-top:24px;display:inline-flex;">방문 예약 (카카오톡)</a>
+        <a href="http://talk.naver.com/profile/wyh876l" target="_blank" rel="noopener" class="btn btn--primary" style="margin-top:24px;display:inline-flex;">방문 예약 (카카오톡)</a>
       </div>
     </div>
   </section>
@@ -563,7 +599,7 @@
           <a href="https://youtube.com/@alindamall" target="_blank" rel="noopener" aria-label="유튜브">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.56A3.02 3.02 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3.02 3.02 0 0 0 2.12 2.14c1.88.56 9.38.56 9.38.56s7.5 0 9.38-.56a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
           </a>
-          <a href="https://pf.kakao.com/_YBFEX" target="_blank" rel="noopener" aria-label="카카오채널">
+          <a href="http://talk.naver.com/profile/wyh876l" target="_blank" rel="noopener" aria-label="카카오채널">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.48 3 2 6.58 2 10.94c0 2.8 1.86 5.27 4.66 6.67l-1.19 4.39 5.07-3.34c.48.04.96.07 1.46.07 5.52 0 10-3.58 10-7.79S17.52 3 12 3z"/></svg>
           </a>
         </div>
@@ -582,7 +618,7 @@
         <h3 class="footer-heading">외부 링크</h3>
         <a href="https://smartstore.naver.com/alindamall" target="_blank" rel="noopener" class="footer-link">네이버 스마트스토어</a>
         <a href="https://naver.me/x5m0ABfi" target="_blank" rel="noopener" class="footer-link">네이버 플레이스</a>
-        <a href="https://pf.kakao.com/_YBFEX" target="_blank" rel="noopener" class="footer-link">카카오톡 채널</a>
+        <a href="http://talk.naver.com/profile/wyh876l" target="_blank" rel="noopener" class="footer-link">카카오톡 채널</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -622,7 +658,7 @@
   </a>
 
   <!-- Kakao Floating Button -->
-  <a href="https://pf.kakao.com/_YBFEX" target="_blank" rel="noopener" class="kakao-float" id="kakaoFloat" aria-label="카카오톡 상담">
+  <a href="http://talk.naver.com/profile/wyh876l" target="_blank" rel="noopener" class="kakao-float" id="kakaoFloat" aria-label="카카오톡 상담">
     <svg width="28" height="28" viewBox="0 0 24 24" fill="#3C1E1E"><path d="M12 3C6.48 3 2 6.58 2 10.94c0 2.8 1.86 5.27 4.66 6.67l-1.19 4.39 5.07-3.34c.48.04.96.07 1.46.07 5.52 0 10-3.58 10-7.79S17.52 3 12 3z"/></svg>
     <span class="kakao-tooltip">카카오톡 상담</span>
   </a>
@@ -630,29 +666,5 @@
   <!-- Scripts (defer) -->
   <script src="js/data.js" defer></script>
   <script src="js/ui.js" defer></script>
-  <!-- 네이버맵 SDK -->
-  <script src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=x4cmonumtt&submodules=geocoder"></script>
-  <script>
-    (function() {
-      if (typeof naver === 'undefined' || !naver.maps) return;
-      var container = document.getElementById('locationMap');
-      if (!container) return;
-      naver.maps.Service.geocode({ query: '경기 하남시 미사강변서로 25' }, function(status, response) {
-        var center;
-        if (status === naver.maps.Service.Status.OK && response.v2.addresses.length) {
-          var item = response.v2.addresses[0];
-          center = new naver.maps.LatLng(item.y, item.x);
-        } else {
-          center = new naver.maps.LatLng(37.5627, 127.1986);
-        }
-        var map = new naver.maps.Map(container, { center: center, zoom: 16 });
-        var marker = new naver.maps.Marker({ map: map, position: center });
-        var infowindow = new naver.maps.InfoWindow({
-          content: '<div style="padding:8px 12px;font-size:13px;font-weight:600;color:#0D2B5E;white-space:nowrap;">알린다몰 — 미사비즈타워 6층 636호</div>'
-        });
-        infowindow.open(map, marker);
-      });
-    })();
-  </script>
 </body>
 </html>
