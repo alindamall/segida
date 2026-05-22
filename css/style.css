@@ -500,22 +500,28 @@ ul,ol { list-style:none; }
 .portfolio-item {
   border-radius:var(--radius); overflow:hidden;
   position:relative; cursor:pointer;
-  aspect-ratio:4/3;
-  transition:all var(--transition);
+  aspect-ratio:4/5;
+  transition:transform .35s cubic-bezier(.4,0,.2,1), box-shadow .35s;
+}
+.portfolio-item:hover {
+  transform:translateY(-4px);
+  box-shadow:0 16px 40px rgba(0,0,0,.2);
 }
 .portfolio-item img {
-  width:100%; height:100%; object-fit:cover;
+  width:100%; height:100%; object-fit:cover; display:block;
   transition:transform .5s cubic-bezier(.4,0,.2,1);
 }
-.portfolio-item:hover img { transform:scale(1.06); }
+.portfolio-item:hover img { transform:scale(1.05); }
 .portfolio-item-overlay {
   position:absolute; inset:0;
-  background:linear-gradient(0deg,rgba(0,0,0,.8) 0%,transparent 60%);
+  background:linear-gradient(0deg,rgba(0,0,0,.75) 0%,rgba(0,0,0,.1) 50%,transparent 100%);
   display:flex; flex-direction:column;
-  justify-content:flex-end; padding:20px;
-  opacity:0; transition:opacity var(--transition);
+  justify-content:flex-end; padding:18px;
+  transition:background var(--transition);
 }
-.portfolio-item:hover .portfolio-item-overlay { opacity:1; }
+.portfolio-item:hover .portfolio-item-overlay {
+  background:linear-gradient(0deg,rgba(0,0,0,.88) 0%,rgba(0,0,0,.2) 60%,transparent 100%);
+}
 .portfolio-item-title { color:#fff; font-weight:600; font-size:.9375rem; }
 .portfolio-item-desc { color:rgba(255,255,255,.7); font-size:.8125rem; margin-top:4px; }
 
@@ -536,15 +542,198 @@ ul,ol { list-style:none; }
   position:absolute; top:24px; right:24px;
   width:48px; height:48px; border-radius:50%;
   background:rgba(255,255,255,.15); color:#fff;
-  font-size:1.5rem; display:flex; align-items:center; justify-content:center;
-  transition:all var(--transition);
+  display:flex; align-items:center; justify-content:center;
+  transition:all var(--transition); z-index:1;
 }
 .lightbox-close:hover { background:rgba(255,255,255,.3); }
+.lightbox-nav {
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:52px; height:52px; border-radius:50%;
+  background:rgba(255,255,255,.15); color:#fff;
+  border:1.5px solid rgba(255,255,255,.2);
+  display:flex; align-items:center; justify-content:center;
+  transition:all var(--transition); z-index:1;
+  backdrop-filter:blur(6px);
+}
+.lightbox-nav:hover { background:rgba(255,255,255,.3); border-color:rgba(255,255,255,.5); transform:translateY(-50%) scale(1.08); }
+.lightbox-prev { left:24px; }
+.lightbox-next { right:24px; }
 .lightbox-info {
   position:absolute; bottom:40px; left:50%;
   transform:translateX(-50%);
   text-align:center; color:#fff;
 }
+
+/* ============================================================
+   EXAMPLE — 인쇄 예시 무한스크롤 마퀴
+   ============================================================ */
+.example-section {
+  background: var(--bg-dark);
+  padding: 80px 0 72px;
+  overflow: hidden;
+}
+.example-section > .section {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.example-overflow {
+  position: relative;
+  margin-top: 48px;
+  overflow: hidden;
+}
+.example-overflow::before,
+.example-overflow::after {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  width: 140px;
+  z-index: 2;
+  pointer-events: none;
+}
+.example-overflow::before { left:0;  background:linear-gradient(to right, var(--bg-dark), transparent); }
+.example-overflow::after  { right:0; background:linear-gradient(to left,  var(--bg-dark), transparent); }
+
+.example-track-wrap { display:flex; flex-direction:column; gap:16px; }
+
+.example-track {
+  display: flex;
+  gap: 14px;
+  width: max-content;
+  will-change: transform;
+}
+.example-track--fwd { animation: ex-fwd 36s linear infinite; }
+.example-track--rev { animation: ex-rev 30s linear infinite; }
+.example-track:hover { animation-play-state: paused; }
+
+@keyframes ex-fwd {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes ex-rev {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+.example-card {
+  flex-shrink: 0;
+  width: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,.3);
+  cursor: pointer;
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s;
+  text-decoration: none;
+  display: block;
+}
+.example-card:hover {
+  transform: translateY(-10px) scale(1.04);
+  box-shadow: 0 20px 52px rgba(33,150,243,.4), 0 0 0 2px rgba(33,150,243,.35);
+}
+.example-card img {
+  width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block;
+}
+.example-card-name {
+  display: block;
+  padding: 10px 10px 12px;
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-align: center;
+  background: #fff;
+  letter-spacing: -.01em;
+}
+
+/* btn outline white (CTA) */
+.btn--outline-white {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 14px 32px; border-radius: 50px;
+  border: 1.5px solid rgba(255,255,255,.45);
+  color: #fff; font-size: .9375rem; font-weight: 600;
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(8px);
+  transition: all var(--transition);
+  letter-spacing: -.01em;
+}
+.btn--outline-white:hover {
+  background: rgba(255,255,255,.18);
+  border-color: rgba(255,255,255,.75);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .example-track--fwd,
+  .example-track--rev { animation: none; }
+}
+
+/* Example 모달 */
+.ex-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.ex-modal.open { display: flex; }
+.ex-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5,12,30,.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.ex-modal-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  animation: ex-modal-in .3s cubic-bezier(.34,1.4,.64,1);
+}
+@keyframes ex-modal-in {
+  from { transform: scale(.82); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+.ex-modal-img {
+  max-width: min(480px, 90vw);
+  max-height: 75vh;
+  width: auto;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 32px 80px rgba(0,0,0,.6), 0 0 0 1.5px rgba(255,255,255,.1);
+  display: block;
+  object-fit: contain;
+}
+.ex-modal-name {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.0625rem;
+  letter-spacing: -.01em;
+  text-align: center;
+}
+.ex-modal-close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.14);
+  border: 1.5px solid rgba(255,255,255,.25);
+  color: #fff;
+  font-size: 1.125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+  backdrop-filter: blur(8px);
+}
+.ex-modal-close:hover { background: rgba(255,255,255,.28); transform: scale(1.1); }
 
 /* ============================================================
    REVIEWS — 대화형 말풍선 채팅 스타일
@@ -648,7 +837,12 @@ ul,ol { list-style:none; }
 }
 
 /* --- Sample Process --- */
-.sample-process-section { background:var(--bg); }
+.sample-process-section {
+  background:#eef1f6;
+  max-width:100%;
+  padding-left:0;
+  padding-right:0;
+}
 .sample-scroll-wrap {
   overflow-x:auto; -webkit-overflow-scrolling:touch;
   padding-bottom:12px;
@@ -685,13 +879,28 @@ ul,ol { list-style:none; }
 }
 .location-map {
   border-radius:16px; overflow:hidden;
-  background:var(--border); height:380px;
+  height:380px; display:block;
+  position:relative; cursor:pointer;
 }
-.location-map-placeholder {
-  display:flex; flex-direction:column; align-items:center; gap:12px;
-  color:var(--text-muted);
+.location-map img {
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform .4s cubic-bezier(.4,0,.2,1);
 }
-.location-map-placeholder p { font-size:.875rem; }
+.location-map:hover img { transform:scale(1.04); }
+.location-map-hover {
+  position:absolute; inset:0;
+  background:rgba(0,0,0,.45);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:10px;
+  color:#fff; font-weight:700; font-size:1.0625rem;
+  letter-spacing:-.01em;
+  opacity:0;
+  transition:opacity .3s;
+  backdrop-filter:blur(2px);
+}
+.location-map:hover .location-map-hover { opacity:1; }
+.location-map-link { text-decoration:none; }
 .location-list {
   list-style:none; padding:0; margin:0;
   display:flex; flex-direction:column; gap:20px;
@@ -962,8 +1171,14 @@ textarea.form-input { resize:vertical; min-height:120px; font-family:inherit; }
   .tweet-list .tweet-card:nth-child(3n+2) { transform:none; }
   .tweet-list .tweet-card:nth-child(n+3) { display:none; }
 
-  /* Portfolio */
+  /* Portfolio (비활성) */
   .portfolio-grid { grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); }
+
+  /* Example */
+  .example-section { padding:60px 0 52px; }
+  .example-card { width:160px; }
+  .example-overflow::before,
+  .example-overflow::after { width:60px; }
 
   /* Footer */
   .sample-steps { min-width:600px; }
@@ -1091,6 +1306,21 @@ textarea.form-input { resize:vertical; min-height:120px; font-family:inherit; }
 
 /* view-transition-name 지정 */
 .portfolio-grid { view-transition-name:portfolio-grid; }
+
+/* 문의 토스트 알림 */
+.inquiry-toast {
+  position:fixed; bottom:100px; left:50%; transform:translateX(-50%) translateY(16px);
+  background:var(--primary); color:#fff;
+  padding:14px 24px; border-radius:50px;
+  font-size:.9rem; font-weight:600;
+  box-shadow:0 8px 32px rgba(0,0,0,.2);
+  z-index:9999; opacity:0;
+  transition:opacity .35s, transform .35s cubic-bezier(.34,1.4,.64,1);
+  white-space:nowrap; max-width:90vw;
+  pointer-events:none;
+}
+.inquiry-toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+.inquiry-toast--error { background:#c0392b; }
 
 /* 접근성: 모션 감소 설정 존중 */
 @media (prefers-reduced-motion:reduce) {

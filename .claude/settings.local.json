@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python -c \"from PIL import Image; img = Image.open\\('img/og/og_image.webp'\\); print\\(img.size, img.format, img.mode\\)\")"
+      "Bash(python -c \"from PIL import Image; img = Image.open\\('img/og/og_image.webp'\\); print\\(img.size, img.format, img.mode\\)\")",
+      "Bash(python -c \"import fitz; print\\('PyMuPDF ok'\\)\")",
+      "Bash(python -c \"from pdf2image import convert_from_path; print\\('pdf2image ok'\\)\")",
+      "Bash(python -c \"from PIL import Image; print\\('PIL ok'\\)\")"
     ]
   }
 }

@@ -207,10 +207,11 @@
         className: 'portfolio-item fade-up',
         onClick: () => openLightbox(p)
       }, [
-        el('div', {
-          className: 'img-placeholder--dark',
-          style: 'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:.8125rem;color:var(--text-muted);text-align:center;padding:16px',
-          text: p.title
+        el('img', {
+          src: p.img,
+          alt: p.title,
+          loading: 'lazy',
+          style: 'width:100%;height:100%;object-fit:cover;display:block;'
         }),
         el('div', { className: 'portfolio-item-overlay' }, [
           el('p', { className: 'portfolio-item-title', text: p.title }),
@@ -223,26 +224,61 @@
   }
 
   /* Lightbox */
+  let lbItems = [];
+  let lbIndex = 0;
+
   function openLightbox(item) {
-    const lb = document.getElementById('lightbox');
-    document.getElementById('lightboxImg').style.display = 'none';
-    document.getElementById('lightboxTitle').textContent = item.title;
-    document.getElementById('lightboxDesc').textContent = item.desc;
-    lb.classList.add('open');
+    // 현재 필터된 아이템 목록 기준으로 인덱스 계산
+    lbItems = activeFilter === 'all'
+      ? PORTFOLIO_ITEMS
+      : PORTFOLIO_ITEMS.filter(p => p.category === activeFilter);
+    lbIndex = lbItems.findIndex(p => p.id === item.id);
+    renderLightbox();
+    document.getElementById('lightbox').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
-  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
-  document.getElementById('lightbox').addEventListener('click', e => {
-    if (e.target === e.currentTarget) closeLightbox();
-  });
+  function renderLightbox() {
+    const item = lbItems[lbIndex];
+    const lbImg = document.getElementById('lightboxImg');
+    lbImg.src = item.img;
+    lbImg.alt = item.title;
+    document.getElementById('lightboxTitle').textContent = item.title;
+    document.getElementById('lightboxDesc').textContent = item.desc;
+    document.getElementById('lightboxCounter').textContent = `${lbIndex + 1} / ${lbItems.length}`;
+    // 버튼 표시 (1장이면 숨김)
+    const showNav = lbItems.length > 1;
+    document.getElementById('lightboxPrev').style.display = showNav ? '' : 'none';
+    document.getElementById('lightboxNext').style.display = showNav ? '' : 'none';
+  }
+
+  function lbPrev() {
+    lbIndex = (lbIndex - 1 + lbItems.length) % lbItems.length;
+    renderLightbox();
+  }
+
+  function lbNext() {
+    lbIndex = (lbIndex + 1) % lbItems.length;
+    renderLightbox();
+  }
 
   function closeLightbox() {
     document.getElementById('lightbox').classList.remove('open');
     document.body.style.overflow = '';
   }
 
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  document.getElementById('lightboxPrev').addEventListener('click', e => { e.stopPropagation(); lbPrev(); });
+  document.getElementById('lightboxNext').addEventListener('click', e => { e.stopPropagation(); lbNext(); });
+  document.getElementById('lightbox').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeLightbox();
+  });
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape')      closeLightbox();
+    if (e.key === 'ArrowLeft')   lbPrev();
+    if (e.key === 'ArrowRight')  lbNext();
+  });
 
   /* ----------------------------------------------------------
      6. REVIEWS — X(트위터) 스타일 카드
@@ -415,7 +451,8 @@
         : '미선택';
 
       const payload = { name, phone, message, category: catLabel, source: 'float' };
-      submitInquiry(payload);
+      const btn = document.getElementById('floatSubmit');
+      submitInquiry(payload, btn);
       e.target.reset();
     });
   }
@@ -427,25 +464,48 @@
      Google Sheets / Gmail 연동 공통 제출 함수
      → GOOGLE_APPS_SCRIPT_URL 에 Apps Script 웹앱 URL 넣으면 자동 연동
   ---------------------------------------------------------- */
-  const GOOGLE_APPS_SCRIPT_URL = ''; // TODO: Apps Script 배포 URL
+  const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyhhp7yJ1y-xaiTYTblfUusuIDg06e2NQ1Q1W0H01zFefm7QNVTrkNNDORsAiwWngZO/exec';
 
-  function submitInquiry(payload) {
+  function submitInquiry(payload, btnEl) {
+    // 버튼 로딩 처리
+    if (btnEl) { btnEl.disabled = true; btnEl.dataset.orig = btnEl.textContent; btnEl.textContent = '전송 중…'; }
+
+    const send = () => fetch(GOOGLE_APPS_SCRIPT_URL, {
+      method : 'POST',
+      mode   : 'no-cors',   // Apps Script CORS 우회
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body   : new URLSearchParams(payload).toString(),
+    });
+
+    const done = () => {
+      if (btnEl) { btnEl.disabled = false; btnEl.textContent = btnEl.dataset.orig; }
+      showToast(`${payload.name}님, 문의가 접수됐습니다! 곧 연락드릴게요 😊`);
+    };
+    const fail = () => {
+      if (btnEl) { btnEl.disabled = false; btnEl.textContent = btnEl.dataset.orig; }
+      showToast('전송 오류가 발생했습니다. 전화(1644-2523)로 문의해 주세요.', true);
+    };
+
     if (GOOGLE_APPS_SCRIPT_URL) {
-      fetch(GOOGLE_APPS_SCRIPT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      })
-      .then(res => res.json())
-      .then(() => {
-        alert(`${payload.name}님, 문의가 접수되었습니다!\n빠른 시간 내에 연락드리겠습니다.`);
-      })
-      .catch(() => {
-        alert('전송 중 오류가 발생했습니다. 전화(02-465-0817)로 문의해주세요.');
-      });
+      send().then(done).catch(fail);
     } else {
-      alert(`${payload.name}님, 문의가 접수되었습니다!\n빠른 시간 내에 연락드리겠습니다.`);
+      // URL 미설정 시 콘솔에만 기록 (개발용)
+      console.log('[문의 payload]', payload);
+      done();
     }
+  }
+
+  /* 토스트 알림 */
+  function showToast(msg, isError) {
+    const old = document.getElementById('inquiryToast');
+    if (old) old.remove();
+    const t = document.createElement('div');
+    t.id = 'inquiryToast';
+    t.className = 'inquiry-toast' + (isError ? ' inquiry-toast--error' : '');
+    t.textContent = msg;
+    document.body.appendChild(t);
+    requestAnimationFrame(() => t.classList.add('show'));
+    setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 400); }, 4000);
   }
 
   function initContactForm() {
@@ -459,7 +519,8 @@
         message: fd.get('message'),
         source: 'contact',
       };
-      submitInquiry(payload);
+      const btn = e.target.querySelector('button[type="submit"]');
+      submitInquiry(payload, btn);
       e.target.reset();
     });
   }
@@ -526,15 +587,36 @@
      INIT
   ---------------------------------------------------------- */
   function initMarquee() {
-    const src = 'img/logo/logo_hash.png';
-    const count = 16;
-    let html = '';
-    for (let i = 0; i < count; i++) {
-      html += '<img src="' + src + '" alt="돌잔치" loading="lazy">';
+    const logos = [
+      { src: 'img/partners/고려기프트판촉물_1도.png',      alt: '고려기프트판촉물' },
+      { src: 'img/partners/락앤락%202021%20로고.png',      alt: '락앤락' },
+      { src: 'img/partners/랜드로버.png',                  alt: '랜드로버' },
+      { src: 'img/partners/러시아월드컵.png',               alt: '러시아월드컵' },
+      { src: 'img/partners/르노삼성.png',                  alt: '르노삼성' },
+      { src: 'img/partners/모디.png',                      alt: '모디' },
+      { src: 'img/partners/배화여자대학교%20로고.png',       alt: '배화여자대학교' },
+      { src: 'img/partners/벤틀리.png',                    alt: '벤틀리' },
+      { src: 'img/partners/쉐보레.png',                    alt: '쉐보레' },
+      { src: 'img/partners/진에어.png',                    alt: '진에어' },
+      { src: 'img/partners/파커.png',                      alt: '파커' },
+    ];
+
+    function buildHtml(list) {
+      // 원본 + 복사본으로 무한 루프
+      return [...list, ...list].map(l =>
+        `<img src="${l.src}" alt="${l.alt}" loading="lazy">`
+      ).join('');
     }
-    ['marqueeTrack1','marqueeTrack2','marqueeTrack3'].forEach(function(id) {
+
+    const tracks = [
+      { id: 'marqueeTrack1', list: logos },
+      { id: 'marqueeTrack2', list: [...logos].reverse() },
+      { id: 'marqueeTrack3', list: logos },
+    ];
+
+    tracks.forEach(({ id, list }) => {
       const el = document.getElementById(id);
-      if (el) el.innerHTML = html;
+      if (el) el.innerHTML = buildHtml(list);
     });
   }
 

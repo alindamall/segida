@@ -139,14 +139,12 @@
         "item": {
           "@type": "Product",
           "name": "각인 텀블러",
-          "description": "스텐·도자기·트라이탄 소재에 레이저 및 UV 각인으로 기업 로고를 새긴 텀블러. 소량 30개부터 대량 주문 가능.",
+          "description": "스텐·도자기·트라이탄 소재에 레이저 및 UV 각인으로 기업 로고를 새긴 텀블러. 소량 50개부터 대량 주문 가능.",
           "brand": {"@type": "Brand", "name": "알린다"},
           "offers": {
             "@type": "Offer",
             "url": "https://smartstore.naver.com/alindamall",
             "priceCurrency": "KRW",
-            "price": "5000",
-            "priceValidUntil": "2026-12-31",
             "availability": "https://schema.org/InStock"
           }
         }
@@ -157,14 +155,12 @@
         "item": {
           "@type": "Product",
           "name": "판촉 볼펜",
-          "description": "제트스트림·모나미 프리미엄 볼펜에 기업 로고 인쇄. 30개부터 주문 가능.",
+          "description": "제트스트림·모나미 프리미엄 볼펜에 기업 로고 인쇄. 50개부터 주문 가능.",
           "brand": {"@type": "Brand", "name": "알린다"},
           "offers": {
             "@type": "Offer",
             "url": "https://smartstore.naver.com/alindamall",
             "priceCurrency": "KRW",
-            "price": "1000",
-            "priceValidUntil": "2026-12-31",
             "availability": "https://schema.org/InStock"
           }
         }
@@ -181,8 +177,6 @@
             "@type": "Offer",
             "url": "https://smartstore.naver.com/alindamall",
             "priceCurrency": "KRW",
-            "price": "5000",
-            "priceValidUntil": "2026-12-31",
             "availability": "https://schema.org/InStock"
           }
         }
@@ -199,8 +193,6 @@
             "@type": "Offer",
             "url": "https://smartstore.naver.com/alindamall",
             "priceCurrency": "KRW",
-            "price": "5000",
-            "priceValidUntil": "2026-12-31",
             "availability": "https://schema.org/InStock"
           }
         }
@@ -217,8 +209,6 @@
             "@type": "Offer",
             "url": "https://smartstore.naver.com/alindamall",
             "priceCurrency": "KRW",
-            "price": "3000",
-            "priceValidUntil": "2026-12-31",
             "availability": "https://schema.org/InStock"
           }
         }
@@ -235,8 +225,6 @@
             "@type": "Offer",
             "url": "https://smartstore.naver.com/alindamall",
             "priceCurrency": "KRW",
-            "price": "15000",
-            "priceValidUntil": "2026-12-31",
             "availability": "https://schema.org/InStock"
           }
         }
@@ -254,6 +242,7 @@
         <img class="logo-img" src="img/logo/logo_hash.png" alt="텀블러제작">
       </a>
       <nav class="nav" aria-label="메인 메뉴">
+        <a href="products.html" class="nav-link">제품</a>
         <a href="#services" class="nav-link">서비스</a>
         <a href="#brand" class="nav-link">커스텀</a>
         <a href="#example" class="nav-link">인쇄예시</a>
@@ -274,6 +263,7 @@
 
   <!-- Mobile Nav -->
   <div class="mobile-nav" id="mobileNav">
+    <a href="products.html" class="nav-link">제품</a>
     <a href="#services" class="nav-link">서비스</a>
     <a href="#brand" class="nav-link">커스텀</a>
     <a href="#example" class="nav-link">인쇄예시</a>
@@ -413,45 +403,16 @@
     <button class="lightbox-close" id="lightboxClose" aria-label="닫기">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
-    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="이전">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="다음">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
     <img id="lightboxImg" src="" alt="">
     <div class="lightbox-info">
       <p id="lightboxTitle" class="heading-sm"></p>
       <p id="lightboxDesc" class="text-small" style="color:rgba(255,255,255,.7)"></p>
-      <p id="lightboxCounter" style="color:rgba(255,255,255,.4);font-size:.8rem;margin-top:6px;"></p>
     </div>
   </div>
 
-  <!-- ===== REVIEWS (대화형 말풍선) ===== -->
-  <div class="reviews-bg">
-    <section class="section" id="reviews">
-      <div class="text-center fade-up">
-        <span class="section-label">Reviews</span>
-        <h2 class="heading-lg section-title">제작 리뷰</h2>
-        <p class="text-small section-desc">알린다과 실제 대화한 고객님들의 생생한 후기입니다.</p>
-      </div>
-      <div class="chat-list" id="chatList"></div>
-    </section>
-  </div>
-
-  <!-- ===== PROCESS ===== -->
-  <div class="process-bg">
-    <section class="section" id="process">
-      <div class="text-center fade-up">
-        <span class="section-label">How It Works</span>
-        <h2 class="heading-lg section-title">주문부터 배송까지</h2>
-        <p class="text-small section-desc">간편한 5단계 프로세스로 완벽한 결과물을 받아보세요.</p>
-      </div>
-      <div class="timeline" id="timeline"></div>
-    </section>
-  </div>
-
-  <section class="example-section" id="example" aria-label="인쇄 예시">
+  <!-- EXAMPLE 섹션은 FAQ 바로 위로 이동 —— 아래 참조 -->
+  <!-- placeholder-example-removed -->
+  <section class="example-section" id="example" aria-label="인쇄 예시" style="display:none">
     <div class="section text-center fade-up">
       <span class="section-label" style="color:var(--accent-lt)">Print Examples</span>
       <h2 class="heading-lg section-title" style="color:#fff">텀블러 인쇄 예시</h2>
@@ -532,7 +493,9 @@
       </div>
     </div>
 
-    <!-- 전체 제품 보기 버튼 비활성화 -->
+    <div class="text-center fade-up" style="margin-top:48px;">
+      <a href="products.html" class="btn btn--outline-white">전체 제품 보기 →</a>
+    </div>
   </section>
 
   <!-- Example 이미지 모달 -->
@@ -545,6 +508,30 @@
       <img class="ex-modal-img" id="exModalImg" src="" alt="">
       <p class="ex-modal-name" id="exModalName"></p>
     </div>
+  </div>
+
+  <!-- ===== REVIEWS (대화형 말풍선) ===== -->
+  <div class="reviews-bg">
+    <section class="section" id="reviews">
+      <div class="text-center fade-up">
+        <span class="section-label">Reviews</span>
+        <h2 class="heading-lg section-title">제작 리뷰</h2>
+        <p class="text-small section-desc">알린다과 실제 대화한 고객님들의 생생한 후기입니다.</p>
+      </div>
+      <div class="chat-list" id="chatList"></div>
+    </section>
+  </div>
+
+  <!-- ===== PROCESS ===== -->
+  <div class="process-bg">
+    <section class="section" id="process">
+      <div class="text-center fade-up">
+        <span class="section-label">How It Works</span>
+        <h2 class="heading-lg section-title">주문부터 배송까지</h2>
+        <p class="text-small section-desc">간편한 5단계 프로세스로 완벽한 결과물을 받아보세요.</p>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </section>
   </div>
 
   <!-- ===== GUIDE & FAQ ===== -->
@@ -561,7 +548,7 @@
 
   <!-- ===== SAMPLE PROCESS ===== -->
   <section class="section sample-process-section" id="sampleProcess">
-    <div class="text-center fade-up" style="max-width:var(--max-w);margin:0 auto 40px;padding:0 24px;">
+    <div class="text-center fade-up" style="max-width:var(--max-w);margin:0 auto 40px;">
       <span class="section-label">VISIT &amp; SAMPLE</span>
       <h2 class="heading-lg section-title">직접 만져보고 결정하세요</h2>
       <p class="text-small section-desc">방문하시면 각인 텍스처·컬러·재질을 현장에서 확인하고<br>샘플을 바로 제작해 드립니다.</p>
@@ -610,15 +597,7 @@
       <p class="text-small section-desc">방문하시면 현장에서 바로 샘플 제작·확인이 가능합니다.<br>각인 텍스처, 컬러, 재질을 직접 눈으로 보고 결정하세요.</p>
     </div>
     <div class="location-grid fade-up">
-      <a class="location-map location-map-link" id="locationMap"
-         href="https://naver.me/xfbYgHu7" target="_blank" rel="noopener"
-         aria-label="네이버 지도에서 예약하기">
-        <img src="img/og/location.jpg" alt="알린다 오시는 길" loading="lazy">
-        <div class="location-map-hover">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a8 8 0 0 0-8 8c0 1.892.402 3.13 1.5 4.5L12 22l6.5-7.5C19.598 13.13 20 11.892 20 10a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
-          클릭해서 바로 예약
-        </div>
-      </a>
+      <div class="location-map" id="locationMap" style="background:#e5e7eb;"></div>
       <div class="location-info">
         <ul class="location-list">
           <li>
@@ -767,7 +746,11 @@
     </form>
   </div>
 
-  <!-- Cart Floating Button 비활성화 -->
+  <!-- Cart Floating Button -->
+  <a href="products.html" class="cart-float" id="cartFloat" aria-label="제품 보러가기">
+    🛒
+    <span class="cart-tooltip">제품 보러가기</span>
+  </a>
 
   <!-- Naver Smartstore Floating Button (desktop only) -->
   <a href="https://smartstore.naver.com/alindamall" target="_blank" rel="noopener" class="naver-float" id="naverFloat" aria-label="스마트스토어">
