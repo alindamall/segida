@@ -736,58 +736,211 @@ ul,ol { list-style:none; }
 .ex-modal-close:hover { background: rgba(255,255,255,.28); transform: scale(1.1); }
 
 /* ============================================================
-   REVIEWS — 대화형 말풍선 채팅 스타일
+   REVIEWS — 네이버 구매후기 스타일
    ============================================================ */
-.reviews-bg { background:var(--surface); }
+.reviews-bg {
+  background:#f6f8f9;
+  overflow:hidden;
+  padding-bottom:32px;
+}
 
-/* X(트위터) 스타일 리뷰 카드 */
-.tweet-list {
+.naver-review-list {
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
   align-items:start;
 }
-.tweet-list .tweet-card:nth-child(3n+2) { transform:translateY(32px); }
 
-.tweet-card {
+.naver-review-card {
   background:#fff;
-  border:1px solid #e7e7e7;
-  border-radius:16px;
-  padding:20px;
-  box-shadow:0 2px 12px rgba(0,0,0,.07);
-  transition:box-shadow var(--transition), transform var(--transition);
+  border:1px solid #e5e8eb;
+  border-radius:8px;
+  padding:18px;
+  box-shadow:0 1px 2px rgba(0,0,0,.03);
+  transition:border-color var(--transition), box-shadow var(--transition), transform var(--transition);
 }
-.tweet-card:hover { box-shadow:0 6px 24px rgba(0,0,0,.13); }
+.naver-review-card:hover {
+  border-color:#03c75a;
+  box-shadow:0 8px 24px rgba(3,199,90,.10);
+  transform:translateY(-2px);
+}
 
-.tweet-header { display:flex; align-items:flex-start; gap:12px; margin-bottom:14px; }
-.tweet-avatar {
-  width:44px; height:44px; border-radius:50%; flex-shrink:0;
-  display:flex; align-items:center; justify-content:center;
-  color:#fff; font-weight:700; font-size:.9375rem;
+.naver-review-head {
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  padding-bottom:12px;
+  border-bottom:1px solid #edf0f2;
 }
-.tweet-author { flex:1; min-width:0; }
-.tweet-name-row { display:flex; align-items:center; gap:4px; }
-.tweet-name { font-weight:700; font-size:.9375rem; color:#0f1419; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.tweet-verified { flex-shrink:0; color:#1d9bf0; }
-.tweet-handle { font-size:.8125rem; color:#536471; margin-top:1px; }
-.tweet-meta { display:flex; align-items:center; gap:8px; flex-shrink:0; }
-.tweet-time { font-size:.8125rem; color:#536471; }
-.tweet-dots { font-size:1.25rem; color:#536471; line-height:1; cursor:default; }
+.naver-review-product { min-width:0; }
+.naver-review-badge {
+  display:inline-flex;
+  align-items:center;
+  height:24px;
+  padding:0 8px;
+  border-radius:4px;
+  background:#e9f8ef;
+  color:#03a94f;
+  font-size:.75rem;
+  font-weight:800;
+  line-height:1;
+}
+.naver-review-product-name {
+  display:-webkit-box;
+  margin-top:8px;
+  color:#222;
+  font-size:.9375rem;
+  font-weight:700;
+  line-height:1.45;
+  overflow:hidden;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow-wrap:break-word;
+}
+.naver-review-source {
+  flex-shrink:0;
+  color:#03c75a;
+  border:1px solid #bfeccc;
+  border-radius:999px;
+  padding:4px 9px;
+  font-size:.75rem;
+  font-weight:800;
+  line-height:1;
+  white-space:nowrap;
+}
 
-.tweet-body { font-size:.9375rem; line-height:1.65; color:#0f1419; margin-bottom:16px; word-break:keep-all; }
+.naver-review-meta {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:6px 10px;
+  margin-top:14px;
+  color:#8f959a;
+  font-size:.8125rem;
+}
+.naver-review-stars {
+  color:#ffb800;
+  font-size:.875rem;
+  line-height:1;
+  letter-spacing:0;
+}
+.naver-review-score {
+  color:#222;
+  font-size:.875rem;
+  font-weight:800;
+}
+.naver-review-user,
+.naver-review-date { position:relative; }
+.naver-review-user::before,
+.naver-review-date::before {
+  content:"";
+  display:inline-block;
+  width:1px;
+  height:10px;
+  margin-right:10px;
+  background:#d8dde1;
+  vertical-align:-1px;
+}
 
-.tweet-img-wrap { margin:10px 0; border-radius:12px; overflow:hidden; }
-.tweet-img { width:100%; aspect-ratio:1/1; object-fit:cover; display:block; }
-.tweet-actions {
-  display:flex; gap:20px; padding-top:12px;
-  border-top:1px solid #eff3f4;
+.naver-review-content {
+  margin-top:14px;
 }
-.tweet-action {
-  display:flex; align-items:center; gap:5px;
-  font-size:.8125rem; color:#536471;
-  cursor:default;
+.naver-review-content.has-photo {
+  display:grid;
+  grid-template-columns:96px minmax(0,1fr);
+  gap:14px;
 }
-.tweet-action svg { flex-shrink:0; }
+.naver-review-photo {
+  width:96px;
+  aspect-ratio:1;
+  overflow:hidden;
+  border:1px solid #e5e8eb;
+  border-radius:6px;
+  background:#f1f3f5;
+  cursor:pointer;
+  padding:0;
+  position:relative;
+  transition:border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+}
+.naver-review-photo:hover {
+  border-color:#03c75a;
+  box-shadow:0 6px 16px rgba(3,199,90,.16);
+  transform:translateY(-1px);
+}
+.naver-review-photo:focus-visible {
+  outline:2px solid #03c75a;
+  outline-offset:3px;
+}
+.naver-review-photo::after {
+  content:"";
+  position:absolute;
+  right:6px;
+  bottom:6px;
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  background:rgba(0,0,0,.55);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3Cpath d='M11 8v6'/%3E%3Cpath d='M8 11h6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:center;
+  opacity:.95;
+}
+.naver-review-photo img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.naver-review-text {
+  color:#222;
+  font-size:.9375rem;
+  line-height:1.65;
+  white-space:pre-line;
+  word-break:keep-all;
+  overflow-wrap:break-word;
+}
+.naver-review-related {
+  margin-top:14px;
+  padding:12px 14px;
+  border-left:3px solid #03c75a;
+  border-radius:6px;
+  background:#f8fafb;
+}
+.naver-review-related-label {
+  display:block;
+  margin-bottom:4px;
+  color:#03a94f;
+  font-size:.75rem;
+  font-weight:800;
+}
+.naver-review-related-text {
+  color:#5f666d;
+  font-size:.875rem;
+  line-height:1.6;
+  white-space:pre-line;
+  word-break:keep-all;
+  overflow-wrap:break-word;
+}
+.naver-review-foot {
+  display:flex;
+  justify-content:flex-end;
+  margin-top:14px;
+  padding-top:12px;
+  border-top:1px solid #edf0f2;
+}
+.naver-review-help {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:28px;
+  padding:0 12px;
+  border:1px solid #d8dde1;
+  border-radius:999px;
+  color:#5f666d;
+  font-size:.8125rem;
+  font-weight:700;
+  line-height:1;
+}
 
 /* --- Guide & FAQ --- */
 .guide-bg { background:var(--bg); }
@@ -863,7 +1016,13 @@ ul,ol { list-style:none; }
 }
 .sample-step:hover { box-shadow:0 8px 24px rgba(21,101,192,.12); transform:translateY(-4px); }
 .sample-step-num { font-size:.75rem; font-weight:700; color:var(--accent); letter-spacing:.08em; }
-.sample-step-icon { font-size:2rem; }
+.sample-step-icon {
+  width:52px; height:52px; border-radius:14px;
+  background:rgba(21,101,192,.08);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--accent);
+  flex-shrink:0;
+}
 .sample-step-title { font-size:1rem; font-weight:700; color:var(--text); }
 .sample-step-desc { font-size:.8125rem; color:var(--text-muted); line-height:1.7; flex:1; }
 .sample-step-arrow {
@@ -941,6 +1100,13 @@ ul,ol { list-style:none; }
   background:rgba(255,255,255,.15);
 }
 textarea.form-input { resize:vertical; min-height:120px; font-family:inherit; }
+select.form-input {
+  appearance:none; -webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,.6)' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 16px center;
+  padding-right:44px; cursor:pointer;
+}
+select.form-input option { background:#0D2B5E; color:#fff; }
 .contact-info-item {
   display:flex; align-items:center; gap:12px;
   font-size:.9375rem; margin-bottom:16px;
@@ -1142,7 +1308,7 @@ textarea.form-input { resize:vertical; min-height:120px; font-family:inherit; }
   .card-grid { grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); }
   .contact-grid { grid-template-columns:1fr; }
   .footer-inner { grid-template-columns:1fr 1fr; }
-  .tweet-list { grid-template-columns:repeat(2,1fr); }
+  .naver-review-list { grid-template-columns:1fr; }
 }
 
 @media (max-width:768px) {
@@ -1166,10 +1332,10 @@ textarea.form-input { resize:vertical; min-height:120px; font-family:inherit; }
   }
   .timeline-icon { margin:0 auto 12px; }
 
-  /* Reviews tweet */
-  .tweet-list { grid-template-columns:1fr; }
-  .tweet-list .tweet-card:nth-child(3n+2) { transform:none; }
-  .tweet-list .tweet-card:nth-child(n+3) { display:none; }
+  /* Reviews */
+  .naver-review-head { flex-direction:column; gap:10px; }
+  .naver-review-content.has-photo { grid-template-columns:84px minmax(0,1fr); gap:12px; }
+  .naver-review-photo { width:84px; }
 
   /* Portfolio (비활성) */
   .portfolio-grid { grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); }
@@ -1187,7 +1353,7 @@ textarea.form-input { resize:vertical; min-height:120px; font-family:inherit; }
   .location-grid { grid-template-columns:1fr; gap:24px; }
   .footer-inner { grid-template-columns:1fr; gap:24px; }
   .footer-bottom { flex-direction:column; gap:8px; text-align:center; }
-  .footer { padding:40px 20px 32px; }
+  .footer { padding:40px 20px 48px; }
 
   /* Floating */
   .floating-bar { display:none !important; }

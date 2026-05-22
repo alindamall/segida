@@ -267,6 +267,21 @@
     document.body.style.overflow = '';
   }
 
+  function openReviewLightbox(review) {
+    lbItems = REVIEWS
+      .filter(item => item.img)
+      .map(item => ({
+        id: item.id,
+        img: `img/review/${item.img}`,
+        title: item.product,
+        desc: `${item.user} · ${item.date} · 평점 ${Number(item.rating).toFixed(1)}`,
+      }));
+    lbIndex = Math.max(0, lbItems.findIndex(item => item.id === review.id));
+    renderLightbox();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
   document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
   document.getElementById('lightboxPrev').addEventListener('click', e => { e.stopPropagation(); lbPrev(); });
   document.getElementById('lightboxNext').addEventListener('click', e => { e.stopPropagation(); lbNext(); });
@@ -281,43 +296,68 @@
   });
 
   /* ----------------------------------------------------------
-     6. REVIEWS — X(트위터) 스타일 카드
+     6. REVIEWS — 네이버 구매후기 스타일
   ---------------------------------------------------------- */
-  const VERIFIED_SVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="#1d9bf0"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91C1.88 9.33 1 10.57 1 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.8 3.91s2.52 1.26 3.92.8c.66 1.31 1.9 2.19 3.33 2.19s2.68-.88 3.34-2.19c1.39.46 2.9.2 3.91-.8s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/></svg>';
-
   function initReviews() {
     const list = document.getElementById('chatList');
-    list.className = 'tweet-list';
+    list.className = 'naver-review-list';
 
     REVIEWS.forEach((r, i) => {
-      const initials = r.name.replace(/[^가-힣a-zA-Z]/g, '').slice(0, 1) || '?';
+      const rating = Math.max(0, Math.min(5, Number(r.rating) || 0));
+      const stars = '★'.repeat(rating);
 
-      const card = el('div', { className: 'tweet-card fade-up' }, [
-        el('div', { className: 'tweet-header' }, [
-          el('div', { className: 'tweet-avatar', style: `background:${r.avatarColor}`, text: initials }),
-          el('div', { className: 'tweet-author' }, [
-            el('div', { className: 'tweet-name-row' }, [
-              el('span', { className: 'tweet-name', text: r.name }),
-              ...(r.verified ? [el('span', { className: 'tweet-verified', html: VERIFIED_SVG })] : []),
-            ]),
-            el('div', { className: 'tweet-handle', text: r.handle }),
+      const card = el('article', { className: `naver-review-card fade-up fade-up-delay-${Math.min(i % 3 + 1, 3)}` }, [
+        el('div', { className: 'naver-review-head' }, [
+          el('div', { className: 'naver-review-product' }, [
+            el('span', { className: 'naver-review-badge', text: r.type }),
+            el('strong', { className: 'naver-review-product-name', text: r.product }),
           ]),
-          el('div', { className: 'tweet-meta' }, [
-            el('span', { className: 'tweet-time', text: r.time }),
-            el('span', { className: 'tweet-dots', text: '···' }),
-          ]),
+          el('span', { className: 'naver-review-source', text: 'NAVER 리뷰' }),
         ]),
-        el('p', { className: 'tweet-body', text: r.text }),
-        ...(r.img ? [el('div', { className: 'tweet-img-wrap' }, [
-          el('img', { className: 'tweet-img', src: `img/review/${r.img}`, alt: '텀블러판촉물' })
-        ])] : []),
-        el('div', { className: 'tweet-actions' }, [
-          el('span', { className: 'tweet-action', html: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f91880" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="#f91880"/></svg>${r.likes}` }),
-          el('span', { className: 'tweet-action', html: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#536471" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>${r.comments}` }),
-          el('span', { className: 'tweet-action', html: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#536471" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>${r.retweets}` }),
+        el('div', { className: 'naver-review-meta' }, [
+          el('span', { className: 'naver-review-stars', 'aria-label': `평점 ${rating}점`, text: stars }),
+          el('strong', { className: 'naver-review-score', text: rating.toFixed(1) }),
+          el('span', { className: 'naver-review-user', text: r.user }),
+          el('span', { className: 'naver-review-date', text: r.date }),
+        ]),
+        el('div', { className: `naver-review-content${r.img ? ' has-photo' : ''}` }, [
+          ...(r.img ? [el('button', {
+            className: 'naver-review-photo',
+            type: 'button',
+            'aria-label': '리뷰 사진 크게 보기',
+            'data-review-id': String(r.id),
+          }, [
+            el('img', {
+              src: `img/review/${r.img}`,
+              alt: `${r.product} 리뷰 이미지`,
+              loading: 'lazy',
+              onError: (event) => {
+                const content = event.currentTarget.closest('.naver-review-content');
+                event.currentTarget.parentElement.remove();
+                if (content) content.classList.remove('has-photo');
+              }
+            })
+          ])] : []),
+          el('p', { className: 'naver-review-text', text: r.text }),
+        ]),
+        ...(r.related ? [
+          el('div', { className: 'naver-review-related' }, [
+            el('span', { className: 'naver-review-related-label', text: '이전 리뷰' }),
+            el('p', { className: 'naver-review-related-text', text: r.related }),
+          ]),
+        ] : []),
+        el('div', { className: 'naver-review-foot' }, [
+          el('span', { className: 'naver-review-help', text: `도움돼요${r.help ? ` ${r.help}` : ''}` }),
         ]),
       ]);
       list.appendChild(card);
+    });
+
+    list.addEventListener('click', event => {
+      const photoButton = event.target.closest('.naver-review-photo');
+      if (!photoButton) return;
+      const review = REVIEWS.find(item => String(item.id) === photoButton.dataset.reviewId);
+      if (review) openReviewLightbox(review);
     });
   }
 
@@ -516,6 +556,7 @@
         name: fd.get('name'),
         phone: fd.get('phone'),
         email: fd.get('email'),
+        category: fd.get('category') || '',
         message: fd.get('message'),
         source: 'contact',
       };
@@ -635,7 +676,7 @@
     initFloating();
     initContactForm();
     initObserver();
-    observeBubbles();
+    if (typeof observeBubbles === 'function') observeBubbles();
     // initPromo(); /* 프로모 팝업 제거 */
   }
 
