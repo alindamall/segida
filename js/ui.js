@@ -464,7 +464,7 @@
      Google Sheets / Gmail 연동 공통 제출 함수
      → GOOGLE_APPS_SCRIPT_URL 에 Apps Script 웹앱 URL 넣으면 자동 연동
   ---------------------------------------------------------- */
-  const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyhhp7yJ1y-xaiTYTblfUusuIDg06e2NQ1Q1W0H01zFefm7QNVTrkNNDORsAiwWngZO/exec';
+  const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw27W5GCpfui0s15yyFt2RlCSn8kF_-SeSPk4lJvqbkxEvjGgBDDc48CnP21CAH8KFu/exec';
 
   function submitInquiry(payload, btnEl) {
     // 버튼 로딩 처리
