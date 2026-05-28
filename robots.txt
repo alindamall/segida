@@ -1,7 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /products.html
-Disallow: /product-detail.html
 Sitemap: https://alinda.kr/sitemap.xml
 
 # AI 크롤러 허용
