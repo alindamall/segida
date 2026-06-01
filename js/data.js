@@ -191,21 +191,18 @@ const PROCESS_STEPS = [
 ];
 
 const PORTFOLIO_ITEMS = [
-  { id: 1, category: 'engrave', img: 'img/portfolio/portfolio_01.webp', title: '대기업 A사 텀블러 각인', desc: '스텐 텀블러 500ml 레이저 각인 2,000개' },
-  { id: 2, category: 'sticker', img: 'img/portfolio/portfolio_02.webp', title: '통신사 B사 DTF 스티커', desc: '유니폼 열전사 스티커 500장' },
-  { id: 3, category: 'gift', img: 'img/portfolio/portfolio_03.webp', title: '건설사 C사 답례품 세트', desc: '텀블러+볼펜+에코백 세트 1,000개' },
-  { id: 4, category: 'engrave', img: 'img/portfolio/portfolio_04.webp', title: 'IT기업 D사 볼펜 로고 인쇄', desc: '제트스트림 볼펜 UV 인쇄 3,000개' },
-  { id: 5, category: 'sticker', img: 'img/portfolio/portfolio_05.webp', title: '스포츠브랜드 E사 DTF 전사', desc: '모자 열전사 스티커 2,000장' },
-  { id: 6, category: 'gift', img: 'img/portfolio/portfolio_06.webp', title: '돌잔치 답례품 패키지', desc: '미니 디퓨저+타올 세트 300개' },
-  { id: 7, category: 'engrave', img: 'img/portfolio/portfolio_07.webp', title: '에너지기업 F사 USB 각인', desc: '메탈 USB 32GB 레이저 각인 1,500개' },
-  { id: 8, category: 'sticker', img: 'img/portfolio/portfolio_08.webp', title: '프랜차이즈 G사 라벨', desc: 'PVC 스티커 풀컬러 인쇄 10,000장' },
+  { id: 1, category: 'metro',   img: 'img/portfolio/metro355_01.jpg',    title: '뉴 메트로 머그 355 각인',    desc: '스텐 텀블러 355ml · 레이저 각인' },
+  { id: 2, category: 'metro',   img: 'img/portfolio/metro355_02.jpg',    title: '뉴 메트로 머그 355 각인',    desc: '기업 로고 각인 — 측면 마감 컷' },
+  { id: 3, category: 'metro',   img: 'img/portfolio/metro355_03.jpg',    title: '뉴 메트로 머그 355 각인',    desc: '뚜껑 포함 전체 마감 확인 컷' },
+  { id: 4, category: 'lacnlac', img: 'img/portfolio/mildknob400_01.jpg', title: '락앤락 마일드노브 400 각인', desc: '락앤락 OEM · 단체 각인 400ml' },
+  { id: 5, category: 'lacnlac', img: 'img/portfolio/mildknob400_02.jpg', title: '락앤락 마일드노브 400 각인', desc: '화이트 컬러 · 기업 답례품용' },
+  { id: 6, category: 'lacnlac', img: 'img/portfolio/mildknob400_03.jpg', title: '락앤락 마일드노브 400 각인', desc: '측면 로고 포지션 각인 마감' },
 ];
 
 const PORTFOLIO_FILTERS = [
-  { key: 'all', label: '전체' },
-  { key: 'engrave', label: '각인' },
-  { key: 'sticker', label: '스티커' },
-  { key: 'gift', label: '답례품' },
+  { key: 'all',     label: '전체' },
+  { key: 'metro',   label: '뉴 메트로' },
+  { key: 'lacnlac', label: '락앤락' },
 ];
 
 /* X(트위터) 스타일 리뷰 */
