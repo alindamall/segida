@@ -60,17 +60,37 @@
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    "@id": "https://alinda.kr/#business",
     "name": "알린다",
+    "alternateName": ["알린다몰", "주식회사 알린다", "alinda"],
     "description": "커스텀텀블러, 각인 텀블러, 기업 판촉물, DTF 스티커, 레이저 각인, 프리미엄 답례품 전문 제작",
     "url": "https://alinda.kr",
+    "logo": "https://alinda.kr/img/logo/logo_hash.png",
+    "image": "https://alinda.kr/img/og/og_image.webp",
     "telephone": "1644-2523",
+    "email": "alindamall@naver.com",
+    "priceRange": "₩₩",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "미사강변서로 25 6층 635호",
       "addressLocality": "하남시",
       "addressRegion": "경기도",
       "addressCountry": "KR"
-    }
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      }
+    ],
+    "sameAs": [
+      "https://smartstore.naver.com/alindamall",
+      "https://blog.naver.com/alindamall",
+      "https://instagram.com/alindamall",
+      "https://youtube.com/@alindamall"
+    ]
   }
   </script>
   <script type="application/ld+json">
@@ -139,11 +159,13 @@
           "@type": "Product",
           "name": "커스텀텀블러 (각인 텀블러)",
           "description": "스텐·도자기·트라이탄 소재에 레이저 및 UV 각인으로 기업 로고를 새긴 커스텀텀블러. 소량 30개부터 대량 주문 가능.",
+          "image": "https://alinda.kr/img/product/product_tumbler.png",
           "brand": {"@type": "Brand", "name": "알린다"},
           "offers": {
             "@type": "Offer",
             "url": "https://smartstore.naver.com/alindamall",
             "priceCurrency": "KRW",
+            "price": "4900",
             "availability": "https://schema.org/InStock"
           }
         }
@@ -155,11 +177,13 @@
           "@type": "Product",
           "name": "판촉 볼펜",
           "description": "제트스트림·모나미 프리미엄 볼펜에 기업 로고 인쇄. 50개부터 주문 가능.",
+          "image": "https://alinda.kr/img/product/product_pen.png",
           "brand": {"@type": "Brand", "name": "알린다"},
           "offers": {
             "@type": "Offer",
             "url": "https://smartstore.naver.com/alindamall",
             "priceCurrency": "KRW",
+            "price": "500",
             "availability": "https://schema.org/InStock"
           }
         }
@@ -171,11 +195,13 @@
           "@type": "Product",
           "name": "핸디 선풍기",
           "description": "여름 시즌 판촉 필수템. 풀컬러 인쇄, 개별포장 가능.",
+          "image": "https://alinda.kr/img/product/product_fan.png",
           "brand": {"@type": "Brand", "name": "알린다"},
           "offers": {
             "@type": "Offer",
             "url": "https://smartstore.naver.com/alindamall",
             "priceCurrency": "KRW",
+            "price": "3900",
             "availability": "https://schema.org/InStock"
           }
         }
@@ -187,11 +213,13 @@
           "@type": "Product",
           "name": "USB · 보조배터리",
           "description": "실용성 높은 IT 판촉물. 레이저 각인 및 풀컬러 UV 인쇄.",
+          "image": "https://alinda.kr/img/product/product_usb.png",
           "brand": {"@type": "Brand", "name": "알린다"},
           "offers": {
             "@type": "Offer",
             "url": "https://smartstore.naver.com/alindamall",
             "priceCurrency": "KRW",
+            "price": "5900",
             "availability": "https://schema.org/InStock"
           }
         }
@@ -203,11 +231,13 @@
           "@type": "Product",
           "name": "에코백 · 파우치",
           "description": "친환경 캔버스 원단에 실크스크린, 디지털 전사 인쇄.",
+          "image": "https://alinda.kr/img/product/product_ecobag.png",
           "brand": {"@type": "Brand", "name": "알린다"},
           "offers": {
             "@type": "Offer",
             "url": "https://smartstore.naver.com/alindamall",
             "priceCurrency": "KRW",
+            "price": "1900",
             "availability": "https://schema.org/InStock"
           }
         }
@@ -219,11 +249,13 @@
           "@type": "Product",
           "name": "세트 · 선물 패키지",
           "description": "텀블러+볼펜+에코백 세트 구성. 답례품·행사 선물 맞춤 제작.",
+          "image": "https://alinda.kr/img/product/product_gift.png",
           "brand": {"@type": "Brand", "name": "알린다"},
           "offers": {
             "@type": "Offer",
             "url": "https://smartstore.naver.com/alindamall",
             "priceCurrency": "KRW",
+            "price": "9900",
             "availability": "https://schema.org/InStock"
           }
         }
@@ -241,7 +273,6 @@
         <img class="logo-img" src="img/logo/logo_hash.png" alt="텀블러제작">
       </a>
       <nav class="nav" aria-label="메인 메뉴">
-        <a href="products.html" class="nav-link">제품</a>
         <a href="#services" class="nav-link">서비스</a>
         <a href="#brand" class="nav-link">커스텀</a>
         <a href="#portfolio" class="nav-link">포트폴리오</a>
@@ -262,7 +293,6 @@
 
   <!-- Mobile Nav -->
   <div class="mobile-nav" id="mobileNav">
-    <a href="products.html" class="nav-link">제품</a>
     <a href="#services" class="nav-link">서비스</a>
     <a href="#brand" class="nav-link">커스텀</a>
     <a href="#portfolio" class="nav-link">포트폴리오</a>
@@ -402,6 +432,13 @@
     <button class="lightbox-close" id="lightboxClose" aria-label="닫기">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
+    <span class="lightbox-counter" id="lightboxCounter"></span>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="이전 이미지">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="다음 이미지">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
     <img id="lightboxImg" src="" alt="">
     <div class="lightbox-info">
       <p id="lightboxTitle" class="heading-sm"></p>
@@ -415,7 +452,7 @@
       <div class="text-center fade-up">
         <span class="section-label">Reviews</span>
         <h2 class="heading-lg section-title">제작 리뷰</h2>
-        <p class="text-small section-desc">알린다과 실제 대화한 고객님들의 생생한 후기입니다.</p>
+        <p class="text-small section-desc">알린다에서 실제 제작·구매하신 고객님들이 남겨주신 생생한 후기입니다.</p>
       </div>
       <div class="chat-list" id="chatList"></div>
     </section>
@@ -456,28 +493,28 @@
       <div class="sample-steps">
         <div class="sample-step">
           <div class="sample-step-num">01</div>
-          <div class="sample-step-icon">📞</div>
+          <div class="sample-step-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
           <h3 class="sample-step-title">방문 예약</h3>
           <p class="sample-step-desc">카카오톡 또는 전화로 방문 일정을 조율합니다. 원하시는 제품과 수량을 미리 알려주시면 더 빠른 상담이 가능합니다.</p>
         </div>
         <div class="sample-step-arrow">→</div>
         <div class="sample-step">
           <div class="sample-step-num">02</div>
-          <div class="sample-step-icon">🏭</div>
+          <div class="sample-step-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9h.01"/><path d="M9 12h.01"/><path d="M9 15h.01"/></svg></div>
           <h3 class="sample-step-title">쇼룸 방문</h3>
           <p class="sample-step-desc">경기 하남 미사비즈타워 쇼룸에서 텀블러·머그·판촉물 실물을 직접 확인합니다. 재질·무게감·마감까지 눈과 손으로 검토하세요.</p>
         </div>
         <div class="sample-step-arrow">→</div>
         <div class="sample-step">
           <div class="sample-step-num">03</div>
-          <div class="sample-step-icon">✏️</div>
+          <div class="sample-step-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div>
           <h3 class="sample-step-title">현장 샘플 제작</h3>
           <p class="sample-step-desc">로고·문구를 레이저 각인 또는 DTF 인쇄로 현장에서 즉시 제작합니다. 색상·위치·크기를 실물로 비교하고 바로 피드백 드립니다.</p>
         </div>
         <div class="sample-step-arrow">→</div>
         <div class="sample-step">
           <div class="sample-step-num">04</div>
-          <div class="sample-step-icon">✅</div>
+          <div class="sample-step-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
           <h3 class="sample-step-title">최종 확정 · 발주</h3>
           <p class="sample-step-desc">샘플 확인 후 수량·납기를 협의하고 발주합니다. 당일 견적 확정이 가능하며 소량 50개부터 대량까지 유연하게 대응합니다.</p>
         </div>
@@ -573,6 +610,16 @@
             <input type="text" class="form-input" name="name" placeholder="이름 / 회사명" required>
             <input type="tel" class="form-input" name="phone" placeholder="연락처 (010-0000-0000)" required>
             <input type="email" class="form-input" name="email" placeholder="이메일 (선택)">
+            <select class="form-input" name="category">
+              <option value="">문의 제품 카테고리 (선택)</option>
+              <option value="커스텀텀블러·머그">커스텀텀블러 · 머그</option>
+              <option value="판촉볼펜">판촉 볼펜 (메탈/일반)</option>
+              <option value="주방용품">주방용품</option>
+              <option value="에코백·파우치">에코백 · 파우치</option>
+              <option value="답례품·기프트세트">답례품 · 기프트세트</option>
+              <option value="DTF스티커·각인">DTF 스티커 · 각인</option>
+              <option value="기타">기타 문의</option>
+            </select>
             <textarea class="form-input" name="message" placeholder="문의 내용 (제품, 수량, 원하시는 각인 내용 등)" rows="5" required></textarea>
             <button type="submit" class="btn btn--white" style="width:100%;">견적 문의 보내기</button>
           </form>
@@ -645,11 +692,7 @@
     </form>
   </div>
 
-  <!-- Cart Floating Button -->
-  <a href="products.html" class="cart-float" id="cartFloat" aria-label="제품 보러가기">
-    🛒
-    <span class="cart-tooltip">제품 보러가기</span>
-  </a>
+  <!-- Cart Floating Button — 제품 페이지 비활성화로 임시 제거 -->
 
   <!-- Naver Smartstore Floating Button (desktop only) -->
   <a href="https://smartstore.naver.com/alindamall" target="_blank" rel="noopener" class="naver-float" id="naverFloat" aria-label="스마트스토어">

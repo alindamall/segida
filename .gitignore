@@ -1,5 +1,22 @@
+# 의존성 / 빌드 (정적 사이트 배포에 불필요 — 로컬 미리보기용 serve 의존성)
 node_modules/
+package.json
+package-lock.json
+
+# Claude Code / 에이전트 로컬 설정
+.claude/
+
+# 민감 정보 (제안서·Apps Script 원본·인수인계 문서)
+secret/
+
+# 로컬 / 임시 / 백업 파일
+*.bak
+*.tmp
+_*.json
+
+# 로그
+*.log
+
+# OS 생성 파일
 .DS_Store
 Thumbs.db
-*.log
-secret/

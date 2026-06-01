@@ -173,6 +173,7 @@
      5. PORTFOLIO (filter + lightbox)
   ---------------------------------------------------------- */
   let activeFilter = 'all';
+  let currentItems = [];
 
   function initPortfolio() {
     const bar = document.getElementById('filterBar');
@@ -202,16 +203,13 @@
     const grid = document.getElementById('portfolioGrid');
     grid.innerHTML = '';
     const items = key === 'all' ? PORTFOLIO_ITEMS : PORTFOLIO_ITEMS.filter(p => p.category === key);
+    currentItems = items;
     items.forEach(p => {
       const item = el('div', {
         className: 'portfolio-item fade-up',
-        onClick: () => openLightbox(p)
+        onClick: () => openLightbox(currentItems, currentItems.indexOf(p))
       }, [
-        el('div', {
-          className: 'img-placeholder--dark',
-          style: 'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:.8125rem;color:var(--text-muted);text-align:center;padding:16px',
-          text: p.title
-        }),
+        el('img', { src: p.img, alt: p.title, loading: 'lazy', style: 'width:100%;height:100%;object-fit:cover;display:block;' }),
         el('div', { className: 'portfolio-item-overlay' }, [
           el('p', { className: 'portfolio-item-title', text: p.title }),
           el('p', { className: 'portfolio-item-desc', text: p.desc })
@@ -222,66 +220,127 @@
     grid.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   }
 
-  /* Lightbox */
-  function openLightbox(item) {
-    const lb = document.getElementById('lightbox');
-    document.getElementById('lightboxImg').style.display = 'none';
-    document.getElementById('lightboxTitle').textContent = item.title;
-    document.getElementById('lightboxDesc').textContent = item.desc;
-    lb.classList.add('open');
+  /* Lightbox (이미지 + 이전/다음 내비게이션) */
+  let lbItems = [];
+  let lbIndex = 0;
+
+  function openLightbox(list, index) {
+    if (!Array.isArray(list) || !list.length) return;
+    lbItems = list;
+    lbIndex = (typeof index === 'number' && index >= 0) ? index : 0;
+    renderLightbox();
+    document.getElementById('lightbox').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
-  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
-  document.getElementById('lightbox').addEventListener('click', e => {
-    if (e.target === e.currentTarget) closeLightbox();
-  });
+  function renderLightbox() {
+    const item = lbItems[lbIndex];
+    if (!item) return;
+    const img = document.getElementById('lightboxImg');
+    img.style.display = 'block';
+    img.src = item.img;
+    img.alt = item.title;
+    document.getElementById('lightboxTitle').textContent = item.title;
+    document.getElementById('lightboxDesc').textContent = item.desc;
+    const counter = document.getElementById('lightboxCounter');
+    if (counter) counter.textContent = `${lbIndex + 1} / ${lbItems.length}`;
+  }
+
+  function lbPrev() { lbIndex = (lbIndex - 1 + lbItems.length) % lbItems.length; renderLightbox(); }
+  function lbNext() { lbIndex = (lbIndex + 1) % lbItems.length; renderLightbox(); }
 
   function closeLightbox() {
     document.getElementById('lightbox').classList.remove('open');
     document.body.style.overflow = '';
   }
 
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  document.getElementById('lightbox').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeLightbox();
+  });
+  (function () {
+    const prev = document.getElementById('lightboxPrev');
+    const next = document.getElementById('lightboxNext');
+    if (prev) prev.addEventListener('click', e => { e.stopPropagation(); lbPrev(); });
+    if (next) next.addEventListener('click', e => { e.stopPropagation(); lbNext(); });
+  })();
+
+  document.addEventListener('keydown', e => {
+    const lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowLeft') lbPrev();
+    else if (e.key === 'ArrowRight') lbNext();
+  });
 
   /* ----------------------------------------------------------
-     6. REVIEWS — X(트위터) 스타일 카드
+     6. REVIEWS — 네이버 스마트스토어 리뷰 스타일
   ---------------------------------------------------------- */
-  const VERIFIED_SVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="#1d9bf0"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91C1.88 9.33 1 10.57 1 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.8 3.91s2.52 1.26 3.92.8c.66 1.31 1.9 2.19 3.33 2.19s2.68-.88 3.34-2.19c1.39.46 2.9.2 3.91-.8s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/></svg>';
+  function reviewStars(n) {
+    let out = '<span class="review-stars">';
+    for (let i = 1; i <= 5; i++) {
+      out += `<svg class="review-star" viewBox="0 0 24 24" fill="${i <= n ? '#FFB400' : '#dfe3e8'}"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`;
+    }
+    return out + '</span>';
+  }
 
   function initReviews() {
     const list = document.getElementById('chatList');
-    list.className = 'tweet-list';
+    list.className = 'naver-reviews';
+    list.innerHTML = '';
 
-    REVIEWS.forEach((r, i) => {
-      const initials = r.name.replace(/[^가-힣a-zA-Z]/g, '').slice(0, 1) || '?';
+    const avg = (REVIEWS.reduce((a, r) => a + (r.rating || 5), 0) / REVIEWS.length).toFixed(1);
 
-      const card = el('div', { className: 'tweet-card fade-up' }, [
-        el('div', { className: 'tweet-header' }, [
-          el('div', { className: 'tweet-avatar', style: `background:${r.avatarColor}`, text: initials }),
-          el('div', { className: 'tweet-author' }, [
-            el('div', { className: 'tweet-name-row' }, [
-              el('span', { className: 'tweet-name', text: r.name }),
-              ...(r.verified ? [el('span', { className: 'tweet-verified', html: VERIFIED_SVG })] : []),
-            ]),
-            el('div', { className: 'tweet-handle', text: r.handle }),
+    // 사진 후기만 모아 라이트박스용 리스트 구성 (사진 클릭 시 확대)
+    const photoReviews = REVIEWS.filter(r => r.img);
+    const reviewLb = photoReviews.map(r => ({
+      img: `img/review/${r.img}`,
+      title: r.product || '구매 후기',
+      desc: r.option ? `${r.name} · ${r.option}` : r.name,
+    }));
+
+    // 요약 헤더
+    list.appendChild(el('div', { className: 'review-summary' }, [
+      el('div', { className: 'review-summary-score', text: avg }),
+      el('div', { className: 'review-summary-stars' }, [
+        el('div', { className: 'stars', html: reviewStars(Math.round(avg)) }),
+        el('div', { className: 'review-summary-count', text: `엄선된 실구매 후기 ${REVIEWS.length}건` }),
+      ]),
+      el('a', {
+        className: 'review-summary-badge',
+        href: 'https://smartstore.naver.com/alindamall', target: '_blank', rel: 'noopener',
+        html: '<svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M3 3h8v8.5l2-2.5V3h8v18h-8v-8.5l-2 2.5V21H3z"/></svg><span>스마트스토어 리뷰</span>',
+      }),
+    ]));
+
+    // 리뷰 항목
+    REVIEWS.forEach(r => {
+      const rating = r.rating || 5;
+
+      list.appendChild(el('div', { className: 'review-item fade-up' }, [
+        el('div', { className: 'review-top' }, [
+          el('div', { className: 'review-id-row' }, [
+            el('span', { html: reviewStars(rating) }),
+            el('span', { className: 'review-id', text: r.name }),
           ]),
-          el('div', { className: 'tweet-meta' }, [
-            el('span', { className: 'tweet-time', text: r.time }),
-            el('span', { className: 'tweet-dots', text: '···' }),
-          ]),
+          el('span', { className: 'review-date', text: r.date || r.time || '' }),
         ]),
-        el('p', { className: 'tweet-body', text: r.text }),
-        ...(r.img ? [el('div', { className: 'tweet-img-wrap' }, [
-          el('img', { className: 'tweet-img', src: `img/review/${r.img}`, alt: '텀블러판촉물' })
-        ])] : []),
-        el('div', { className: 'tweet-actions' }, [
-          el('span', { className: 'tweet-action', html: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f91880" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="#f91880"/></svg>${r.likes}` }),
-          el('span', { className: 'tweet-action', html: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#536471" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>${r.comments}` }),
-          el('span', { className: 'tweet-action', html: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#536471" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>${r.retweets}` }),
-        ]),
-      ]);
-      list.appendChild(card);
+        (r.product || r.option)
+          ? el('div', { className: 'review-option', html: `${r.product ? `<strong>${r.product}</strong>` : ''}${r.option ? ` · ${r.option}` : ''}` })
+          : null,
+        el('p', { className: 'review-text', text: r.text }),
+        r.img
+          ? el('div', {
+              className: 'review-photo',
+              onClick: () => openLightbox(reviewLb, photoReviews.indexOf(r))
+            }, [
+              el('img', {
+                src: `img/review/${r.img}`, alt: r.product || '구매 후기', loading: 'lazy',
+                onError: function () { this.parentElement.style.display = 'none'; }
+              })
+            ])
+          : null,
+      ]));
     });
   }
 
@@ -407,6 +466,7 @@
     // 빠른 문의 (Google Sheets + Gmail 연동 대비)
     document.getElementById('floatForm').addEventListener('submit', e => {
       e.preventDefault();
+      const btn = document.getElementById('floatSubmit');
       const name = document.getElementById('floatName').value.trim();
       const phone = document.getElementById('floatPhone').value.trim();
       const message = document.getElementById('floatMessage').value.trim();
@@ -415,7 +475,7 @@
         : '미선택';
 
       const payload = { name, phone, message, category: catLabel, source: 'float' };
-      submitInquiry(payload);
+      submitInquiry(payload, btn);
       e.target.reset();
     });
   }
@@ -427,39 +487,69 @@
      Google Sheets / Gmail 연동 공통 제출 함수
      → GOOGLE_APPS_SCRIPT_URL 에 Apps Script 웹앱 URL 넣으면 자동 연동
   ---------------------------------------------------------- */
-  const GOOGLE_APPS_SCRIPT_URL = ''; // TODO: Apps Script 배포 URL
+  const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw27W5GCpfui0s15yyFt2RlCSn8kF_-SeSPk4lJvqbkxEvjGgBDDc48CnP21CAH8KFu/exec';
 
-  function submitInquiry(payload) {
-    if (GOOGLE_APPS_SCRIPT_URL) {
-      fetch(GOOGLE_APPS_SCRIPT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      })
-      .then(res => res.json())
-      .then(() => {
-        alert(`${payload.name}님, 문의가 접수되었습니다!\n빠른 시간 내에 연락드리겠습니다.`);
-      })
-      .catch(() => {
-        alert('전송 중 오류가 발생했습니다. 전화(02-465-0817)로 문의해주세요.');
-      });
-    } else {
-      alert(`${payload.name}님, 문의가 접수되었습니다!\n빠른 시간 내에 연락드리겠습니다.`);
+  function showToast(message, type) {
+    let toast = document.getElementById('toast');
+    if (!toast) {
+      toast = el('div', { id: 'toast', className: 'toast' });
+      document.body.appendChild(toast);
     }
+    toast.textContent = message;
+    toast.className = 'toast show' + (type ? ' toast--' + type : '');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => { toast.className = 'toast'; }, 3800);
+  }
+
+  function submitInquiry(payload, btnEl) {
+    const origText = btnEl ? btnEl.textContent : '';
+    if (btnEl) { btnEl.disabled = true; btnEl.textContent = '전송 중...'; }
+    const restore = () => { if (btnEl) { btnEl.disabled = false; btnEl.textContent = origText; } };
+
+    if (!payload.name || !payload.phone) {
+      showToast('이름과 연락처를 입력해 주세요.', 'error');
+      restore();
+      return;
+    }
+
+    if (!GOOGLE_APPS_SCRIPT_URL) {
+      showToast(`${payload.name}님, 문의가 접수되었습니다. 곧 연락드리겠습니다.`, 'success');
+      restore();
+      return;
+    }
+
+    const body = new URLSearchParams();
+    Object.entries(payload).forEach(([k, v]) => body.append(k, v == null ? '' : v));
+
+    fetch(GOOGLE_APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+      body: body.toString(),
+    })
+    .then(() => {
+      showToast(`${payload.name}님, 문의가 정상 접수되었습니다. 빠르게 연락드리겠습니다.`, 'success');
+    })
+    .catch(() => {
+      showToast('전송 중 오류가 발생했습니다. 1644-2523으로 문의해 주세요.', 'error');
+    })
+    .finally(restore);
   }
 
   function initContactForm() {
     document.getElementById('contactForm').addEventListener('submit', e => {
       e.preventDefault();
       const fd = new FormData(e.target);
+      const btn = e.target.querySelector('button[type="submit"]');
       const payload = {
         name: fd.get('name'),
         phone: fd.get('phone'),
         email: fd.get('email'),
+        category: fd.get('category') || '',
         message: fd.get('message'),
         source: 'contact',
       };
-      submitInquiry(payload);
+      submitInquiry(payload, btn);
       e.target.reset();
     });
   }
@@ -526,15 +616,32 @@
      INIT
   ---------------------------------------------------------- */
   function initMarquee() {
-    const src = 'img/logo/logo_hash.png';
-    const count = 16;
-    let html = '';
-    for (let i = 0; i < count; i++) {
-      html += '<img src="' + src + '" alt="돌잔치" loading="lazy">';
-    }
-    ['marqueeTrack1','marqueeTrack2','marqueeTrack3'].forEach(function(id) {
-      const el = document.getElementById(id);
-      if (el) el.innerHTML = html;
+    const logos = [
+      { src: 'img/partners/고려기프트판촉물_1도.png', alt: '고려기프트판촉물' },
+      { src: 'img/partners/락앤락%202021%20로고.png', alt: '락앤락' },
+      { src: 'img/partners/랜드로버.png', alt: '랜드로버' },
+      { src: 'img/partners/러시아월드컵.png', alt: '러시아 월드컵' },
+      { src: 'img/partners/르노삼성.png', alt: '르노삼성' },
+      { src: 'img/partners/모디.png', alt: '모디' },
+      { src: 'img/partners/배화여자대학교%20로고.png', alt: '배화여자대학교' },
+      { src: 'img/partners/벤틀리.png', alt: '벤틀리' },
+      { src: 'img/partners/쉐보레.png', alt: '쉐보레' },
+      { src: 'img/partners/진에어.png', alt: '진에어' },
+      { src: 'img/partners/파커.png', alt: '파커' },
+    ];
+    // translateX(-50%) 무한 루프를 위해 동일 세트를 2배 복제
+    const make = arr => arr.concat(arr)
+      .map(l => `<img src="${l.src}" alt="${l.alt} 파트너사" loading="lazy">`).join('');
+    const reversed = logos.slice().reverse();
+    const shifted = logos.slice(4).concat(logos.slice(0, 4));
+    const tracks = {
+      marqueeTrack1: make(logos),
+      marqueeTrack2: make(reversed),
+      marqueeTrack3: make(shifted),
+    };
+    Object.keys(tracks).forEach(id => {
+      const node = document.getElementById(id);
+      if (node) node.innerHTML = tracks[id];
     });
   }
 
