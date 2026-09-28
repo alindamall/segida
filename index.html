@@ -282,7 +282,16 @@
       </a>
       <nav class="nav" aria-label="메인 메뉴">
         <a href="#services" class="nav-link">서비스</a>
-        <a href="#brand" class="nav-link">커스텀</a>
+        <div class="nav-drop">
+          <a href="/tumbler/" class="nav-link nav-drop-toggle" aria-haspopup="true">커스텀 <span class="nav-caret" aria-hidden="true">▾</span></a>
+          <div class="nav-drop-menu" role="menu">
+            <a href="/tumbler/" role="menuitem">커스텀 텀블러</a>
+            <a href="/pen/" role="menuitem">판촉 볼펜</a>
+            <a href="/gift/" role="menuitem">답례품 · 기프트 세트</a>
+            <a href="/guide/printing/" role="menuitem">각인 · 인쇄 방식 가이드</a>
+            <a href="/portfolio/" role="menuitem">납품 사례</a>
+          </div>
+        </div>
         <a href="#portfolio" class="nav-link">포트폴리오</a>
         <a href="#blog" class="nav-link">출고기</a>
         <a href="#reviews" class="nav-link">제작리뷰</a>
@@ -303,7 +312,14 @@
   <!-- Mobile Nav -->
   <div class="mobile-nav" id="mobileNav">
     <a href="#services" class="nav-link">서비스</a>
-    <a href="#brand" class="nav-link">커스텀</a>
+    <div class="mnav-group">
+      <span class="mnav-title">커스텀</span>
+      <a href="/tumbler/" class="nav-link nav-sub">커스텀 텀블러</a>
+      <a href="/pen/" class="nav-link nav-sub">판촉 볼펜</a>
+      <a href="/gift/" class="nav-link nav-sub">답례품 · 기프트 세트</a>
+      <a href="/guide/printing/" class="nav-link nav-sub">각인 · 인쇄 방식 가이드</a>
+      <a href="/portfolio/" class="nav-link nav-sub">납품 사례</a>
+    </div>
     <a href="#portfolio" class="nav-link">포트폴리오</a>
     <a href="#blog" class="nav-link">출고기</a>
     <a href="#reviews" class="nav-link">제작리뷰</a>
@@ -596,7 +612,6 @@
       <div>
         <h3 class="footer-heading">바로가기</h3>
         <a href="#services" class="footer-link">서비스</a>
-        <a href="#brand" class="footer-link">커스텀</a>
         <a href="#portfolio" class="footer-link">포트폴리오</a>
         <a href="#blog" class="footer-link">출고기</a>
         <a href="#reviews" class="footer-link">제작리뷰</a>

@@ -1193,3 +1193,25 @@ select.form-input option { color:#0f1419; background:#fff; }
   .blog-card { flex:0 0 72%; scroll-snap-align:start; }
   .blog-skeleton { flex:0 0 72%; }
 }
+
+/* --- 헤더 '커스텀' 드롭다운 (상세 페이지 바로가기) --- */
+.nav-drop { position:relative; display:flex; align-items:center; }
+.nav-caret { font-size:.7em; margin-left:2px; }
+.nav-drop-menu {
+  position:absolute; top:100%; left:50%; transform:translate(-50%,8px);
+  min-width:200px; padding:8px; border-radius:12px; background:#fff;
+  box-shadow:0 12px 32px rgba(13,43,94,.18);
+  opacity:0; visibility:hidden; transition:all .2s ease; z-index:1001;
+}
+.nav-drop::after { content:''; position:absolute; top:100%; left:0; right:0; height:14px; }
+.nav-drop:hover .nav-drop-menu, .nav-drop:focus-within .nav-drop-menu { opacity:1; visibility:visible; transform:translate(-50%,12px); }
+.nav-drop-menu a { display:block; padding:10px 14px; border-radius:8px; font-size:.9rem; font-weight:600; color:var(--text); white-space:nowrap; }
+.nav-drop-menu a:hover { background:var(--bg); color:var(--accent); }
+/* 모바일 메뉴 안 '커스텀' 묶음 */
+.mobile-nav { overflow-y:auto; }
+.mnav-group { display:flex; flex-direction:column; align-items:center; gap:10px; padding:14px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); width:100%; max-width:320px; }
+.mnav-title { font-size:.75rem; font-weight:800; letter-spacing:.12em; color:var(--accent); }
+.mobile-nav .nav-link.nav-sub { font-size:1rem; font-weight:600; }
+/* 모바일 메뉴 글자색 (배경이 흰색이라 어두운 색으로 고정) */
+.mobile-nav .nav-link { color:var(--text); }
+.mobile-nav .nav-link::after { background:var(--accent); }
