@@ -817,7 +817,7 @@ select.form-input option { color:#0f1419; background:#fff; }
 .footer-inner {
   max-width:var(--max-w); margin:0 auto;
   display:grid;
-  grid-template-columns:2fr 1fr 1fr;
+  grid-template-columns:1.6fr 1fr 1fr 1fr;
   gap:40px;
 }
 .footer-logo {
@@ -935,28 +935,19 @@ select.form-input option { color:#0f1419; background:#fff; }
 }
 .naver-float:hover .naver-tooltip { opacity:1; }
 
-.kakao-float {
+/* --- Naver TalkTalk Floating Button --- */
+.talk-float {
   position:fixed; bottom:calc(var(--floating-h) + 80px); right:24px; z-index:900;
-  width:60px; height:60px; border-radius:50%;
-  background:#FEE500; color:#3C1E1E;
-  display:flex; align-items:center; justify-content:center;
-  font-size:1.5rem; font-weight:800;
-  box-shadow:0 4px 20px rgba(0,0,0,.15);
+  display:flex; align-items:center; gap:8px;
+  height:56px; padding:0 20px 0 14px; border-radius:28px;
+  background:#03C75A; color:#fff;
+  font-size:.9375rem; font-weight:700; letter-spacing:-.01em;
+  box-shadow:0 6px 20px rgba(3,199,90,.35);
   transition:all var(--transition);
-  cursor:pointer;
 }
-.kakao-float:hover { transform:scale(1.1) translateY(-2px); }
-.kakao-tooltip {
-  position:absolute; right:72px; top:50%; transform:translateY(-50%);
-  background:var(--surface); color:var(--text);
-  padding:8px 16px; border-radius:8px;
-  font-size:.8125rem; font-weight:600;
-  white-space:nowrap;
-  box-shadow:var(--shadow);
-  opacity:0; pointer-events:none;
-  transition:opacity var(--transition);
-}
-.kakao-float:hover .kakao-tooltip { opacity:1; }
+.talk-float:hover { background:#02B351; transform:translateY(-2px); box-shadow:0 10px 26px rgba(3,199,90,.45); }
+.talk-float-icon { display:flex; width:30px; height:30px; align-items:center; justify-content:center; border-radius:50%; background:rgba(255,255,255,.18); }
+.talk-float-label { white-space:nowrap; }
 
 /* --- Scroll Animation --- */
 .fade-up {
@@ -1028,8 +1019,8 @@ select.form-input option { color:#0f1419; background:#fff; }
   /* Floating */
   .floating-bar { display:none !important; }
   .naver-float { display:none; }
-  .kakao-float { display:flex; bottom:24px; right:16px; width:52px; height:52px; }
-  .kakao-tooltip { display:none; }
+  .talk-float { bottom:24px; right:16px; height:48px; padding:0 16px 0 10px; font-size:.875rem; }
+  .talk-float-icon { width:28px; height:28px; }
 
   /* Reviews — 모바일 3개만 (요약 헤더가 첫 자식이라 5번째 자식부터 숨김) */
   .review-item:nth-child(n+5) { display:none; }
@@ -1156,3 +1147,49 @@ select.form-input option { color:#0f1419; background:#fff; }
   clip:rect(0,0,0,0); white-space:nowrap; border:0;
 }
 .overflow-hidden { overflow:hidden; }
+
+
+/* --- Services 하단 상세 페이지 링크 --- */
+.services-more { display:flex; flex-wrap:wrap; justify-content:center; gap:10px 12px; margin-top:36px; }
+.services-more a {
+  padding:10px 18px; border-radius:999px; background:var(--surface); border:1px solid var(--border);
+  font-size:.875rem; font-weight:600; color:var(--accent); transition:all var(--transition);
+}
+.services-more a:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
+
+/* --- BLOG 출고기 --- */
+.blog-bg { background:linear-gradient(180deg,#fff 0%,var(--bg) 100%); }
+.blog-head { display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:32px; }
+.blog-head .section-title { margin-bottom:6px; }
+.blog-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+.blog-card {
+  display:flex; flex-direction:column; background:var(--surface); border-radius:var(--radius);
+  overflow:hidden; box-shadow:0 2px 14px rgba(13,43,94,.08); transition:all var(--transition);
+}
+.blog-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); }
+.blog-thumb { position:relative; aspect-ratio:4/3; overflow:hidden; background:linear-gradient(135deg,var(--primary),var(--accent)); }
+.blog-thumb img { position:relative; z-index:0; width:100%; height:100%; object-fit:cover; background:#fff; transition:transform .5s ease; }
+.blog-card:hover .blog-thumb img { transform:scale(1.06); }
+.blog-thumb-fallback { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.9); font-weight:800; font-size:1.125rem; letter-spacing:.02em; }
+.blog-badge {
+  position:absolute; top:12px; left:12px; z-index:1; padding:4px 10px; border-radius:999px;
+  background:#03C75A; color:#fff; font-size:.6875rem; font-weight:700;
+}
+.blog-new { background:#E53935; left:auto; right:12px; }
+.blog-body { padding:16px 18px 18px; display:flex; flex-direction:column; gap:8px; flex:1; }
+.blog-title {
+  font-size:.9688rem; font-weight:700; line-height:1.45; color:var(--text);
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+}
+.blog-meta { margin-top:auto; display:flex; justify-content:space-between; font-size:.75rem; color:var(--text-muted); }
+.blog-meta span:last-child { color:#03A94F; font-weight:600; }
+.blog-skeleton { aspect-ratio:3/4; border-radius:var(--radius); background:linear-gradient(90deg,#e8eef6 25%,#f4f7fb 50%,#e8eef6 75%); background-size:200% 100%; animation:blogShimmer 1.2s infinite; }
+@keyframes blogShimmer { to { background-position:-200% 0; } }
+@media (max-width:1024px) { .blog-grid { grid-template-columns:repeat(3,1fr); } }
+@media (max-width:768px) {
+  .blog-head { flex-direction:column; align-items:flex-start; }
+  .blog-grid { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:14px; margin:0; padding:4px 2px 12px; }
+  .blog-grid::-webkit-scrollbar { display:none; }
+  .blog-card { flex:0 0 72%; scroll-snap-align:start; }
+  .blog-skeleton { flex:0 0 72%; }
+}

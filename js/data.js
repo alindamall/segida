@@ -8,9 +8,8 @@ const SITE = {
   tagline: '기업 판촉물 · 답례품 · 각인 전문',
   phone: '1644-2523',
   email: 'alindamall@naver.com',
-  kakao: 'http://talk.naver.com/profile/wyh876l',
+  kakao: 'https://talk.naver.com/profile/wyh876l', /* 네이버 톡톡 (변수명은 기존 호환 위해 유지) */
   smartstore: 'https://smartstore.naver.com/alindamall',
-  instagram: 'https://instagram.com/alindamall',
   youtube: 'https://youtube.com/@alindamall',
   blog: 'https://blog.naver.com/alindamall',
   naverPlace: 'https://naver.me/x5m0ABfi',
@@ -26,7 +25,7 @@ const HERO_SLIDES = [
     img: 'img/hero/hero_01.webp',
     placeholder: 'linear-gradient(135deg, #0D2B5E 0%, #1565C0 100%)',
     title: '기업 판촉물,\n알린다에서 시작하세요',
-    subtitle: '텀블러 · 볼펜 · USB · 에코백 — 각인부터 배송까지 원스톱',
+    subtitle: '텀블러 · 볼펜 · 선풍기 · 보조배터리 — 각인부터 배송까지 원스톱',
     cta1: { text: '무료 견적 받기', link: '#contact' },
     cta2: { text: '스마트스토어 바로가기', link: SITE.smartstore },
   },
@@ -35,9 +34,9 @@ const HERO_SLIDES = [
     img: 'img/hero/hero_02.webp',
     placeholder: 'linear-gradient(135deg, #1565C0 0%, #2196F3 100%)',
     title: 'DTF 스티커 · 레이저 각인\n브랜드를 새기다',
-    subtitle: '소량 50개부터 대량 10,000개까지 — 정밀 커스텀 제작',
+    subtitle: '소량부터 대량까지 — 정밀 커스텀 제작',
     cta1: { text: '포트폴리오 보기', link: '#portfolio' },
-    cta2: { text: '카카오 상담', link: SITE.kakao },
+    cta2: { text: '네이버 톡톡 상담', link: SITE.kakao },
   },
   {
     id: 3,
@@ -46,7 +45,7 @@ const HERO_SLIDES = [
     title: '프리미엄 답례품\n특별한 순간을 완성합니다',
     subtitle: '돌잔치 · 결혼 · 기업행사 — 감동을 전하는 맞춤 답례품',
     cta1: { text: '답례품 상담', link: '#contact' },
-    cta2: { text: '인스타그램', link: SITE.instagram },
+    cta2: { text: '네이버 톡톡 상담', link: SITE.kakao },
   },
 ];
 
@@ -55,8 +54,7 @@ const SERVICE_SVG = {
   tumbler: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M6 8h11v9a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="17" y2="1"/><line x1="6" y1="4" x2="17" y2="4"/></svg>',
   pen: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>',
   fan: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c-2-2.67-6-7-6-10a6 6 0 0 1 12 0c0 3-4 7.33-6 10z"/><circle cx="12" cy="12" r="2"/><path d="M12 12c2 2.67 6 7 6 10a6 6 0 0 1-12 0c0-3 4-7.33 6-10z"/><path d="M12 12c2.67-2 7-6 10-6a6 6 0 0 1 0 12c-3 0-7.33-4-10-6z"/><path d="M12 12c-2.67 2-7 6-10 6a6 6 0 0 1 0-12c3 0 7.33 4 10 6z"/></svg>',
-  usb: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="4" cy="20" r="2"/><circle cx="16" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M12 2v10l4-2"/><path d="M12 12l-8 6"/><path d="M12 12l8 2"/></svg>',
-  ecobag: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>',
+  battery: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="17" height="10" rx="2"/><line x1="22" y1="11" x2="22" y2="13"/><polyline points="11 9 9 12 12 12 10 15"/></svg>',
   gift: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>',
 };
 
@@ -65,17 +63,17 @@ const SERVICES = [
     id: 'tumbler',
     svgIcon: SERVICE_SVG.tumbler,
     title: '각인 텀블러',
-    desc: '스텐·도자기·트라이탄 —\n레이저 & UV 각인으로\n브랜드를 새깁니다.',
+    desc: '스텐·도자기·트라이탄 —\n레이저 각인 & DTF 인쇄로\n브랜드를 새깁니다.',
     img: 'img/product/product_tumbler.png',
-    link: SITE.smartstore,
+    link: '/tumbler/',
   },
   {
     id: 'pen',
     svgIcon: SERVICE_SVG.pen,
     title: '판촉 볼펜',
-    desc: '제트스트림·모나미 프리미엄 —\n기업 로고 인쇄 50개부터.',
+    desc: '판촉용 볼펜부터 브랜드 볼펜까지 —\n기업 로고 인쇄 & 각인.',
     img: 'img/product/product_pen.png',
-    link: SITE.smartstore,
+    link: '/pen/',
   },
   {
     id: 'fan',
@@ -86,28 +84,20 @@ const SERVICES = [
     link: SITE.smartstore,
   },
   {
-    id: 'usb',
-    svgIcon: SERVICE_SVG.usb,
-    title: 'USB · 보조배터리',
-    desc: '실용성 최강 IT 판촉물 —\n레이저 각인 & 풀컬러 UV 인쇄.',
-    img: 'img/product/product_usb.png',
-    link: SITE.smartstore,
-  },
-  {
-    id: 'ecobag',
-    svgIcon: SERVICE_SVG.ecobag,
-    title: '에코백 · 파우치',
-    desc: '친환경 캔버스 원단 —\n실크스크린, 디지털 전사 인쇄.',
-    img: 'img/product/product_ecobag.png',
+    id: 'battery',
+    svgIcon: SERVICE_SVG.battery,
+    title: '보조배터리',
+    desc: '실용성 최강 IT 판촉물 —\n레이저 각인으로 로고를 새깁니다.',
+    img: 'img/product/product_battery.png',
     link: SITE.smartstore,
   },
   {
     id: 'gift',
     svgIcon: SERVICE_SVG.gift,
     title: '세트 · 선물 패키지',
-    desc: '텀블러+볼펜+에코백 세트 —\n답례품·행사 선물 맞춤 구성.',
+    desc: '텀블러+볼펜 세트 —\n답례품·행사 선물 맞춤 구성.',
     img: 'img/product/product_gift.png',
-    link: SITE.smartstore,
+    link: '/gift/',
   },
 ];
 
@@ -138,9 +128,9 @@ const ICEBERG_SVG = {
 
 const ICEBERG_ITEMS = [
   { svg: ICEBERG_SVG.consult,  num: '01', title: '1:1 맞춤 상담',       desc: '용도·수량·예산에 맞는 최적 제안' },
-  { svg: ICEBERG_SVG.design,   num: '02', title: '디자인 시안 제작',    desc: '24시간 내 시안, 수정 무제한' },
+  { svg: ICEBERG_SVG.design,   num: '02', title: '디자인 시안 제작',    desc: '24시간 내 시안, 수정 3회 가능' },
   { svg: ICEBERG_SVG.material, num: '03', title: '원자재 품질 선별',    desc: '검증된 공급처, 불량률 1% 미만' },
-  { svg: ICEBERG_SVG.engrave,  num: '04', title: '정밀 각인 · 인쇄',    desc: '레이저·UV·DTF — 기법별 최적화' },
+  { svg: ICEBERG_SVG.engrave,  num: '04', title: '정밀 각인 · 인쇄',    desc: '레이저·실크·DTF — 기법별 최적화' },
   { svg: ICEBERG_SVG.color,    num: '05', title: '색상 보정 · 테스트',  desc: '시안과 실물 차이 최소화' },
   { svg: ICEBERG_SVG.check,    num: '06', title: '전수 품질 검수',      desc: '1:1 수작업 검수, 불량 0% 목표' },
   { svg: ICEBERG_SVG.pack,     num: '07', title: '개별 포장 · 패키징',  desc: '감성 포장, 답례품 맞춤 구성' },
@@ -184,7 +174,7 @@ const PROCESS_SVG = {
 
 const PROCESS_STEPS = [
   { step: 1, svgIcon: PROCESS_SVG.order, title: '주문 접수', desc: '카카오톡·전화·폼으로\n원하시는 제품과 수량을\n알려주세요.' },
-  { step: 2, svgIcon: PROCESS_SVG.design, title: '시안 확인', desc: '24시간 내 디자인 시안을\n보내드립니다.\n수정 무제한.' },
+  { step: 2, svgIcon: PROCESS_SVG.design, title: '시안 확인', desc: '24시간 내 디자인 시안을\n보내드립니다.\n수정 3회 가능.' },
   { step: 3, svgIcon: PROCESS_SVG.factory, title: '제작 진행', desc: '시안 확정 후 3~7일 내\n자체 공장에서\n제작합니다.' },
   { step: 4, svgIcon: PROCESS_SVG.check, title: '품질 검수', desc: '1:1 수작업 검수로\n완벽한 품질을\n보장합니다.' },
   { step: 5, svgIcon: PROCESS_SVG.delivery, title: '안전 배송', desc: '개별 포장 후\n안전하게 배송해\n드립니다.' },
@@ -282,7 +272,7 @@ const REVIEWS = [
 const FAQ_ITEMS = [
   {
     q: '최소 주문 수량은 얼마인가요?',
-    a: '제품에 따라 다르지만, 대부분 50개부터 주문 가능합니다. 소량 주문도 상담해 주세요!',
+    a: '제품마다 다릅니다. 원하시는 제품과 수량을 알려주시면 가능 여부와 견적을 안내해 드립니다.',
   },
   {
     q: '제작 기간은 얼마나 걸리나요?',
@@ -290,7 +280,7 @@ const FAQ_ITEMS = [
   },
   {
     q: '시안은 어떻게 확인하나요?',
-    a: '주문 접수 후 24시간 이내에 카카오톡 또는 이메일로 디자인 시안을 보내드립니다. 수정은 횟수 제한 없이 가능합니다.',
+    a: '주문 접수 후 24시간 이내에 카카오톡 또는 이메일로 디자인 시안을 보내드립니다. 수정은 3회까지 가능합니다.',
   },
   {
     q: '로고 파일은 어떤 형식으로 보내야 하나요?',
@@ -321,8 +311,8 @@ const GUIDE_CARDS = [
   },
   {
     svgIcon: GUIDE_SVG.box,
-    title: '최소 수량',
-    desc: '대부분 50개부터 주문 가능.\n소량·대량 모두 친절히 상담해 드립니다.',
+    title: '주문 수량',
+    desc: '제품별로 달라요.\n소량·대량 모두 친절히 상담해 드립니다.',
   },
   {
     svgIcon: GUIDE_SVG.clock,
@@ -336,8 +326,7 @@ const FLOAT_CATEGORIES = [
   { key: 'tumbler', label: '텀블러', svg: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M6 8h11v9a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="17" y2="1"/><line x1="6" y1="4" x2="17" y2="4"/></svg>' },
   { key: 'pen', label: '볼펜', svg: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>' },
   { key: 'fan', label: '선풍기', svg: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 12c-2-2.67-6-7-6-10a6 6 0 0 1 12 0c0 3-4 7.33-6 10z"/><circle cx="12" cy="12" r="2"/><path d="M12 12c2 2.67 6 7 6 10a6 6 0 0 1-12 0c0-3 4-7.33 6-10z"/></svg>' },
-  { key: 'usb', label: 'USB', svg: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="4" cy="20" r="2"/><circle cx="16" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M12 2v10l4-2"/><path d="M12 12l-8 6"/><path d="M12 12l8 2"/></svg>' },
-  { key: 'ecobag', label: '에코백', svg: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>' },
+  { key: 'battery', label: '보조배터리', svg: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="17" height="10" rx="2"/><line x1="22" y1="11" x2="22" y2="13"/><polyline points="11 9 9 12 12 12 10 15"/></svg>' },
   { key: 'gift', label: '답례품', svg: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>' },
   { key: 'sticker', label: '스티커', svg: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>' },
   { key: 'etc', label: '기타', svg: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>' },

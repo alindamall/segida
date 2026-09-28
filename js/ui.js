@@ -100,7 +100,8 @@
     SERVICES.forEach((s, i) => {
       const card = el('a', {
         className: `card service-card fade-up fade-up-delay-${(i % 3) + 1}`,
-        href: s.link, target: '_blank', rel: 'noopener'
+        href: s.link,
+        ...(/^https?:/.test(s.link) ? { target: '_blank', rel: 'noopener' } : {})
       }, [
         el('div', { className: 'card-img-wrap' }, [
           el('img', {
@@ -660,7 +661,7 @@
     initFloating();
     initContactForm();
     initObserver();
-    observeBubbles();
+    if (typeof observeBubbles === 'function') observeBubbles(); /* 정의되지 않은 함수 호출 오류 방지 */
     // initPromo(); /* 프로모 팝업 제거 */
   }
 
