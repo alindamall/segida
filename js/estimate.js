@@ -33,11 +33,32 @@
   document.getElementById('estCrumbs').innerHTML = '<a href="/">홈</a><i>/</i><a href="/shop/">Shop</a><i>/</i><a href="' + esc(x.url) + '">' + esc(x.name) + '</a><i>/</i><span>옵션 및 견적</span>';
 
   var packs = x.packs.length ? x.packs : [['포장 안 함', [[1, null, 'u', 0]]]];
+  var PACK_PHOTO = '/img/site/pack-giftwrap.webp';  // 선물포장 예시 사진 ('디자인 보기' 버튼)
+  function showPhoto(src, cap) {
+    var lb = document.createElement('div');
+    lb.className = 'est-lb';
+    lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', cap);
+    lb.innerHTML = '<figure><img src="' + esc(src) + '" alt="' + esc(cap) + '"><figcaption>' + esc(cap) + ' · 실제 포장지 무늬·색상은 조금 다를 수 있어요</figcaption>' +
+      '<button type="button" class="est-lb-x" aria-label="닫기">×</button></figure>';
+    function close() { lb.remove(); document.removeEventListener('keydown', key); }
+    function key(e) { if (e.key === 'Escape') close(); }
+    lb.addEventListener('click', function (e) { if (e.target === lb || e.target.closest('.est-lb-x')) close(); });
+    document.addEventListener('keydown', key);
+    document.body.appendChild(lb);
+    lb.querySelector('.est-lb-x').focus();
+  }
+  grid.addEventListener('click', function (e) {
+    var b = e.target.closest('.est-photo');
+    if (!b) return;
+    e.preventDefault(); e.stopPropagation();  // 라벨 안 버튼이라 포장 선택이 바뀌지 않게
+    showPhoto(b.getAttribute('data-photo'), b.getAttribute('data-cap'));
+  });
   function radios(name, list, priced) {
     return list.map(function (o, i) {
       var title = typeof o === 'string' ? o : o[0];
+      var photo = name === 'pack' && /선물\s*포장/.test(title) ? PACK_PHOTO : '';
       return '<label class="est-opt"><input type="radio" name="' + name + '" value="' + i + '"' + (i ? '' : ' checked') + '>' +
-        '<span><b>' + esc(title) + '</b>' + (priced ? '<small>' + label(o[1]) + '</small>' : '') + '</span></label>';
+        '<span><b>' + esc(title) + (photo ? ' <button type="button" class="est-photo" data-photo="' + photo + '" data-cap="' + esc(title) + ' 예시">디자인 보기</button>' : '') + '</b>' + (priced ? '<small>' + label(o[1]) + '</small>' : '') + '</span></label>';
     }).join('');
   }
   var tierRows = x.tiers.map(function (t) {
